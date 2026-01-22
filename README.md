@@ -28,13 +28,26 @@ Shows the placeholder UI to control de stats.
 <img src="media/screenshot_02.jpg" width="900">--->
 
 ---
-## Project Status
-Early prototype / WIP focused on core gameplay systems.
+## Playable Build
+
+A playable WebGL build is available on itch.io for testing and iteration purposes.
+
+👉 Play it here: https://yourname.itch.io/project-name
+
+---
 
 ## Platform & Controls
-Designed to run as a WebGL build on itch.io.
-Primarily intended for mobile devices using touch-based interaction.
 
+The project currently runs as a WebGL build on itch.io.  
+It is primarily designed for mobile devices using touch-based interaction.
+
+---
+
+## Project Status
+
+Early prototype / WIP focused on building and testing core gameplay systems.
+
+> ⚠️ This build is an early prototype and may contain bugs or incomplete features.
 ## Technology
 - Engine: Unity
 - Language: C#
