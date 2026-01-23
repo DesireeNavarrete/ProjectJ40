@@ -22,6 +22,8 @@ The main goal at this stage is to design and test **core gameplay systems** befo
 
 
 Shows the placeholder UI to control de stats, currently developing the needs system.
+<!---Shows early system for hunger, energy, and happiness.--->
+
 <!---
 ### Screenshots
 <!---<img src="media/screenshot_01.jpg" width="900">
