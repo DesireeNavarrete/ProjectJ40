@@ -21,7 +21,7 @@ The main goal at this stage is to design and test **core gameplay systems** befo
 
 
 
-Shows the placeholder UI to control de stats.
+Shows the placeholder UI to control de stats, currently developing the needs system.
 <!---
 ### Screenshots
 <!---<img src="media/screenshot_01.jpg" width="900">
