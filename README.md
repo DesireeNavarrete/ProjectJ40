@@ -17,7 +17,7 @@ The main goal at this stage is to design and test **core gameplay systems** befo
 ### UI Prototype
 <!---[![Needs System GIF](media/needs.gif)](https://www.youtube.com/watch?v=VIDEO_ID)--->
 
-![Screenshot_2026-01-22-09-21-53-455_com android chrome (3)](https://github.com/user-attachments/assets/9d88f649-a101-4d03-8609-e4e6d9db4e5f)
+<img width="499" height="618" alt="Captura de pantalla 2026-01-23 085907" src="https://github.com/user-attachments/assets/919b0cdf-921e-470a-84d1-dc5f16d1f24c" />
 
 
 
