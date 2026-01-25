@@ -14,15 +14,14 @@ The main goal at this stage is to design and test **core gameplay systems** befo
 
 ## Media
 
-### UI Prototype
+### STATE MACHINE
 <!---[![Needs System GIF](media/needs.gif)](https://www.youtube.com/watch?v=VIDEO_ID)--->
 
-<img width="499" height="618" alt="Captura de pantalla 2026-01-23 085907" src="https://github.com/user-attachments/assets/919b0cdf-921e-470a-84d1-dc5f16d1f24c" />
+<img width="621" height="773" alt="Captura de pantalla 2026-01-25 143859" src="https://github.com/user-attachments/assets/2e65e502-703d-4ed9-a158-dbdce1064b57" />
 
 
-
-Shows the placeholder UI to control de stats, currently developing the needs system.
-<!---Shows early system for hunger, energy, and happiness.--->
+<!---Shows the placeholder UI to control de stats, currently developing the needs system.--->
+<Shows early system for hunger, energy, and happiness.
 
 <!---
 ### Screenshots
