@@ -81,6 +81,24 @@ Activities represent short-term actions the player can perform with the characte
 
 ---
 
+```mermaid
+flowchart TD
+    Player[Player_Interaction]
+    ChooseActivity[Select_Activity_Feed_Play_Rest]
+    ApplyEffects[Apply_Effects_on_Stats]
+    Stats[Stats_Hunger_Sleep_Play]
+    CheckThresholds[Check_Thresholds]
+    Effects[Trigger_Effects_Cry_Refuse_MoodPenalty]
+    UI[UI_Feedback_Sliders]
+
+    Player --> ChooseActivity
+    ChooseActivity --> ApplyEffects
+    ApplyEffects --> Stats
+    Stats --> CheckThresholds
+    CheckThresholds --> Effects
+    Stats --> UI
+```
+
 ## Notes
 
 - Mechanics are currently in pre-production and may evolve as the project develops.
