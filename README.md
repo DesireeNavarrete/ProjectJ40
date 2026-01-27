@@ -4,6 +4,24 @@ The main goal at this stage is to design and test **core gameplay systems** befo
 
 ---
 
+# Project Overview
+
+```mermaid
+flowchart TD
+    PlayerInput[Player_Input]
+    ActivitySys[Activity_System]
+    NeedsSys[Needs_System_Hunger_Sleep_Play]
+    GrowthSys[Growth_System_FSM_Baby_Toddler_Child]
+    Threshold[Threshold_Effects]
+    UI[UI_Feedback_StatView]
+
+    PlayerInput --> ActivitySys
+    ActivitySys --> NeedsSys
+    ActivitySys --> GrowthSys
+    NeedsSys --> Threshold
+    Threshold --> UI
+```
+---
 ## Current Development Focus
 - **Needs System**: Tracks hunger, sleep, happiness, and other metrics.
 - **Character Growth**: Baby evolves visually and mechanically over time.
