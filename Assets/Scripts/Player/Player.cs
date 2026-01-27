@@ -1,21 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectJ40.Growth;
 
 public class Player : MonoBehaviour
 {
 
-    private StateMachine fsm;
+    [SerializeField] private GrowthController growthController;
+
+    public GameObject cuerpoP;
     void Start()
     {
-        fsm= new StateMachine();
-        //Iniciamos en bebe
-        fsm.Initialize(new BebePhase(this, fsm));
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        fsm.Update();
+        if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Baby)
+        {
+            print("Bebeeeeeeee");
+            cuerpoP.GetComponent<SpriteRenderer>().color = Color.yellow;
+        }
+        if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Teen)
+        {
+            print("Niñoooooo");
+            cuerpoP.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+        if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Adult)
+        {
+            print("Niño mayooooor");
+        }
     }
 }

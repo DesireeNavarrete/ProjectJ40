@@ -1,30 +1,33 @@
 
+using ProjectJ40.Growth;
 using UnityEngine;
 
-public class BebePhase : IState
+public class BabyPhase : IState
 {
+    public GrowthStage Stage => GrowthStage.Baby;
+
     private readonly Player pj;
     private readonly StateMachine fsm;
 
-    public BebePhase(Player p, StateMachine fsm)
+    public BabyPhase(Player p, StateMachine fsm)
     {
         this.pj = p;
         this.fsm = fsm;
     }
     public void Enter()
     {
-        DebugConsole.instance.Log("Fase Bebe");
+        Debug.Log("Fase Bebe");
 
     }
 
     public void Execute()
     {
-        DebugConsole.instance.Log("Siendo Bebe");
+        Debug.Log("Siendo Bebe");
     }
 
     public void Exit()
     {
-        DebugConsole.instance.Log("Ya no es Bebe");
+        Debug.Log("Ya no es Bebe");
     }
 
 

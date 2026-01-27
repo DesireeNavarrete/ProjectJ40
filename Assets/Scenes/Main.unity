@@ -363,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &82549173
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -788,6 +788,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194811743}
   m_CullTransparentMesh: 1
+--- !u!1 &196443542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 196443544}
+  - component: {fileID: 196443543}
+  m_Layer: 0
+  m_Name: --QuestManager--
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &196443543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196443542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9a545b8e0aa994bbe8487acef48669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BabyToTeen: 0
+  growthController: {fileID: 630559706}
+  pj: {fileID: 630559705}
+--- !u!4 &196443544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196443542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 173.70953, y: 534.29236, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209752114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,6 +2400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630559704}
   - component: {fileID: 630559705}
+  - component: {fileID: 630559706}
   m_Layer: 0
   m_Name: --P1--
   m_TagString: Untagged
@@ -2390,6 +2438,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d172ea54ffe62b146b72db49592d1b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  growthController: {fileID: 630559706}
+  cuerpoP: {fileID: 755897048}
+--- !u!114 &630559706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630559703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d5210785d951f4891b628a9ac6e92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pj: {fileID: 630559705}
 --- !u!1 &653071188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,6 +2791,7 @@ GameObject:
   - component: {fileID: 729885613}
   - component: {fileID: 729885615}
   - component: {fileID: 729885614}
+  - component: {fileID: 729885616}
   m_Layer: 5
   m_Name: Hambre
   m_TagString: Untagged
@@ -2792,6 +2856,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729885612}
   m_CullTransparentMesh: 1
+--- !u!114 &729885616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729885612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5c094c2336a154cbaf57e8f7d2fb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 729885614}
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  warningThreshold: 25
 --- !u!1 &755897048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2851,7 +2931,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9775771, g: 1, b: 0.2688679, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3069,6 +3149,7 @@ GameObject:
   - component: {fileID: 862126707}
   - component: {fileID: 862126709}
   - component: {fileID: 862126708}
+  - component: {fileID: 862126710}
   m_Layer: 5
   m_Name: Jugar
   m_TagString: Untagged
@@ -3133,6 +3214,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862126706}
   m_CullTransparentMesh: 1
+--- !u!114 &862126710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862126706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5c094c2336a154cbaf57e8f7d2fb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 862126708}
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  warningThreshold: 25
 --- !u!1 &878227962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,6 +4156,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106160699}
   m_CullTransparentMesh: 1
+--- !u!1 &1159007709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1159007711}
+  - component: {fileID: 1159007710}
+  m_Layer: 0
+  m_Name: --UIManager--
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1159007710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159007709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c108a28954a022a44b396b46e90a81f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasComp: {fileID: 98228674}
+--- !u!4 &1159007711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159007709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 250, y: 310, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1163194238
 GameObject:
   m_ObjectHideFlags: 0
@@ -4457,6 +4599,7 @@ GameObject:
   - component: {fileID: 1251742069}
   - component: {fileID: 1251742071}
   - component: {fileID: 1251742070}
+  - component: {fileID: 1251742072}
   m_Layer: 5
   m_Name: Energia
   m_TagString: Untagged
@@ -4521,6 +4664,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251742068}
   m_CullTransparentMesh: 1
+--- !u!114 &1251742072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251742068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5c094c2336a154cbaf57e8f7d2fb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1251742070}
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  warningThreshold: 25
 --- !u!1 &1268989017
 GameObject:
   m_ObjectHideFlags: 0
@@ -6935,9 +7094,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasComp: {fileID: 98228674}
-  pseudoNivelH: 0
-  pseudoNivelS: 0
-  pseudoNivelJ: 0
+  hungerView: {fileID: 729885616}
+  sleepView: {fileID: 1251742072}
+  playView: {fileID: 862126710}
 --- !u!1 &2121561939
 GameObject:
   m_ObjectHideFlags: 0
@@ -7035,7 +7194,9 @@ SceneRoots:
   - {fileID: 2009066826}
   - {fileID: 705507995}
   - {fileID: 45662761}
+  - {fileID: 1159007711}
   - {fileID: 2100208891}
+  - {fileID: 196443544}
   - {fileID: 82549175}
   - {fileID: 630559704}
   - {fileID: 98228673}

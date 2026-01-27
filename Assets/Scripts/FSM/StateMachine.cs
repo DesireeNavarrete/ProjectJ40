@@ -5,6 +5,11 @@ using UnityEngine;
 public class StateMachine
 {
     private IState currentState;
+    public IState CurrentState
+    {
+        get { return currentState; }
+    }
+
     public void Initialize(IState startingState)
     {
         currentState = startingState;
