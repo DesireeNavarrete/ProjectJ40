@@ -70,6 +70,16 @@ Maintains the current state of the character and ensures consistency between sys
 4. State changes may restrict or enable interactions.
 
 ---
+### Threshold Effects
+
+The Needs Manager evaluates each stat against defined thresholds.
+When a stat falls below a critical value, a corresponding effect is triggered:
+- Hunger < 20 → Cry animation + sound
+- Sleep < 15 → Refuse to play
+- Play < 10 → Mood penalty
+
+These effects are managed separately from UI updates, keeping gameplay logic clean.
+
 -->
 
 ## Character Growth System
