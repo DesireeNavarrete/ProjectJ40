@@ -1,30 +1,31 @@
 # Systems Overview
 
-This document describes the core gameplay systems of the project and how data flows between them.
-The focus at this stage is on defining responsibilities, interactions, and scalability before full implementation.
+This document describes the core systems that govern character behavior, progression, and player interaction.
+It explains how different systems interact, their responsibilities, and the architecture decisions behind them.
 
 ---
 ## Needs System
 
 ### Purpose
-Manages continuous character needs using numeric values rather than discrete states.
+Manages continuous character needs using numeric values that decay over time and react to player actions.
 
 ### Core Needs
-- Hunger
-- Sleep
-- Play
+- **Hunger**
+- **Sleep**
+- **Play**
 
-### Architecture
-Each need is implemented as an independent stat with:
-- Clamped values (0–100)
-- Configurable decay or regeneration rates
-- Modifiers applied by player actions
+### Update Logic
+- Each need is represented as a continuous numeric value (0–100).
+- Values are updated every frame using a configurable decay rate.
+- Player actions modify the stats immediately.
+- Critical thresholds trigger effects (e.g., crying, refusal to play).
 
-Needs are updated continuously and evaluated through thresholds rather than state transitions.
+### Design Rationale
+- Using continuous values allows multiple needs to evolve simultaneously.
+- Provides smoother gameplay and flexible balancing.
+- Decoupled from UI; visual feedback is handled separately by `StatView`.
 
-### Design 
-Using continuous values allows multiple needs to evolve simultaneously,
-providing smoother gameplay and more flexible balancing compared to a state-based approach.
+
 
 ---
 
@@ -82,62 +83,65 @@ These effects are managed separately from UI updates, keeping gameplay logic cle
 
 -->
 
-## Character Growth System
+## Growth System
 
 ### Purpose
-Controls long-term character progression using a finite state machine (FSM),
-ensuring clear transitions and scalable growth stages.
+Controls long-term character progression using a finite state machine (FSM).
 
 ### Core Responsibilities
-- Define and manage character growth stages
+- Define and manage character growth stages (e.g., Baby, Toddler, Child)
 - Control transitions between stages
-- React to long-term needs evaluation
+- React to long-term needs and milestones
 - Persist current growth state
 
 ### Architecture
-The system is implemented as a **finite state machine**, where each growth stage
-represents a distinct state with its own rules and behavior.
-
-### Main Components
-- `GrowthStateMachine`
-  - Manages current growth state and transitions
-- `GrowthIState`
-  - Base class/interface for growth stages
-<!--- `GrowthStageData`
-  - Configuration data for each stage (thresholds, conditions)-->
-
-### Data Flow
-1. The Needs System periodically provides aggregated data.
-2. Growth conditions are evaluated by the state machine.
-3. If conditions are met, a state transition is triggered.
-4. The current growth state is updated.
-5. Character visuals and available interactions are refreshed.
+- Each growth stage represents a distinct state with its own rules and behavior.
+- Implemented as a FSM with `GrowthStateMachine` and individual `GrowthState` classes.
+- Future iterations may explore hierarchical states if complexity increases.
 
 ### Benefits
 - Clear separation between growth stages
 - Easy to add or modify stages without affecting existing logic
-- Predictable and controlled state transitions
-
+- Predictable and controlled transitions
 
 ---
-## UI System
+
+## Activity System
 
 ### Purpose
-Provides feedback to the player about character status and interactions.
+Handles short-term character actions that the player triggers.
 
-### Core Responsibilities
-- Display current needs values
-- Show visual feedback for state changes
-- Reflect player actions immediately
+### Examples of Activities
+- Feeding
+- Resting
+- Playing
 
-<!--### Main Components
-- `NeedsUI`
-- `FeedbackUI`-->
+### Mechanics
+- Only one activity is active at a time.
+- Activities modify the Needs System stats according to defined rules.
+- Activity outcomes may trigger visual/audio feedback but do not directly change the stats logic.
 
-### Data Flow
-1. UI subscribes to events from Needs and Character State systems.
-2. UI elements update when values or states change.
-3. Player feedback is displayed in real time.
+---
+## UI Separation
+
+- All visual representations of stats are handled by `StatView`.
+- Sliders update in real time based on stat values.
+- Slider color changes indicate critical thresholds:
+  - Green: Normal
+  - Red: Critical
+
+- Gameplay logic and visual feedback are clearly separated.
+
+---
+
+## Threshold Effects
+
+- The Needs Manager evaluates each stat against critical thresholds:
+  - **Hunger < 20** → Cry animation + sound
+  - **Sleep < 15** → Refuse to play
+  - **Play < 10** → Mood penalty
+- Effects are managed by the system, not the UI.
+- Threshold effects are modular and can be extended for additional stats or activities.
 
 ---
 <!--## Save System (Planned)
@@ -165,7 +169,28 @@ Planned for future iteration once core systems stabilize.
 
 ---
 Future iterations may explore hierarchical states if growth complexity increases.
+---
 
+## System Diagram (Conceptual)
+
+```mermaid
+flowchart TD
+    PlayerInput[Player_Input]
+    ActivitySys[Activity_System]
+    NeedsSys[Needs_System_Hunger_Sleep_Play]
+    GrowthSys[Growth_System_FSM_Baby_Toddler_Child]
+    Threshold[Threshold_Effects]
+    UI[UI_Feedback_StatView]
+
+    PlayerInput --> ActivitySys
+    ActivitySys --> NeedsSys
+    ActivitySys --> GrowthSys
+    NeedsSys --> Threshold
+    Threshold --> UI
+
+
+
+```
 
 ## Notes
 
