@@ -86,7 +86,8 @@ These effects are managed separately from UI updates, keeping gameplay logic cle
 ## Growth System
 
 ### Purpose
-Controls long-term character progression using a finite state machine (FSM).
+Growth stages are defined through a shared enum used across systems (FSM, UI, gameplay logic and save system).  
+This avoids tight coupling and allows the growth logic to scale cleanly.
 
 ### Core Responsibilities
 - Define and manage character growth stages (e.g., Baby, Toddler, Child)
