@@ -36,8 +36,8 @@ flowchart TD
 <!---[![Needs System GIF](media/needs.gif)](https://www.youtube.com/watch?v=VIDEO_ID)--->
 <!---Shows the placeholder UI to control de stats, currently developing the needs system.--->
 Shows early system for hunger, energy, and happiness.<br>
-<img width="621" height="773" alt="Captura de pantalla 2026-01-25 143859" src="https://github.com/user-attachments/assets/2e65e502-703d-4ed9-a158-dbdce1064b57" />
 
+<img width="498" height="617" alt="Captura de pantalla 2026-01-28 110251" src="https://github.com/user-attachments/assets/f7e9507d-4c35-494f-bfcc-6a77be78644f" />
 
 
 
