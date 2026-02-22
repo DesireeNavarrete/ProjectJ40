@@ -15,14 +15,12 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (BabyToTeen)
         {
-            GrowthController.GrowthFSM.ChangeState(new TeenPhase(pj, GrowthController.GrowthFSM));
-
-
+            growthController.AdvanceToStage(GrowthStage.Teen);
         }
     }
 }

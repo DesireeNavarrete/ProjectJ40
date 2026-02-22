@@ -1,3 +1,4 @@
+using ProjectJ40.Growth;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,4 +18,19 @@ public class GrowthController : MonoBehaviour
     {
         GrowthFSM.Update();
     }
+
+    public void AdvanceToStage(GrowthStage newStage)
+    {
+        switch (newStage)
+        {
+            case GrowthStage.Teen:
+                GrowthFSM.ChangeState(new TeenPhase(pj, GrowthFSM));
+                break;
+
+            case GrowthStage.Adult:
+                GrowthFSM.ChangeState(new AdultPhase(pj, GrowthFSM));
+                break;
+        }
+    }
+
 }

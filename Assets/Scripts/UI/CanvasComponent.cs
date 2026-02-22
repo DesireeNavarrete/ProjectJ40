@@ -9,4 +9,14 @@ public class CanvasComponent : MonoBehaviour
     public Image nivelSliderSueño;
     public Image nivelSliderJugar;
 
+
+    public Button nextRoom;
+
+
+    public Text currentRoomText;
+
+
+    public GameObject cocinaCO;
+    public GameObject labCO;
+
 }
