@@ -20,7 +20,7 @@ public class QuestManager : MonoBehaviour
     {
         if (BabyToTeen)
         {
-            growthController.AdvanceToStage(GrowthStage.Teen);
+            growthController.AdvanceToStage(GrowthStage.Teen);//cambiar al estapa de creciemiento dependiendo de las misiones
         }
     }
 }

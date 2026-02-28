@@ -18,5 +18,8 @@ public class CanvasComponent : MonoBehaviour
 
     public GameObject cocinaCO;
     public GameObject labCO;
+    public GameObject bathCO;
+    public GameObject dormCO;
+    public GameObject entradaCO;
 
 }
