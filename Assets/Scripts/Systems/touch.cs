@@ -11,11 +11,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            DebugConsole.instance.Log(Screen.currentResolution.ToString());
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    DebugConsole.instance.Log(Screen.currentResolution.ToString());
 
-        }
+        //}
 
         if (Input.touchCount > 0)
         {

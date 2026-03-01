@@ -17,6 +17,8 @@ public class StatsView : MonoBehaviour
         stat = newStat;
     }
 
+
+   
     void Update()
     {
         if (stat == null || slider == null) return;

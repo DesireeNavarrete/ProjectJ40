@@ -23,7 +23,7 @@ public class GrowthController : MonoBehaviour
     {
         switch (newStage)
         {
-            case GrowthStage.Teen:
+            case GrowthStage.Teen://cambio de etapa, añadir diferentes stats + objetos
                 GrowthFSM.ChangeState(new TeenPhase(pj, GrowthFSM));
                 break;
 

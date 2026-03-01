@@ -11,6 +11,7 @@ public class CanvasComponent : MonoBehaviour
 
 
     public Button nextRoom;
+    public Button FoodBut;
 
 
     public Text currentRoomText;
