@@ -10,16 +10,20 @@ The main goal at this stage is to design and test **core gameplay systems** befo
 flowchart TD
     PlayerInput[Player_Input]
     ActivitySys[Activity_System]
-    NeedsSys[Needs_System_Hunger_Sleep_Play]
-    GrowthSys[Growth_System_FSM_Baby_Toddler_Child]
+    NeedsSys[Needs_System]
+    QuestSys[Quest_System]
+    GrowthSys[Growth_System_FSM]
     Threshold[Threshold_Effects]
-    UI[UI_Feedback_StatView]
+    UI[UI_Feedback]
 
     PlayerInput --> ActivitySys
     ActivitySys --> NeedsSys
-    ActivitySys --> GrowthSys
+    ActivitySys --> QuestSys
+    QuestSys --> GrowthSys
     NeedsSys --> Threshold
     Threshold --> UI
+
+
 ```
 ---
 ## Current Development Focus

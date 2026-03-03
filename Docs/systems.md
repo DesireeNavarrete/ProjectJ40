@@ -145,21 +145,40 @@ Handles short-term character actions that the player triggers.
 - Threshold effects are modular and can be extended for additional stats or activities.
 
 ---
-<!--## Save System (Planned)
 
-### Purpose
-Persist core gameplay data between sessions.
+## Quest System
 
-### Core Responsibilities
-- Save needs values
-- Save growth stage and character state
-- Load data at startup
+The Quest System controls character progression by defining structured objectives that the player must complete in order to trigger growth transitions.
 
-### Status
-Planned for future iteration once core systems stabilize.
+Instead of automatic time-based evolution, character growth is now progression-driven. Each growth stage is unlocked by completing specific missions.
 
----
--->
+### Responsibilities
+
+- Define mission objectives (e.g., feed X times, play Y times)
+- Track mission progress
+- Notify the GrowthController when conditions are met
+- Trigger stage transitions in the Growth State Machine
+
+### System Flow
+
+```mermaid
+flowchart TD
+    PlayerAction[Player Action]
+    QuestManager[Quest Manager]
+    QuestCheck[Check Objectives]
+    GrowthController[Growth Controller]
+    GrowthFSM[Growth State Machine]
+
+    PlayerAction --> QuestManager
+    QuestManager --> QuestCheck
+    QuestCheck -->|Completed| GrowthController
+    GrowthController --> GrowthFSM
+
+
+```
+
+
+
 ## System Relationships Summary
 
 - **Needs System** is the central driver of gameplay.
