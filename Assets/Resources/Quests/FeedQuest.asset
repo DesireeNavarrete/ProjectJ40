@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dcd7545bef65e54fbbe3e79acc07c47, type: 3}
-  m_Name: FeedQuestStep
+  m_Name: FeedQuest
   m_EditorClassIdentifier: 
-  <id>k__BackingField: FeedQuestStep
+  <id>k__BackingField: FeedQuest
   displayName: primera quest
   levelRequirement: 0
   questPrerequisites: []

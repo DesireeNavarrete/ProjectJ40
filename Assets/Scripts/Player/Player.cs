@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     {
         if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Baby)
         {
-            print("Bebeeeeeeee");
+            //print("Bebeeeeeeee");
             cuerpoP.GetComponent<SpriteRenderer>().color = Color.yellow;
         }
         if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Teen)

@@ -17,7 +17,6 @@ public class BabyPhase : IState
     public void Enter()
     {
         Debug.Log("Fase Bebe");
-
     }
 
     public void Execute()
