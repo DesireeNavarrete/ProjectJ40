@@ -23,4 +23,14 @@ public class Stat
         Value = Mathf.Clamp(value, 0f, 100f);
     }
 
+    public float currentCooldown = 0f;
+    //Cooldown para las acciones para que no se espameen
+    public void Cooldown(int duration)
+    {
+        if (currentCooldown <= 0)
+        {
+            // Usar accion
+            currentCooldown = duration;
+        }
+    }
 }

@@ -36,6 +36,14 @@ public class StatsView : MonoBehaviour
             slider.color = normalColor;
         }
 
+
+        //cooldown of a stat
+        if (stat.currentCooldown > 0)
+        {
+            stat.currentCooldown -= Time.deltaTime;
+            //print(stat.currentCooldown);    
+        }
+
     }
 
 }

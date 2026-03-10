@@ -2,7 +2,7 @@ using System;
 
 public class QuestEvents
 {
-    public event Action<string> onStartQuest;
+    public event Action<string> onStartQuest;//tipo string para el id de la quest
     public void StartQuest(string id)
     {
         if (onStartQuest != null)
@@ -47,4 +47,3 @@ public class QuestEvents
         }
     }
 }
-

@@ -23,6 +23,7 @@ public class QuestPoint : MonoBehaviour
         questId = questInfoForPoint.id;
     }
 
+    //suscribimos al evento onQuestStateChange
     private void OnEnable()
     {
         GameEventsManager.instance.questEvents.onQuestStateChange += QuestStateChange;
@@ -35,7 +36,7 @@ public class QuestPoint : MonoBehaviour
 
     private void QuestStateChange(Quest quest)
     {
-        //solo actuliza el estado si tiene la quest correspondiente
+        //solo actualiza el estado si tiene la quest correspondiente
         if (quest.info.id.Equals(questId))
         {
             currentQuestState = quest.state;
@@ -54,5 +55,6 @@ public class QuestPoint : MonoBehaviour
         {
             GameEventsManager.instance.questEvents.FinishQuest(questId);
         }
+
     }
 }

@@ -18,19 +18,22 @@ public class QuestManager : MonoBehaviour
     private void Awake()
     {
         questMap = CreateQuestMap();
+    }
 
-        //Quest quest = GetQuestById("FeedQuestStep");
-        //Debug.Log(quest.info.displayName);
-        //Debug.Log(quest.info.levelRequirement);
-        //Debug.Log(quest.state);
-        //Debug.Log(quest.CurrentStepExists());
+    //nos suscribimos a los eventos de la quest
+    private void OnEnable()
+    {
+        GameEventsManager.instance.questEvents.onStartQuest += StartQuest;
+        GameEventsManager.instance.questEvents.onAdvanceQuest += AdvanceQuest;
+        GameEventsManager.instance.questEvents.onFinishQuest += FinishQuest;
     }
 
     private void StartQuest(string id)
     {
+        //print(id);
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(this.transform);
-        ChangeQuestStatte(quest.info.id, QuestState.IN_PROGRESS);
+        ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
     }
 
     private void AdvanceQuest(string id)
@@ -44,35 +47,28 @@ public class QuestManager : MonoBehaviour
         if (quest.CurrentStepExists())
         {
             quest.InstantiateCurrentQuestStep(this.transform);
-            print("hay mas pasos");
         }
         //si no hay mas, finaliazmos quest
         else
         {
-            ChangeQuestStatte(quest.info.id, QuestState.CAN_FINISH);
-            print("no hay mas pasos");
+            ChangeQuestState(quest.info.id, QuestState.CAN_FINISH);
         }
     }
     private void FinishQuest(string id)
     {
-        Quest quest= GetQuestById(id);
-        ClaimRewards(quest); 
-        ChangeQuestStatte(quest.info.id, QuestState.FINISHED);
-
+        Quest quest = GetQuestById(id);
+        ClaimRewards(quest);
+        ChangeQuestState(quest.info.id, QuestState.FINISHED);
+        growthController.AdvanceToStage(GrowthStage.Teen);
     }
 
     private void ClaimRewards(Quest quest)
     {
-
+        //TODO: reward de "experiencia"
+        //quest.info.experienceReward
+        //change level?
     }
 
-    //nos suscribimos a los eventos de la quest
-    private void OnEnable()
-    {
-        GameEventsManager.instance.questEvents.onStartQuest += StartQuest;
-        GameEventsManager.instance.questEvents.onAdvanceQuest += AdvanceQuest;
-        GameEventsManager.instance.questEvents.onFinishQuest += FinishQuest;
-    }
 
     //nos desuscribimos de los eventos
     private void OnDisable()
@@ -87,19 +83,23 @@ public class QuestManager : MonoBehaviour
         //ponemos el estado inicial de todas las quests al arrancar
         foreach (Quest quest in questMap.Values)
         {
+            // initialize any loaded quest steps
+            //if (quest.state == QuestState.IN_PROGRESS)
+            //{
+            //    quest.InstantiateCurrentQuestStep(this.transform);
+            //}
+            // broadcast the initial state of all quests on startup
             GameEventsManager.instance.questEvents.QuestStateChange(quest);
         }
     }
 
-    //Metodo para actualizar el estado de la quest, se puede utilizar desde donde queramos para actualizarlo, como en la fase
-    private void ChangeQuestStatte(string id, QuestState state)
+    //Metodo para actualizar el estado de la quest, se puede utilizar desde donde queramos para actualizarlo
+    private void ChangeQuestState(string id, QuestState state)
     {
         Quest quest = GetQuestById(id);
         quest.state = state;
         GameEventsManager.instance.questEvents.QuestStateChange(quest);
     }
-
-
 
     private Dictionary<string, Quest> CreateQuestMap()
     {
@@ -118,9 +118,9 @@ public class QuestManager : MonoBehaviour
         return idToQuestMap;
     }
 
-
     private Quest GetQuestById(string id)
     {
+        //print(id);
         Quest quest = questMap[id];
         if (quest == null)
         {
@@ -152,7 +152,6 @@ public class QuestManager : MonoBehaviour
         return meetsRequirements;
     }
 
-
     void Update()
     {
         //if (BabyToTeen)
@@ -160,11 +159,13 @@ public class QuestManager : MonoBehaviour
         //    growthController.AdvanceToStage(GrowthStage.Teen);//cambiar al estapa de creciemiento dependiendo de las misiones
         //}
 
+
+
         foreach (Quest quest in questMap.Values)
         {
             if (quest.state == QuestState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(quest))
             {
-                ChangeQuestStatte(quest.info.id, QuestState.CAN_START);
+                ChangeQuestState(quest.info.id, QuestState.CAN_START);
             }
         }
     }

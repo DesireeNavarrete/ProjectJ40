@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class StatsManager : MonoBehaviour
 {
     public CanvasComponent canvasComp;
-    
+
     public Stat hambreStat;
     public Stat sleepStat;
     public Stat jugarStat;
@@ -19,7 +19,7 @@ public class StatsManager : MonoBehaviour
     //public float pseudoNivelH,pseudoNivelS, pseudoNivelJ;
     public void Start()
     {
-        hambreStat = new Stat(100, 5);
+        hambreStat = new Stat(100, 3);
         sleepStat = new Stat(100, 1);
         jugarStat = new Stat(100, 2);
 
@@ -30,6 +30,13 @@ public class StatsManager : MonoBehaviour
 
         canvasComp.FoodBut.onClick.AddListener(() => hambreStat.SetValue(100));
 
+        // Agrega ambas funciones dentro de la lambda () =>
+        canvasComp.FoodBut.onClick.AddListener(() =>
+        {
+            hambreStat.SetValue(100);
+            hambreStat.Cooldown(5);
+            
+        });
     }
 
     public void Update()
@@ -39,6 +46,14 @@ public class StatsManager : MonoBehaviour
         UpdateDecay(sleepStat);
         UpdateDecay(jugarStat);
 
+        if (hambreStat.currentCooldown > 0)
+        {
+            canvasComp.FoodBut.interactable = false;
+        }
+        if (hambreStat.currentCooldown <= 0)
+        {
+            canvasComp.FoodBut.interactable = true;
+        }
     }
     void UpdateDecay(Stat stat)
     {

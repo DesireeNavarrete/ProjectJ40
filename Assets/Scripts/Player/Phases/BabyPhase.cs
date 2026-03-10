@@ -16,12 +16,12 @@ public class BabyPhase : IState
     }
     public void Enter()
     {
-        Debug.Log("Fase Bebe");
+        //Debug.Log("Fase Bebe");
     }
 
     public void Execute()
     {
-        Debug.Log("Siendo Bebe");
+        //Debug.Log("Siendo Bebe");
     }
 
     public void Exit()

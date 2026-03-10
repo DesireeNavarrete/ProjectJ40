@@ -17,6 +17,5 @@ public class GameEventsManager : MonoBehaviour
 
         //instanciar los events
         questEvents = new QuestEvents();
-        //Debug.Log(questEvents);
     }
 }
