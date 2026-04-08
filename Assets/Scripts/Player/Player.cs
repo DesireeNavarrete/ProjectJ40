@@ -18,17 +18,18 @@ public class Player : MonoBehaviour
     {
         if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Baby)
         {
-            //print("Bebeeeeeeee");
+            print("Bebeeeeeeee");
             cuerpoP.GetComponent<SpriteRenderer>().color = Color.yellow;
         }
         if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Teen)
         {
-            print("Niñoooooo");
+            print("Teen");
             cuerpoP.GetComponent<SpriteRenderer>().color = Color.blue;
         }
         if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Adult)
         {
-            print("Niño mayooooor");
+            print("Adulto");
+            cuerpoP.GetComponent<SpriteRenderer>().color = Color.red;
         }
     }
 }

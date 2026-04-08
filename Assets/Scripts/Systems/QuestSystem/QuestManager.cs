@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    public bool BabyToTeen;
 
     [SerializeField] private GrowthController growthController;
     public Player pj;
@@ -57,9 +56,9 @@ public class QuestManager : MonoBehaviour
     private void FinishQuest(string id)
     {
         Quest quest = GetQuestById(id);
-        ClaimRewards(quest);
+        //ClaimRewards(quest);
         ChangeQuestState(quest.info.id, QuestState.FINISHED);
-        growthController.AdvanceToStage(GrowthStage.Teen);
+        //growthController.AdvanceToStage(GrowthStage.Teen);
     }
 
     private void ClaimRewards(Quest quest)
@@ -120,7 +119,6 @@ public class QuestManager : MonoBehaviour
 
     private Quest GetQuestById(string id)
     {
-        //print(id);
         Quest quest = questMap[id];
         if (quest == null)
         {
@@ -130,22 +128,22 @@ public class QuestManager : MonoBehaviour
     }
     private bool CheckRequirementsMet(Quest quest)
     {
-        // start true and prove to be false
+        // empieza en true y se cambia a false para entrar una vez
         bool meetsRequirements = true;
 
-        // check player level requirements
+        //mira el nivel del jugador, y si el nivel es menor sale de aqui
         if (level < quest.info.levelRequirement)
         {
             meetsRequirements = false;
         }
 
-        // check quest prerequisites for completion
+        // revisa los prerequisitos
         foreach (QuestInfoSO prerequisiteQuestInfo in quest.info.questPrerequisites)
         {
             if (GetQuestById(prerequisiteQuestInfo.id).state != QuestState.FINISHED)
             {
                 meetsRequirements = false;
-                // add this break statement here so that we don't continue on to the next quest, since we've proven meetsRequirements to be false at this point.
+                //añadimos el break para salirnos de aqui, porque ya esta finalizada
                 break;
             }
         }

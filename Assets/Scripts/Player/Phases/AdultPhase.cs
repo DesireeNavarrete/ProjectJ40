@@ -18,7 +18,6 @@ public class AdultPhase : IState
     public void Enter()
     {
         Debug.Log("Fase adulto");
-
     }
 
     public void Execute()

@@ -2,6 +2,7 @@ using ProjectJ40.Growth;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestPoint : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class QuestPoint : MonoBehaviour
 
     private string questId;
     private QuestState currentQuestState;
+    public CanvasComponent canvasComp;
+    Text textQuest;
 
     private void Awake()
     {
@@ -41,6 +44,7 @@ public class QuestPoint : MonoBehaviour
         {
             currentQuestState = quest.state;
             Debug.Log("Quest con id: " + questId + " actualizado estado " + currentQuestState);
+            DebugConsole.instance.Log("Quest con id: " + questId + " actualizado estado " + currentQuestState);
         }
     }
 
@@ -50,11 +54,24 @@ public class QuestPoint : MonoBehaviour
         if (currentQuestState.Equals(QuestState.CAN_START) && startPoint)
         {
             GameEventsManager.instance.questEvents.StartQuest(questId);
+            //TODO: poner titulo de quest?
+            textQuest = Instantiate(canvasComp.textPrefabQuest, canvasComp.questPanelIsntanciar);
+            textQuest.text=questId.ToString();
         }
         else if (currentQuestState.Equals(QuestState.CAN_FINISH) && finishPoint)
         {
             GameEventsManager.instance.questEvents.FinishQuest(questId);
+            textQuest.color = Color.green;
+            StartCoroutine(QuestComplete());
         }
+
+    }
+    protected IEnumerator QuestComplete()
+    {
+        //yield return new WaitUntil(() => isFinished = true);
+        canvasComp.questCompletePanel.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        canvasComp.questCompletePanel.SetActive(false);
 
     }
 }

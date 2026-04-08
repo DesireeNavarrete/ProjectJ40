@@ -17,8 +17,24 @@ public class StatsView : MonoBehaviour
         stat = newStat;
     }
 
+    public static void SlideCooldownStats(Slider sli, Stat stat, Button but)
+    {
+        if (stat.currentCooldown > 0)
+        {
+            but.interactable = false;
+            sli.gameObject.SetActive(true);
+        }
+        if (stat.currentCooldown <= 0)
+        {
+            but.interactable = true;
+            sli.gameObject.SetActive(false);
+        }
 
-   
+        sli.value = stat.currentCooldown / 5;
+
+    }
+
+
     void Update()
     {
         if (stat == null || slider == null) return;

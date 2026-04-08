@@ -11,13 +11,15 @@ public abstract class QuestStep : MonoBehaviour
 
     public void InitializeQuestStep(string questiId)
     {
-        this.questId=questiId;
+        this.questId = questiId;
+ 
     }
 
     protected void FinishQuestStep()
     {
         if (!isFinished)
         {
+            print("its finished");
             isFinished = true;
             //Avanzar la quest ahora que ya ha sido completado el step, antes de eliminar el prefab
             GameEventsManager.instance.questEvents.AdvanceQuest(questId);

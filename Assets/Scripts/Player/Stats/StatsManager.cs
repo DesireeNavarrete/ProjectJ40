@@ -28,14 +28,18 @@ public class StatsManager : MonoBehaviour
         if (sleepView != null) sleepView.SetStat(sleepStat);
         if (playView != null) playView.SetStat(jugarStat);
 
-        canvasComp.FoodBut.onClick.AddListener(() => hambreStat.SetValue(100));
-
-        // Agrega ambas funciones dentro de la lambda () =>
+        //Boton comer
         canvasComp.FoodBut.onClick.AddListener(() =>
         {
             hambreStat.SetValue(100);
             hambreStat.Cooldown(5);
-            
+        });
+
+        //Boton jugar
+        canvasComp.PlayBut.onClick.AddListener(() =>
+        {
+            jugarStat.SetValue(100);
+            jugarStat.Cooldown(5);
         });
     }
 
@@ -46,18 +50,14 @@ public class StatsManager : MonoBehaviour
         UpdateDecay(sleepStat);
         UpdateDecay(jugarStat);
 
-        if (hambreStat.currentCooldown > 0)
-        {
-            canvasComp.FoodBut.interactable = false;
-        }
-        if (hambreStat.currentCooldown <= 0)
-        {
-            canvasComp.FoodBut.interactable = true;
-        }
+
+        StatsView.SlideCooldownStats(canvasComp.sliHambre, hambreStat, canvasComp.FoodBut);
+        StatsView.SlideCooldownStats(canvasComp.sliJugar, jugarStat, canvasComp.PlayBut);
+
+
     }
     void UpdateDecay(Stat stat)
     {
         stat.Modify(-Time.deltaTime);
     }
-
 }

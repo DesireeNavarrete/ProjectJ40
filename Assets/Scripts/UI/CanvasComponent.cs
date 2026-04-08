@@ -13,9 +13,11 @@ public class CanvasComponent : MonoBehaviour
     public Button nextRoom;
     public Button FoodBut;
     public Button PlayBut;
+    public Button toiletBut;
 
 
     public Text currentRoomText;
+    public Text textPrefabQuest;
 
 
     public GameObject cocinaCO;
@@ -23,5 +25,13 @@ public class CanvasComponent : MonoBehaviour
     public GameObject bathCO;
     public GameObject dormCO;
     public GameObject entradaCO;
+
+    public GameObject questCompletePanel;
+    public GameObject questPanel;
+    public Transform questPanelIsntanciar;
+
+    public Slider sliHambre;
+    public Slider sliJugar;
+
 
 }

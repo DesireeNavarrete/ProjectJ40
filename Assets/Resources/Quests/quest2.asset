@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <id>k__BackingField: quest2
   displayName: segunda quest
-  levelRequirement: 1
+  levelRequirement: 0
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 7631363774085716279, guid: 0d88562325d677543a20454d9e884c6d, type: 3}

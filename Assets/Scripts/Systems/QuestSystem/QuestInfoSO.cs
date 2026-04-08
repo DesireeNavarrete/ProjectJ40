@@ -20,7 +20,7 @@ public class QuestInfoSO : ScriptableObject
     [Header("Rewards")]
     public int experienceReward;
 
-    // ensure the id is always the name of the Scriptable Object asset
+    // pone siempre el nombre del scriptable en el id
     private void OnValidate()
     {
 #if UNITY_EDITOR

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <id>k__BackingField: FeedQuest
   displayName: primera quest
-  levelRequirement: 1
+  levelRequirement: 0
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 873077642121741484, guid: 603e08f30f526e842baf3af9c1dcbd99, type: 3}

@@ -9,7 +9,12 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-
+        canvasComp.cocinaCO.SetActive(true);
+        canvasComp.labCO.SetActive(false);
+        canvasComp.bathCO.SetActive(false);
+        canvasComp.dormCO.SetActive(false);
+        canvasComp.entradaCO.SetActive(false);
+        canvasComp.questPanel.SetActive(false);
     }
 
     void Update()
