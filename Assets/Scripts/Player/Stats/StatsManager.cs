@@ -6,6 +6,7 @@ public class StatsManager : MonoBehaviour
 {
     public CanvasComponent canvasComp;
 
+    [Header("Stats")]
     public Stat hambreStat;
     public Stat sleepStat;
     public Stat jugarStat;
@@ -16,9 +17,9 @@ public class StatsManager : MonoBehaviour
     public StatsView playView;
 
 
-    //public float pseudoNivelH,pseudoNivelS, pseudoNivelJ;
     public void Start()
     {
+        //Creamos los stats default, con sus multiplicadores correspondientes
         hambreStat = new Stat(100, 3);
         sleepStat = new Stat(100, 1);
         jugarStat = new Stat(100, 2);
@@ -29,14 +30,14 @@ public class StatsManager : MonoBehaviour
         if (playView != null) playView.SetStat(jugarStat);
 
         //Boton comer
-        canvasComp.FoodBut.onClick.AddListener(() =>
+        canvasComp.foodBut.onClick.AddListener(() =>
         {
             hambreStat.SetValue(100);
             hambreStat.Cooldown(5);
         });
 
         //Boton jugar
-        canvasComp.PlayBut.onClick.AddListener(() =>
+        canvasComp.computerBut.onClick.AddListener(() =>
         {
             jugarStat.SetValue(100);
             jugarStat.Cooldown(5);
@@ -50,9 +51,9 @@ public class StatsManager : MonoBehaviour
         UpdateDecay(sleepStat);
         UpdateDecay(jugarStat);
 
-
-        StatsView.SlideCooldownStats(canvasComp.sliHambre, hambreStat, canvasComp.FoodBut);
-        StatsView.SlideCooldownStats(canvasComp.sliJugar, jugarStat, canvasComp.PlayBut);
+        //Cooldown
+        StatsView.SliderCooldownStats(canvasComp.sliCooldown);
+        StatsView.SliderCooldownStats(canvasComp.sliCooldown);
 
 
     }

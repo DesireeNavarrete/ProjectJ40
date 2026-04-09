@@ -5,21 +5,38 @@ using UnityEngine.UI;
 
 public class CanvasComponent : MonoBehaviour
 {
+    [Header("Sliders stats")]
     public Image nivelSliderHambre;
     public Image nivelSliderSueño;
     public Image nivelSliderJugar;
 
+    [Header("Fondo room")]
+    public Image fondoHabitaciones;
 
+    [Header("Botones")]
     public Button nextRoom;
-    public Button FoodBut;
-    public Button PlayBut;
+
+    public Button foodBut;
+    public Button computerBut;
+    public Button weldBut;
     public Button toiletBut;
+    public Button showerBut;
+
+    public Button coffeBut;
+    public Button proteinBut;
+    public Button bricolajeBut;
+    public Button crossfitBut;
+    public Button bioBut;
+    public Button baloncestoBut;
+    public Button quedarBut;
 
 
+    [Header("Texts")]
     public Text currentRoomText;
     public Text textPrefabQuest;
 
 
+    [Header("GO rooms")]
     public GameObject cocinaCO;
     public GameObject labCO;
     public GameObject bathCO;
@@ -29,9 +46,15 @@ public class CanvasComponent : MonoBehaviour
     public GameObject questCompletePanel;
     public GameObject questPanel;
     public Transform questPanelIsntanciar;
+    
+    public GameObject growingPanel;
 
-    public Slider sliHambre;
-    public Slider sliJugar;
+    [Header("Cooldown")]
+    public Slider sliCooldown;
+    
+    [Header("Experiencia")]
+    public Slider sliExp;
+
 
 
 }

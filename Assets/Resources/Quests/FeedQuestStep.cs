@@ -11,7 +11,7 @@ public class FeedQuestStep : QuestStep
     private void Start()
     {
         canvasComp = GameObject.Find("CanvasPrincipal").GetComponent<CanvasComponent>();
-        butCtrlfeed = canvasComp.FoodBut.GetComponent<ButtonControl>();
+        butCtrlfeed = canvasComp.foodBut.GetComponent<ButtonControl>();
     }
     //Controlar el boton de alimentar y luego FinishQuestStep()
     private void Update()
@@ -20,8 +20,6 @@ public class FeedQuestStep : QuestStep
         {
             print("Feeding");
             FinishQuestStep();
-
-            //TODO: advancetostage dependiendo del stage acutal? 
         }
     }
 }

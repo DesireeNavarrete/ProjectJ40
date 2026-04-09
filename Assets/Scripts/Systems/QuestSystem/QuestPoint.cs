@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class QuestPoint : MonoBehaviour
 {
-    [Header("Dialogue (optional)")]
-    [SerializeField] private string dialogueKnotName;
-
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questInfoForPoint;
 
@@ -20,7 +17,7 @@ public class QuestPoint : MonoBehaviour
     private QuestState currentQuestState;
     public CanvasComponent canvasComp;
     Text textQuest;
-
+    public Color colorGreen;
     private void Awake()
     {
         questId = questInfoForPoint.id;
@@ -54,24 +51,14 @@ public class QuestPoint : MonoBehaviour
         if (currentQuestState.Equals(QuestState.CAN_START) && startPoint)
         {
             GameEventsManager.instance.questEvents.StartQuest(questId);
-            //TODO: poner titulo de quest?
             textQuest = Instantiate(canvasComp.textPrefabQuest, canvasComp.questPanelIsntanciar);
-            textQuest.text=questId.ToString();
+            textQuest.text = questId.ToString();
         }
         else if (currentQuestState.Equals(QuestState.CAN_FINISH) && finishPoint)
         {
             GameEventsManager.instance.questEvents.FinishQuest(questId);
-            textQuest.color = Color.green;
-            StartCoroutine(QuestComplete());
+            textQuest.color = colorGreen;
+            StartCoroutine(UIManager.PopupPanel(canvasComp.questCompletePanel, 1));
         }
-
-    }
-    protected IEnumerator QuestComplete()
-    {
-        //yield return new WaitUntil(() => isFinished = true);
-        canvasComp.questCompletePanel.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        canvasComp.questCompletePanel.SetActive(false);
-
     }
 }

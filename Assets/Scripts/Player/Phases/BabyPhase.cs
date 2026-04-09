@@ -26,7 +26,7 @@ public class BabyPhase : IState
 
     public void Exit()
     {
-        Debug.Log("Ya no es Bebe");
+        //Debug.Log("Ya no es Bebe");
     }
 
 

@@ -10,6 +10,7 @@ public class TeenPhase : IState
     private readonly Player pj;
     private readonly StateMachine fsm;
 
+
     public TeenPhase(Player p, StateMachine fsm)
     {
         this.pj = p;
@@ -18,12 +19,13 @@ public class TeenPhase : IState
     public void Enter()
     {
         Debug.Log("Fase adolescente");
-
+        //TODO: crear room entrada
+        RoomsManager.CreateRoom(5, "entrada", RoomsManager.entradaRoom);
     }
 
     public void Execute()
     {
-        Debug.Log("Siendo adolescente");
+        //Debug.Log("Siendo adolescente");
     }
 
     public void Exit()

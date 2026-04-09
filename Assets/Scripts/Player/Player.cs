@@ -6,9 +6,10 @@ using ProjectJ40.Growth;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private GrowthController growthController;
+    //[SerializeField] private GrowthController growthController;
 
     public GameObject cuerpoP;
+    public CanvasComponent canvasComp;
     void Start()
     {
 
@@ -16,20 +17,32 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Baby)
+        switch (GrowthController.GrowthFSM.CurrentState)
         {
-            print("Bebeeeeeeee");
-            cuerpoP.GetComponent<SpriteRenderer>().color = Color.yellow;
-        }
-        if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Teen)
-        {
-            print("Teen");
-            cuerpoP.GetComponent<SpriteRenderer>().color = Color.blue;
-        }
-        if (GrowthController.GrowthFSM.CurrentState.Stage == GrowthStage.Adult)
-        {
-            print("Adulto");
-            cuerpoP.GetComponent<SpriteRenderer>().color = Color.red;
+            case BabyPhase:
+                cuerpoP.GetComponent<SpriteRenderer>().color = Color.yellow;
+                break;
+            case TeenPhase:
+                cuerpoP.GetComponent<SpriteRenderer>().color = Color.blue;
+                canvasComp.weldBut.gameObject.SetActive(true);//activamos el boton de soldar
+                //TODO: 
+                //entrada: amigos, bio y baloncesto
+                canvasComp.baloncestoBut.gameObject.SetActive(true);//activamos el boton de bloncesto
+                canvasComp.quedarBut.gameObject.SetActive(true);//activamos el boton de salir conamigos
+                canvasComp.bioBut.gameObject.SetActive(true);//activamos el boton de bio
+                break;
+            case AdultPhase:
+                cuerpoP.GetComponent<SpriteRenderer>().color = Color.red;
+                //cocina: protes y cafe
+                canvasComp.proteinBut.gameObject.SetActive(true);//activamos el boton de protes
+                canvasComp.coffeBut.gameObject.SetActive(true);//activamos el boton de cafe
+                //lab: bricolaje
+                canvasComp.bricolajeBut.gameObject.SetActive(true);//activamos el boton de bricolaje
+                //bath: movil + cagar
+                //dormit: movil + cama
+                //entrada: crossfit(mochila) 
+                canvasComp.crossfitBut.gameObject.SetActive(true);//activamos el boton de crossfit
+                break;
         }
     }
 }

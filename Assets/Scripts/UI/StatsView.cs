@@ -17,26 +17,24 @@ public class StatsView : MonoBehaviour
         stat = newStat;
     }
 
-    public static void SlideCooldownStats(Slider sli, Stat stat, Button but)
+    public static void SliderCooldownStats(Slider sli)
     {
-        if (stat.currentCooldown > 0)
+        if (Stat.currentCooldown > 0)
         {
-            but.interactable = false;
             sli.gameObject.SetActive(true);
         }
-        if (stat.currentCooldown <= 0)
+        if (Stat.currentCooldown <= 0)
         {
-            but.interactable = true;
             sli.gameObject.SetActive(false);
         }
 
-        sli.value = stat.currentCooldown / 5;
-
+        sli.value = Stat.currentCooldown / 5;
     }
 
 
     void Update()
     {
+        //Slider de los stats
         if (stat == null || slider == null) return;
 
         // Fill
@@ -54,9 +52,9 @@ public class StatsView : MonoBehaviour
 
 
         //cooldown of a stat
-        if (stat.currentCooldown > 0)
+        if (Stat.currentCooldown > 0)
         {
-            stat.currentCooldown -= Time.deltaTime;
+            Stat.currentCooldown -= Time.deltaTime;
             //print(stat.currentCooldown);    
         }
 

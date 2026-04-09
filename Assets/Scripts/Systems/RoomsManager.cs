@@ -4,24 +4,39 @@ using UnityEngine;
 
 public class RoomsManager : MonoBehaviour
 {
-
-    Rooms cocinaRoom, labRoom, bathRoom, dormRoom, entradaRoom;
+    [Header("Rooms")]
+    public static Rooms cocinaRoom, labRoom, bathRoom, dormRoom, entradaRoom;
     Rooms currentRoom;
 
-    public CanvasComponent canvasComp;
-    public List<string> rooms;
-    public int i = 1;
+    [Header("Rooms parameters")]
+    public static List<string> roomsList= new List<string>();
+    int contadorRoom = 1;
 
+    [Header("Color fondo rooms")]
+    public Color cocinaColor;
+    public Color labColor;
+    public Color bathColor;
+    public Color dormColor;
+    public Color entradaColor;
+
+    public CanvasComponent canvasComp;
 
     void Start()
     {
+        //creamos las habitaciones default
         cocinaRoom = new Rooms(1, "cocina");
         labRoom = new Rooms(2, "lab");
         bathRoom = new Rooms(3, "bath");
         dormRoom = new Rooms(4, "dorm");
         currentRoom = cocinaRoom;
-        i = currentRoom.id;
+        contadorRoom = currentRoom.id;
 
+        roomsList.Clear();
+        roomsList.Add("cocina");
+        roomsList.Add("lab");
+        roomsList.Add("bath");
+        roomsList.Add("dorm");
+       
 
         //canvasComp.nextRoom.onClick.AddListener(() => UpdateCurrentRoom());
 
@@ -29,21 +44,27 @@ public class RoomsManager : MonoBehaviour
 
     void Update()
     {
-
+        print(roomsList.Count);
+        foreach (var item in roomsList)
+        {
+            print(item);
+        }
     }
 
-    void CreateRoom(int id, string name)
+    //Constructor para crear una habitacion en runtime, ej: cambio de fases
+    public static void CreateRoom(int id, string name, Rooms room)
     {
-
+        room = new Rooms(id, name);
+        roomsList.Add(name);
     }
 
-
+    //Con la lista de habitaciones como referencia, sumamos 1 cada vez que se clique en la flecha
     public void NextRoom()
     {
-        i++;
-        if (i > rooms.Count)
+        contadorRoom++;
+        if (contadorRoom > roomsList.Count)
         {
-            i = 1;
+            contadorRoom = 1;
         }
 
         ChangeRoom();
@@ -52,22 +73,23 @@ public class RoomsManager : MonoBehaviour
 
     public void PreviousRoom()
     {
-        i--;
-        if (i < 1)
+        contadorRoom--;
+        if (contadorRoom < 1)
         {
-            i = rooms.Count;
+            contadorRoom = roomsList.Count;
         }
         ChangeRoom();
 
     }
 
-
+    //activaciones y desactivaciones de los elementos del canvas para cada habitacion
     public void ChangeRoom()
     {
-        switch (i)
+        switch (contadorRoom)
         {
             case 1:
                 print("Changing to cocina");
+                canvasComp.fondoHabitaciones.color = cocinaColor;
                 currentRoom = cocinaRoom;
                 canvasComp.cocinaCO.SetActive(true);
                 canvasComp.labCO.SetActive(false);
@@ -78,6 +100,7 @@ public class RoomsManager : MonoBehaviour
                 break;
             case 2:
                 print("Changing to lab");
+                canvasComp.fondoHabitaciones.color = labColor;
                 currentRoom = labRoom;
                 canvasComp.labCO.SetActive(true);
                 canvasComp.cocinaCO.SetActive(false);
@@ -88,6 +111,7 @@ public class RoomsManager : MonoBehaviour
                 break;
             case 3:
                 print("Changing to bath");
+                canvasComp.fondoHabitaciones.color = bathColor;
                 currentRoom = bathRoom;
                 canvasComp.bathCO.SetActive(true);
                 canvasComp.labCO.SetActive(false);
@@ -98,7 +122,8 @@ public class RoomsManager : MonoBehaviour
                 break;
             case 4:
                 print("Changing to dorm");
-                currentRoom = bathRoom;
+                canvasComp.fondoHabitaciones.color = dormColor;
+                currentRoom = dormRoom;
                 canvasComp.dormCO.SetActive(true);
                 canvasComp.bathCO.SetActive(false);
                 canvasComp.labCO.SetActive(false);
@@ -108,7 +133,8 @@ public class RoomsManager : MonoBehaviour
                 break;
             case 5:
                 print("Changing to entrada");
-                currentRoom = bathRoom;
+                canvasComp.fondoHabitaciones.color = entradaColor;
+                currentRoom = entradaRoom;
                 canvasComp.entradaCO.SetActive(true);
                 canvasComp.dormCO.SetActive(false);
                 canvasComp.bathCO.SetActive(false);

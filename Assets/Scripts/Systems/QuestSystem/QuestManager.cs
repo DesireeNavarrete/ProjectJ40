@@ -7,19 +7,21 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
 
-    [SerializeField] private GrowthController growthController;
+    public GrowthController growthController;
     public Player pj;
 
     private Dictionary<string, Quest> questMap;
 
     public int level = 0;
 
+    public CanvasComponent canvasComp;
+
     private void Awake()
     {
         questMap = CreateQuestMap();
     }
 
-    //nos suscribimos a los eventos de la quest
+    //nos suscribimos a los eventos de la quest, para poder empezarlas y completarlas
     private void OnEnable()
     {
         GameEventsManager.instance.questEvents.onStartQuest += StartQuest;
@@ -29,7 +31,6 @@ public class QuestManager : MonoBehaviour
 
     private void StartQuest(string id)
     {
-        //print(id);
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(this.transform);
         ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
@@ -47,7 +48,7 @@ public class QuestManager : MonoBehaviour
         {
             quest.InstantiateCurrentQuestStep(this.transform);
         }
-        //si no hay mas, finaliazmos quest
+        //si no hay mas, finalizamos quest
         else
         {
             ChangeQuestState(quest.info.id, QuestState.CAN_FINISH);
@@ -56,16 +57,31 @@ public class QuestManager : MonoBehaviour
     private void FinishQuest(string id)
     {
         Quest quest = GetQuestById(id);
-        //ClaimRewards(quest);
+        ClaimRewards(quest);
         ChangeQuestState(quest.info.id, QuestState.FINISHED);
-        //growthController.AdvanceToStage(GrowthStage.Teen);
     }
 
     private void ClaimRewards(Quest quest)
     {
-        //TODO: reward de "experiencia"
-        //quest.info.experienceReward
-        //change level?
+        var i = canvasComp.questPanelIsntanciar.transform.childCount;
+        canvasComp.sliExp.value += canvasComp.sliExp.maxValue / i;
+
+        if (canvasComp.sliExp.value == canvasComp.sliExp.maxValue)
+        {
+            print("ETAPA COMPLETE");
+            switch (GrowthController.GrowthFSM.CurrentState)
+            {
+                case BabyPhase:
+                    GrowthController.AdvanceToStage(GrowthStage.Teen);
+                    //TODO: UI de cambio de etapa
+                    StartCoroutine(UIManager.PopupPanel(canvasComp.growingPanel,3));
+                    break;
+                case TeenPhase:
+                    GrowthController.AdvanceToStage(GrowthStage.Adult);
+                    StartCoroutine(UIManager.PopupPanel(canvasComp.growingPanel,3));
+                    break;
+            }
+        }
     }
 
 
