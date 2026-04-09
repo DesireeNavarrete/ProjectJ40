@@ -36,19 +36,16 @@ flowchart TD
 
 ## Media
 
-### STATE MACHINE
 <!---[![Needs System GIF](media/needs.gif)](https://www.youtube.com/watch?v=VIDEO_ID)--->
 <!---Shows the placeholder UI to control de stats, currently developing the needs system.--->
-Shows early system for hunger, energy, and happiness.<br>
-
-<img width="498" height="617" alt="Captura de pantalla 2026-01-28 110251" src="https://github.com/user-attachments/assets/f7e9507d-4c35-494f-bfcc-6a77be78644f" />
-
+Shows early system for hunger, energy, and happiness with a quest system<br>
 
 
 <!---
 ### Screenshots
 <!---<img src="media/screenshot_01.jpg" width="900">
 <img src="media/screenshot_02.jpg" width="900">--->
+![GameplayQuets-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ac27f399-52fb-4086-9d82-9bb6b3730f41)
 
 ---
 ## Playable Build
