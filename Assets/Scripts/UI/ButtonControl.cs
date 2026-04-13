@@ -14,6 +14,18 @@ public class ButtonControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        //Cooldown();
         buttonpressed = false;
+    }
+
+    public static float currentCooldown = 0f;
+    //Cooldown para las acciones para que no se espameen
+    public void Cooldown()
+    {
+        if (currentCooldown <= 0)
+        {
+            // Usar accion
+            currentCooldown = 5;
+        }
     }
 }

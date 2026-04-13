@@ -12,6 +12,4 @@ public class Rooms : MonoBehaviour
         this.id = id;
         this.roomName = roomName;
     }
-
-
 }

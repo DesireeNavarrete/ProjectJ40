@@ -1,6 +1,7 @@
 using ProjectJ40.Growth;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class QuestPoint : MonoBehaviour
     private string questId;
     private QuestState currentQuestState;
     public CanvasComponent canvasComp;
+    public Notifications notis;
     Text textQuest;
     public Color colorGreen;
     private void Awake()
@@ -58,7 +60,9 @@ public class QuestPoint : MonoBehaviour
         {
             GameEventsManager.instance.questEvents.FinishQuest(questId);
             textQuest.color = colorGreen;
-            StartCoroutine(UIManager.PopupPanel(canvasComp.questCompletePanel, 1));
+            //StartCoroutine(UIManager.PopupPanel(canvasComp.questCompletePanel, 1));
+            notis.AddCommand("-Quest complete");
+
         }
     }
 }

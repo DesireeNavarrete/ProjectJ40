@@ -21,6 +21,7 @@ public class CanvasComponent : MonoBehaviour
     public Button weldBut;
     public Button toiletBut;
     public Button showerBut;
+    public Button dormirBut;
 
     public Button coffeBut;
     public Button proteinBut;
@@ -29,6 +30,12 @@ public class CanvasComponent : MonoBehaviour
     public Button bioBut;
     public Button baloncestoBut;
     public Button quedarBut;
+
+    public Button cumpleBut;
+
+    public Button seguimientoQuests;
+
+
 
 
     [Header("Texts")]

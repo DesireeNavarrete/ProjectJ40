@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,21 +17,15 @@ public class Stat
     public void Modify(float amount)
     {
         Value = Mathf.Clamp(Value + amount * Multiplier, 0f, 100f);
+
+        if(Value <= 25f)
+        {
+            Debug.Log("AAAAAA");
+        }
     }
 
     public void SetValue(float value)
     {
         Value = Mathf.Clamp(value, 0f, 100f);
-    }
-
-    public static float currentCooldown = 0f;
-    //Cooldown para las acciones para que no se espameen
-    public void Cooldown(int duration)
-    {
-        if (currentCooldown <= 0)
-        {
-            // Usar accion
-            currentCooldown = duration;
-        }
     }
 }

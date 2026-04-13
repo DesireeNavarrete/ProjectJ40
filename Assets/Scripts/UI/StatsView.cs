@@ -19,16 +19,16 @@ public class StatsView : MonoBehaviour
 
     public static void SliderCooldownStats(Slider sli)
     {
-        if (Stat.currentCooldown > 0)
+        if (ButtonControl.currentCooldown > 0)
         {
             sli.gameObject.SetActive(true);
         }
-        if (Stat.currentCooldown <= 0)
+        if (ButtonControl.currentCooldown <= 0)
         {
             sli.gameObject.SetActive(false);
         }
 
-        sli.value = Stat.currentCooldown / 5;
+        sli.value = ButtonControl.currentCooldown / 5;
     }
 
 
@@ -50,14 +50,10 @@ public class StatsView : MonoBehaviour
             slider.color = normalColor;
         }
 
-
         //cooldown of a stat
-        if (Stat.currentCooldown > 0)
+        if (ButtonControl.currentCooldown > 0)
         {
-            Stat.currentCooldown -= Time.deltaTime;
-            //print(stat.currentCooldown);    
+            ButtonControl.currentCooldown -= Time.deltaTime;
         }
-
     }
-
 }

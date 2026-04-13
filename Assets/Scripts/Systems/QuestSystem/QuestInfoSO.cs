@@ -17,9 +17,6 @@ public class QuestInfoSO : ScriptableObject
     [Header("Steps")]
     public GameObject[] questStepPrefabs;
 
-    [Header("Rewards")]
-    public int experienceReward;
-
     // pone siempre el nombre del scriptable en el id
     private void OnValidate()
     {

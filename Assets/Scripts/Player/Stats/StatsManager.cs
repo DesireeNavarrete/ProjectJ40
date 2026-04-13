@@ -20,9 +20,9 @@ public class StatsManager : MonoBehaviour
     public void Start()
     {
         //Creamos los stats default, con sus multiplicadores correspondientes
-        hambreStat = new Stat(100, 3);
-        sleepStat = new Stat(100, 1);
-        jugarStat = new Stat(100, 2);
+        hambreStat = new Stat(100, 2);
+        sleepStat = new Stat(100, .5f);
+        jugarStat = new Stat(100, 1);
 
         // Conectar UI
         if (hungerView != null) hungerView.SetStat(hambreStat);
@@ -33,14 +33,97 @@ public class StatsManager : MonoBehaviour
         canvasComp.foodBut.onClick.AddListener(() =>
         {
             hambreStat.SetValue(100);
-            hambreStat.Cooldown(5);
+            canvasComp.foodBut.GetComponent<ButtonControl>().Cooldown();
         });
 
-        //Boton jugar
+        //Boton pc
         canvasComp.computerBut.onClick.AddListener(() =>
         {
             jugarStat.SetValue(100);
-            jugarStat.Cooldown(5);
+            canvasComp.computerBut.GetComponent<ButtonControl>().Cooldown();
+        });
+
+        //Boton soldar
+        canvasComp.weldBut.onClick.AddListener(() =>
+        {
+            jugarStat.SetValue(100);
+        });
+
+
+        //Boton vater----------
+        canvasComp.toiletBut.onClick.AddListener(() =>
+        {
+            //jugarStat.SetValue(100);
+            //jugarStat.Cooldown();
+        });
+        //Boton ducha--------------------
+        canvasComp.showerBut.onClick.AddListener(() =>
+        {
+            //jugarStat.SetValue(100);
+            //jugarStat.Cooldown();
+        });
+        //Boton dormir
+        canvasComp.dormirBut.onClick.AddListener(() =>
+        {
+            sleepStat.SetValue(100);
+            canvasComp.dormirBut.GetComponent<ButtonControl>().Cooldown();
+
+        });
+        //Boton protes
+        canvasComp.proteinBut.onClick.AddListener(() =>
+        {
+            hambreStat.SetValue(100);
+            canvasComp.proteinBut.GetComponent<ButtonControl>().Cooldown();
+
+        });
+        //Boton cafe
+        canvasComp.coffeBut.onClick.AddListener(() =>
+        {
+            hambreStat.SetValue(100);
+            canvasComp.coffeBut.GetComponent<ButtonControl>().Cooldown();
+
+        });
+        //Boton bricolaje
+        canvasComp.bricolajeBut.onClick.AddListener(() =>
+        {
+            jugarStat.SetValue(100);
+            canvasComp.bricolajeBut.GetComponent<ButtonControl>().Cooldown();
+
+        });
+        //Boton salir
+        canvasComp.quedarBut.onClick.AddListener(() =>
+        {
+            jugarStat.SetValue(100);
+            canvasComp.quedarBut.GetComponent<ButtonControl>().Cooldown();
+
+        });
+        //Boton crossfit
+        canvasComp.crossfitBut.onClick.AddListener(() =>
+        {
+            //jugarStat.SetValue(100);
+            //jugarStat.Cooldown();
+        });
+        //Boton baloncesto
+        canvasComp.baloncestoBut.onClick.AddListener(() =>
+        {
+            jugarStat.SetValue(100);
+            canvasComp.baloncestoBut.GetComponent<ButtonControl>().Cooldown();
+
+        });
+        //Boton bio
+        canvasComp.bioBut.onClick.AddListener(() =>
+        {
+            //jugarStat.SetValue(100);
+            //jugarStat.Cooldown();
+        });
+
+        //CUMPLE
+        canvasComp.cumpleBut.onClick.AddListener(() =>
+        {
+            canvasComp.cumpleBut.GetComponent<ButtonControl>().Cooldown();
+          
+            //jugarStat.SetValue(100);
+            //jugarStat.Cooldown();
         });
     }
 
@@ -53,10 +136,8 @@ public class StatsManager : MonoBehaviour
 
         //Cooldown
         StatsView.SliderCooldownStats(canvasComp.sliCooldown);
-        StatsView.SliderCooldownStats(canvasComp.sliCooldown);
-
-
     }
+
     void UpdateDecay(Stat stat)
     {
         stat.Modify(-Time.deltaTime);

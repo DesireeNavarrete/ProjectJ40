@@ -44,11 +44,7 @@ public class RoomsManager : MonoBehaviour
 
     void Update()
     {
-        print(roomsList.Count);
-        foreach (var item in roomsList)
-        {
-            print(item);
-        }
+       
     }
 
     //Constructor para crear una habitacion en runtime, ej: cambio de fases

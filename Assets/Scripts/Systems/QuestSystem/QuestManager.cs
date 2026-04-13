@@ -14,8 +14,9 @@ public class QuestManager : MonoBehaviour
 
     public int level = 0;
 
-    public CanvasComponent canvasComp;
+    public UIManager uiManager;
 
+    public CanvasComponent canvasComp;
     private void Awake()
     {
         questMap = CreateQuestMap();
@@ -69,18 +70,7 @@ public class QuestManager : MonoBehaviour
         if (canvasComp.sliExp.value == canvasComp.sliExp.maxValue)
         {
             print("ETAPA COMPLETE");
-            switch (GrowthController.GrowthFSM.CurrentState)
-            {
-                case BabyPhase:
-                    GrowthController.AdvanceToStage(GrowthStage.Teen);
-                    //TODO: UI de cambio de etapa
-                    StartCoroutine(UIManager.PopupPanel(canvasComp.growingPanel,3));
-                    break;
-                case TeenPhase:
-                    GrowthController.AdvanceToStage(GrowthStage.Adult);
-                    StartCoroutine(UIManager.PopupPanel(canvasComp.growingPanel,3));
-                    break;
-            }
+            uiManager.Cumple();
         }
     }
 
