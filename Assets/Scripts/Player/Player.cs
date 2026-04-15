@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //TODO: poner en el click de la tarta?para que no se haga en update
         switch (GrowthController.GrowthFSM.CurrentState)
         {
             case BabyPhase:
@@ -25,7 +26,6 @@ public class Player : MonoBehaviour
             case TeenPhase:
                 cuerpoP.GetComponent<SpriteRenderer>().color = Color.blue;
                 canvasComp.weldBut.gameObject.SetActive(true);//activamos el boton de soldar
-                //TODO: 
                 //entrada: amigos, bio y baloncesto
                 canvasComp.baloncestoBut.gameObject.SetActive(true);//activamos el boton de bloncesto
                 canvasComp.quedarBut.gameObject.SetActive(true);//activamos el boton de salir conamigos

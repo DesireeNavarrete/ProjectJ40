@@ -18,10 +18,10 @@ public class Stat
     {
         Value = Mathf.Clamp(Value + amount * Multiplier, 0f, 100f);
 
-        if(Value <= 25f)
-        {
-            Debug.Log("AAAAAA");
-        }
+        //if(Value <= 25f)
+        //{
+        //    Debug.Log("AAAAAA");
+        //}
     }
 
     public void SetValue(float value)

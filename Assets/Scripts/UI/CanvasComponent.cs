@@ -62,6 +62,9 @@ public class CanvasComponent : MonoBehaviour
     [Header("Experiencia")]
     public Slider sliExp;
 
+    [Header("Reacts")]
+    public GameObject emocionPanel;
+    public Image emocion;
 
 
 }

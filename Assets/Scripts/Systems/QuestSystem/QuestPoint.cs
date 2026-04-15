@@ -60,9 +60,7 @@ public class QuestPoint : MonoBehaviour
         {
             GameEventsManager.instance.questEvents.FinishQuest(questId);
             textQuest.color = colorGreen;
-            //StartCoroutine(UIManager.PopupPanel(canvasComp.questCompletePanel, 1));
-            notis.AddCommand("-Quest complete");
-
+            notis.AddNotificationUI("-Quest complete");
         }
     }
 }

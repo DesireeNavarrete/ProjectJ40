@@ -55,5 +55,7 @@ public class StatsView : MonoBehaviour
         {
             ButtonControl.currentCooldown -= Time.deltaTime;
         }
+
+        //reaccciones, scriptable?
     }
 }

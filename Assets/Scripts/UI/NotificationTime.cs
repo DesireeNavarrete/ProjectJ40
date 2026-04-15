@@ -7,7 +7,7 @@ public class NotificationTime : MonoBehaviour
     //contador de tiempo de 5s hacia abajo
     float cont;
     public Notifications notis;
-
+    public int contador=0;
 
     private void Start()
     {
@@ -15,7 +15,7 @@ public class NotificationTime : MonoBehaviour
     }
     private void OnEnable()
     {
-        cont = 5;
+        cont = contador;
     }
     private void Update()
     {
@@ -29,7 +29,12 @@ public class NotificationTime : MonoBehaviour
         {
             cont = 0;
             Destroy(gameObject);
-            notis.QuitarCommand();
+            if (gameObject.name == "Notification")
+            {
+                notis.QuitarNotificationUI();
+            }
+            else
+                notis.QuitarNotificationNeeds();
         }
     }
 }

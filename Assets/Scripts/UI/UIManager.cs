@@ -1,15 +1,22 @@
+using DG.Tweening;
 using ProjectJ40.Growth;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public CanvasComponent canvasComp;
     public Notifications notis;
-    public Stat stat;
-    public static bool cumpleAvaible=false;
+    public NeedsSystem needs;
 
+
+    public Stat stat;
+    public static bool cumpleAvaible = false;
+
+    public NeedsSystem reactManager;
     private void Start()
     {
         //desactivamos los elementos de la ui que no se necesiten al iniciar
@@ -40,6 +47,15 @@ public class UIManager : MonoBehaviour
         //canvasComp.cumpleBut.onClick.AddListener(() => Cumple());
         canvasComp.seguimientoQuests.onClick.AddListener(() => Pausa());
 
+        //canvasComp.foodBut.onClick.AddListener(() => notis.AddNotificationNeeds("love"));
+    }
+
+
+
+    public void Reacting(string react)
+    {
+        //TODO: notificaciones de necesidades
+        //notis.AddNotificationNeeds(react);
     }
 
     public void Pausa()
@@ -47,7 +63,8 @@ public class UIManager : MonoBehaviour
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-        }else
+        }
+        else
             Time.timeScale = 0;
     }
 
@@ -56,20 +73,32 @@ public class UIManager : MonoBehaviour
         cumpleAvaible = true;
         canvasComp.cumpleBut.gameObject.SetActive(true);
         //StartCoroutine(UIManager.PopupPanel(canvasComp.growingPanel, 5));
-        notis.AddCommand("-¡Enhorabuena!\r\nJavi está ahora preparado para crecer\r\n¡Corre ves a la cocina!");
+        notis.AddNotificationUI("-¡Enhorabuena!\r\nJavi está ahora preparado para crecer\r\n¡Corre ves a la cocina!");
     }
 
     public void ChangePhase()
     {
+     
+        if (canvasComp.questPanelIsntanciar.childCount > 0)
+        {
+            for (int j = 0; j < canvasComp.questPanelIsntanciar.childCount; j++)
+            {
+                Destroy(canvasComp.questPanelIsntanciar.GetChild(j).gameObject);
+            }
+            canvasComp.sliExp.value = 0;
+        }
+
         switch (GrowthController.GrowthFSM.CurrentState)
         {
             case BabyPhase:
                 cumpleAvaible = false;
                 GrowthController.AdvanceToStage(GrowthStage.Teen);
+                QuestManager.level = 1;
                 break;
             case TeenPhase:
                 cumpleAvaible = false;
                 GrowthController.AdvanceToStage(GrowthStage.Adult);
+                QuestManager.level = 2;
                 break;
         }
     }
@@ -134,8 +163,17 @@ public class UIManager : MonoBehaviour
     //Popup panels, le pasamos el panel y el tiempo de activacion
     public static IEnumerator PopupPanel(GameObject canvasPanel, float t)
     {
-        canvasPanel.SetActive(true);
-        yield return new WaitForSeconds(t);
-        canvasPanel.SetActive(false);
+        if (canvasPanel.GetComponent<CanvasGroup>() != null)
+        {
+            canvasPanel.GetComponent<CanvasGroup>().DOFade(1, .5f);
+            yield return new WaitForSeconds(t);
+            canvasPanel.GetComponent<CanvasGroup>().DOFade(0, .5f);
+        }
+        else
+        {
+            canvasPanel.SetActive(true);
+            yield return new WaitForSeconds(t);
+            canvasPanel.SetActive(false);
+        }
     }
 }

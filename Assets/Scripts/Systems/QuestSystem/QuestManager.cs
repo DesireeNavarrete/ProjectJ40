@@ -12,7 +12,7 @@ public class QuestManager : MonoBehaviour
 
     private Dictionary<string, Quest> questMap;
 
-    public int level = 0;
+    public static int level = 0;
 
     public UIManager uiManager;
 
@@ -158,13 +158,6 @@ public class QuestManager : MonoBehaviour
 
     void Update()
     {
-        //if (BabyToTeen)
-        //{
-        //    growthController.AdvanceToStage(GrowthStage.Teen);//cambiar al estapa de creciemiento dependiendo de las misiones
-        //}
-
-
-
         foreach (Quest quest in questMap.Values)
         {
             if (quest.state == QuestState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(quest))
