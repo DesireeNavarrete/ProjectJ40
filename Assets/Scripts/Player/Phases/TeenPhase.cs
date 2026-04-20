@@ -19,7 +19,6 @@ public class TeenPhase : IState
     public void Enter()
     {
         Debug.Log("Fase adolescente");
-        //TODO: crear room entrada
         RoomsManager.CreateRoom(5, "entrada", RoomsManager.entradaRoom);
     }
 

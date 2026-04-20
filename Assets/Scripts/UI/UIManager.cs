@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -44,13 +45,60 @@ public class UIManager : MonoBehaviour
 
         canvasComp.cumpleBut.onClick.AddListener(() => ChangePhase());
         canvasComp.seguimientoQuests.onClick.AddListener(() => AbrilCerralQuests());
-        //canvasComp.cumpleBut.onClick.AddListener(() => Cumple());
         canvasComp.seguimientoQuests.onClick.AddListener(() => Pausa());
 
-        //canvasComp.foodBut.onClick.AddListener(() => notis.AddNotificationNeeds("love"));
+        canvasComp.toiletBut.onClick.AddListener(() => QuitarColaBath());
+
+
+        canvasComp.showerBut.onClick.AddListener(() => QuitarColaDucha());
     }
 
+    void QuitarColaBath()
+    {
+        if (notis.notificationsNeeds.Count > 0)
+        {
+            for (int i = 0; i < notis.notificationsNeeds.Count; i++)
+            {
+                if (notis.notificationsNeeds.Contains("caca"))
+                {
+                    notis.notificationsNeeds.Remove("caca");
+                    foreach (Transform child in canvasComp.emocionPanel.transform)
+                    {
+                        if (child.name == "caca")
+                        {
+                            child.gameObject.SetActive(false);
+                            Destroy(child.gameObject, 1);
+                            needs.contadorCaca = 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    void QuitarColaDucha()
+    {
+        if (notis.notificationsNeeds.Count > 0)
+        {
+            for (int i = 0; i < notis.notificationsNeeds.Count; i++)
+            {
+                if (notis.notificationsNeeds.Contains("ducha"))
+                {
+                    notis.notificationsNeeds.Remove("ducha");
+
+                    foreach (Transform child in canvasComp.emocionPanel.transform)
+                    {
+                        if (child.name == "ducha")
+                        {
+                            child.gameObject.SetActive(false);
+                            Destroy(child.gameObject, 1);
+                            needs.contadorDucha = 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public void Reacting(string react)
     {
@@ -78,7 +126,7 @@ public class UIManager : MonoBehaviour
 
     public void ChangePhase()
     {
-     
+
         if (canvasComp.questPanelIsntanciar.childCount > 0)
         {
             for (int j = 0; j < canvasComp.questPanelIsntanciar.childCount; j++)

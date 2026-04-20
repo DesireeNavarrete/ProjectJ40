@@ -22,5 +22,4 @@ public class NeedsSO : ScriptableObject
         UnityEditor.EditorUtility.SetDirty(this);
 #endif
     }
-
 }

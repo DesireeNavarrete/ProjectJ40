@@ -21,8 +21,10 @@ public class NeedsSystem : MonoBehaviour
     {
         if (contadorCaca == 2)
         {
-            notis.AddNotificationNeeds("caca");
-            contadorCaca = 0;
+            if (!notis.notificationsNeeds.Contains("caca"))
+            {
+                notis.AddNotificationNeeds("caca");
+            }
         }
         else
             contadorCaca++;
@@ -32,8 +34,10 @@ public class NeedsSystem : MonoBehaviour
     {
         if (contadorDucha == 2)
         {
-            notis.AddNotificationNeeds("ducha");
-            contadorDucha = 0;
+            if (!notis.notificationsNeeds.Contains("ducha"))
+            {
+                notis.AddNotificationNeeds("ducha");
+            }
         }
         else
             contadorDucha++;
@@ -66,5 +70,6 @@ public class NeedsSystem : MonoBehaviour
         //}
 
         //TODO: necesidad de ir al baño o ducharse, barra de tiempo? y cuando este a 50 o menos, mensaje por texto "Cuidado, javi necesita ir al baño"
+        //Controlar el boton de baño/ducha para quitar la notificacion
     }
 }

@@ -29,7 +29,6 @@ public class Quest
     }
 
     //instancia el prefab del step que toca
-    //TODO: instanciar tambien el Text en el panel de quests
     public void InstantiateCurrentQuestStep(Transform parentTransform)
     {
         GameObject questStepPrefab = GetCurrentQuestStepPrefab();

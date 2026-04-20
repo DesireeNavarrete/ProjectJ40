@@ -6,20 +6,35 @@ using UnityEngine.UI;
 
 public class Notifications : MonoBehaviour
 {
-    private Queue<string> notificationsUI = new Queue<string>();
-    private Queue<string> notificationsNeeds = new Queue<string>();
+    public Queue<string> notificationsUI = new Queue<string>();
+
+    public List<string> notificationsNeeds;
 
     public GameObject queueUI;
     public GameObject queueNeeds;
 
-    public Image prefabNeeds;
+    public GameObject prefabNeeds;
     public Text prefab;
 
     Text txt;
-    Image goNeeds;
+    GameObject goNeeds;
 
     public NeedsSystem reacts;
     public CanvasComponent canvasComp;
+
+
+    public Text txtLog;
+
+
+    void UpdateQueue()
+    {
+        //txtLog.text = string.Empty;
+
+        foreach (string command in notificationsUI)
+        {
+            txt.text += command;
+        }
+    }
 
     //Notificaciones de necesidades
     public void AddNotificationNeeds(string react)//añade elemento a la cola
@@ -28,20 +43,32 @@ public class Notifications : MonoBehaviour
         {
             if (item.reaccion == react)
             {
-                //print("react");
                 goNeeds = Instantiate(prefabNeeds, queueNeeds.transform);
-                goNeeds.sprite = item.emoticono;
-                notificationsNeeds.Enqueue(react);
+                goNeeds.transform.GetChild(1).GetComponent<Image>().sprite = item.emoticono;
+                goNeeds.transform.name = react;
+                notificationsNeeds.Add(react);
+                //notificationsNeeds.Enqueue(react);
+                //UpdateQueue();
             }
         }
     }
 
-    public void QuitarNotificationNeeds()//ejecuta el elemento de la cola
-    {
-        if (notificationsNeeds.Count == 0) return;//si no hay nada en la cola, se sale
+    //public void QuitarNotificationNeeds()//ejecuta el elemento de la cola
+    //{
+    //    if (notificationsNeeds.Count == 0) return;//si no hay nada en la cola, se sale
 
-        notificationsNeeds.Dequeue();
-    }
+    //    notificationsNeeds.Dequeue();
+    //}
+
+    //public void ColaNeedsComprobar()
+    //{
+    //    if (notificationsNeeds.Count > 0)
+    //    {
+    //        //QuitarNotificationNeeds();
+    //        //destruir obj
+    //        Destroy(goNeeds);
+    //    }
+    //}
 
 
     //Notificaciones de texto

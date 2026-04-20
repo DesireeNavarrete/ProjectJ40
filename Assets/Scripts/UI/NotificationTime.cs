@@ -7,11 +7,11 @@ public class NotificationTime : MonoBehaviour
     //contador de tiempo de 5s hacia abajo
     float cont;
     public Notifications notis;
-    public int contador=0;
+    public int contador = 10;
 
     private void Start()
     {
-        notis = GameObject.Find("Queue").GetComponent<Notifications>();
+        notis = GameObject.Find("--Queue--").GetComponent<Notifications>();
     }
     private void OnEnable()
     {
@@ -29,12 +29,7 @@ public class NotificationTime : MonoBehaviour
         {
             cont = 0;
             Destroy(gameObject);
-            if (gameObject.name == "Notification")
-            {
-                notis.QuitarNotificationUI();
-            }
-            else
-                notis.QuitarNotificationNeeds();
+            notis.QuitarNotificationUI();
         }
     }
 }
