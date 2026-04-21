@@ -18,7 +18,7 @@ public class GrowthController : MonoBehaviour
     void Update()
     {
         GrowthFSM.Update();
-        print(GrowthFSM.CurrentState);
+        //print(GrowthFSM.CurrentState);
     }
 
     //funcion para cambiar de fase desde cualquier sitio

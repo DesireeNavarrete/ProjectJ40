@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dcd7545bef65e54fbbe3e79acc07c47, type: 3}
-  m_Name: quest3
+  m_Name: Q1_2
   m_EditorClassIdentifier: 
-  <id>k__BackingField: quest3
-  displayName: tercera quest
-  levelRequirement: 1
-  questPrerequisites:
-  - {fileID: 11400000, guid: 341d3fee203ed84468a8cff068199909, type: 2}
-  - {fileID: 11400000, guid: 47557e4c8caa4744bafc3447c894faca, type: 2}
+  <id>k__BackingField: Q1_2
+  displayName: Juega con Javi
+  levelRequirement: 0
+  questPrerequisites: []
   questStepPrefabs:
-  - {fileID: 7631363774085716279, guid: 0aee2e06aec299a4e9053f6c9f018793, type: 3}
+  - {fileID: 7631363774085716279, guid: 0d88562325d677543a20454d9e884c6d, type: 3}

@@ -15,6 +15,7 @@ public class QuestPoint : MonoBehaviour
     [SerializeField] private bool finishPoint = true;
 
     private string questId;
+    private string questDisplayName;
     private QuestState currentQuestState;
     public CanvasComponent canvasComp;
     public Notifications notis;
@@ -23,6 +24,7 @@ public class QuestPoint : MonoBehaviour
     private void Awake()
     {
         questId = questInfoForPoint.id;
+        questDisplayName = questInfoForPoint.displayName;
     }
 
     //suscribimos al evento onQuestStateChange
@@ -54,7 +56,7 @@ public class QuestPoint : MonoBehaviour
         {
             GameEventsManager.instance.questEvents.StartQuest(questId);
             textQuest = Instantiate(canvasComp.textPrefabQuest, canvasComp.questPanelIsntanciar);
-            textQuest.text = questId.ToString();
+            textQuest.text = questDisplayName.ToString();
         }
         else if (currentQuestState.Equals(QuestState.CAN_FINISH) && finishPoint)
         {

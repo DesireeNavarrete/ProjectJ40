@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dcd7545bef65e54fbbe3e79acc07c47, type: 3}
-  m_Name: Alimenta a javi quest
+  m_Name: Q1_4
   m_EditorClassIdentifier: 
-  <id>k__BackingField: Alimenta a javi quest
-  displayName: primera quest
+  <id>k__BackingField: Q1_4
+  displayName: "LLeva  a Javi al ba\xF1o cuando lo necesite"
   levelRequirement: 0
   questPrerequisites: []
   questStepPrefabs:
-  - {fileID: 873077642121741484, guid: 603e08f30f526e842baf3af9c1dcbd99, type: 3}
+  - {fileID: 3945476347962503606, guid: 3ce82983d21ebb546b810e7a3476f71e, type: 3}

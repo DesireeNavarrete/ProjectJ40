@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dcd7545bef65e54fbbe3e79acc07c47, type: 3}
-  m_Name: Juega conjavi quest
+  m_Name: Q1_3
   m_EditorClassIdentifier: 
-  <id>k__BackingField: Juega conjavi quest
-  displayName: segunda quest
+  <id>k__BackingField: Q1_3
+  displayName: Duerme a Javi
   levelRequirement: 0
   questPrerequisites: []
   questStepPrefabs:
-  - {fileID: 7631363774085716279, guid: 0d88562325d677543a20454d9e884c6d, type: 3}
+  - {fileID: 8144112874952600706, guid: 4c039aaf1327dad4987c62632f50102b, type: 3}

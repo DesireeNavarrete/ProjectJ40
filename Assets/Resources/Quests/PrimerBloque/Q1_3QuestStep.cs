@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class FeedQuestStep : QuestStep
+public class Q1_3QuestStep : QuestStep
 {
     public CanvasComponent canvasComp;
     ButtonControl butCtrlfeed;
@@ -11,14 +10,14 @@ public class FeedQuestStep : QuestStep
     private void Start()
     {
         canvasComp = GameObject.Find("CanvasPrincipal").GetComponent<CanvasComponent>();
-        butCtrlfeed = canvasComp.foodBut.GetComponent<ButtonControl>();
+        butCtrlfeed = canvasComp.dormirBut.GetComponent<ButtonControl>();
     }
     //Controlar el boton de alimentar y luego FinishQuestStep()
     private void Update()
     {
         if (butCtrlfeed.buttonpressed)
         {
-            print("Feeding");
+            print("Durmiendo");
             FinishQuestStep();
         }
     }

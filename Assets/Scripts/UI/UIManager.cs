@@ -66,9 +66,9 @@ public class UIManager : MonoBehaviour
                     {
                         if (child.name == "caca")
                         {
+                            //needs.contadorCaca = 0;
                             child.gameObject.SetActive(false);
                             Destroy(child.gameObject, 1);
-                            needs.contadorCaca = 0;
                         }
                     }
                 }
@@ -92,18 +92,11 @@ public class UIManager : MonoBehaviour
                         {
                             child.gameObject.SetActive(false);
                             Destroy(child.gameObject, 1);
-                            needs.contadorDucha = 0;
                         }
                     }
                 }
             }
         }
-    }
-
-    public void Reacting(string react)
-    {
-        //TODO: notificaciones de necesidades
-        //notis.AddNotificationNeeds(react);
     }
 
     public void Pausa()
@@ -120,7 +113,6 @@ public class UIManager : MonoBehaviour
     {
         cumpleAvaible = true;
         canvasComp.cumpleBut.gameObject.SetActive(true);
-        //StartCoroutine(UIManager.PopupPanel(canvasComp.growingPanel, 5));
         notis.AddNotificationUI("-¡Enhorabuena!\r\nJavi está ahora preparado para crecer\r\n¡Corre ves a la cocina!");
     }
 

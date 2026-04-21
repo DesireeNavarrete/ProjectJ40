@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4732260823456906200}
   - component: {fileID: -566825405735295076}
   m_Layer: 0
-  m_Name: FeedQuestStepPrefab
+  m_Name: Q!_1QuestPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Stat
 {
     public float Value { get; private set; }//valor del stat actual
-    public float Multiplier { get; private set; } //multiplicador para ese stat
+    public float Multiplier { get; set; } //multiplicador para ese stat
 
     public Stat(float initialValue, float multiplier = 1f)
     {
@@ -17,12 +17,9 @@ public class Stat
     public void Modify(float amount)
     {
         Value = Mathf.Clamp(Value + amount * Multiplier, 0f, 100f);
-
-        //if(Value <= 25f)
-        //{
-        //    Debug.Log("AAAAAA");
-        //}
     }
+
+   
 
     public void SetValue(float value)
     {
