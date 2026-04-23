@@ -302,13 +302,10 @@ Estos son los principales sistemas del proyecto:
 - Añadir más habitaciones con más acciones
 - Mejorar el gameplay añadiendo minijuegos
 
-- Explorar [idea de diseño]
-- Cambiar [decisión que no funcionó del todo]
-
 ---
 
 ## 🧭 6. Resumen de diseño (opcional)
 
-> Este proyecto se centró en [1 línea resumen].  
-> Las decisiones principales se enfocaron en [2–3 ideas clave].  
-> El resultado fue [impacto final en el gameplay].
+> Este proyecto se centró en aprender nuevos sistemas junto con diseño de mecánicas.
+> Las decisiones principales se enfocaron en tener un proyecto funcional antes de bonito.
+> El resultado fue un gameplay funcional.
