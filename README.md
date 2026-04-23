@@ -1,88 +1,142 @@
 # ProjectJ40
-This project is an early-stage life simulation game where the player takes care of a baby character whose needs change over time.  
-The main goal at this stage is to design and test **core gameplay systems** before adding polish, content, or final art.
+
+**ProjectJ40** is an early-stage life simulation game inspired by tamagotchi-style experiences, designed specifically as a **mobile-first WebGL experience**.
+
+The player takes care of a character whose needs evolve over time, interacting through touch-based input within a browser environment.
 
 ---
 
-# Project Overview
+## 🎮 Core Concept
+
+The player manages a character’s needs (Hunger, Sleep, Fun) while interacting with different rooms and objects.
+
+- Stats decay over time
+- The player performs activities to restore them
+- Progression unlocks new rooms and interactions
+- Growth stages reflect long-term engagement
+
+---
+
+## 📱 Mobile-First Design (WebGL)
+
+This project is specifically designed to be played:
+
+- On **mobile devices**
+- Through a **WebGL build hosted on itch.io**
+- Using **touch-based interactions only**
+
+### Design Considerations
+
+- Simple and readable UI for small screens
+- Large interaction areas for touch input
+- Short interaction loops suitable for mobile sessions
+- Lightweight systems to ensure WebGL performance
+
+---
+
+## 🧠 Key Features
+
+- **Needs System** with continuous stat decay
+- **Finite State Machine (FSM)** for growth stages
+- **ScriptableObject-driven Quest System**
+- **Queue-based Notification System** to avoid UI spam
+- **Modular Room & Interaction System**
+
+---
+
+## 🏗 Architecture Overview
 
 ```mermaid
 flowchart TD
-    PlayerInput[Player_Input]
-    ActivitySys[Activity_System]
-    NeedsSys[Needs_System]
-    QuestSys[Quest_System]
-    GrowthSys[Growth_System_FSM]
-    Threshold[Threshold_Effects]
-    UI[UI_Feedback]
+    PlayerInput[Touch Input]
+    ActivitySystem[Activity System]
+    NeedsSystem[Needs System]
+    QuestSystem[Quest System]
+    GrowthFSM[Growth FSM]
+    NotificationSystem[Notification Queue]
+    UI[Mobile UI Feedback]
 
-    PlayerInput --> ActivitySys
-    ActivitySys --> NeedsSys
-    ActivitySys --> QuestSys
-    QuestSys --> GrowthSys
-    NeedsSys --> Threshold
-    Threshold --> UI
-
-
+    PlayerInput --> ActivitySystem
+    ActivitySystem --> NeedsSystem
+    ActivitySystem --> QuestSystem
+    QuestSystem --> GrowthFSM
+    NeedsSystem --> NotificationSystem
+    NotificationSystem --> UI
 ```
----
-## Current Development Focus
-- **Needs System**: Tracks hunger, sleep, happiness, and other metrics.
-- **Character Growth**: Baby evolves visually and mechanically over time.
-- **Player Interaction**: Feeding, playing, and attending the baby’s needs.
-- **Modular Architecture**: Core systems designed to scale as the game grows.
 
 ---
 
-## Media
+## ⚙️ Technical Highlights
 
-<!---[![Needs System GIF](media/needs.gif)](https://www.youtube.com/watch?v=VIDEO_ID)--->
-<!---Shows the placeholder UI to control de stats, currently developing the needs system.--->
-Shows early system for hunger, energy, and happiness with a quest system<br>
-
-
-<!---
-### Screenshots
-<!---<img src="media/screenshot_01.jpg" width="900">
-<img src="media/screenshot_02.jpg" width="900">--->
-![GameplayQuets-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ac27f399-52fb-4086-9d82-9bb6b3730f41)
-
----
-## Playable Build
-
-A playable WebGL build is available on itch.io for testing and iteration purposes.
-
-👉 Play it here: https://yourname.itch.io/project-name
+- Custom **State Machine** using `IState`
+- **Data-driven quest system** with ScriptableObjects
+- Clear separation between **gameplay and UI**
+- Systems designed for:
+  - Easy stat expansion
+  - Modular content scaling
+  - Mobile-friendly interaction
 
 ---
 
-## Platform & Controls
+## 🎥 Media
 
-The project currently runs as a WebGL build on itch.io.  
-It is primarily designed for mobile devices using touch-based interaction.
+Shows early system for hunger, energy, and happiness with quest progression  
+![Gameplay](https://github.com/user-attachments/assets/ac27f399-52fb-4086-9d82-9bb6b3730f41)
 
 ---
 
-## Project Status
+## ▶️ Playable Build
 
-Early prototype / WIP focused on building and testing core gameplay systems.
+Play the WebGL version (recommended on mobile):
 
-> ⚠️ This build is an early prototype and may contain bugs or incomplete features.
-## Technology
-- Engine: Unity
+👉 https://desireenavarrete.itch.io/projectj40
+
+---
+
+## 📱 Platform & Controls
+
+- Platform: WebGL (itch.io)
+- Target Device: Mobile browsers
+- Input: Touch-based only
+
+---
+
+## 🚧 Project Status
+
+**Early Prototype / Work in Progress**
+
+Focused on building scalable gameplay systems.
+
+> ⚠️ This build may contain bugs or incomplete features.
+
+---
+
+## 🧪 What I Learned
+
+- Designing systems for **mobile-first interaction**
+- Implementing **FSM-based progression**
+- Building **scalable gameplay architecture**
+- Creating **data-driven quest systems**
+
+---
+
+## 🔗 Portfolio
+
+More details and screenshots:  
+👉 https://desireenavarrete.carrd.co/#WIP
+
+---
+
+## 🛠 Technology
+
+- Engine: Unity 2022.3.20f1
 - Language: C#
-- Input: Unity Input System
-- Target Platform: WebGL (itch.io)
-- Primary Device: Mobile
-
-<!---
-## Assets & Credits
-Some third-party assets used in this project are licensed under **Creative Commons CC0** (public domain).  
-These assets are used for **prototyping purposes only**.--->
+- Input System: Unity Input System
+- Platform: WebGL (itch.io)
+- Target: Mobile browsers
 
 ---
 
-## License
-All rights reserved.
+## 📄 License
 
-This project and its contents are proprietary and may not be used, copied, modified, or distributed without explicit permission from the author.
+All rights reserved.
