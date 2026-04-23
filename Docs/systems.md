@@ -1,218 +1,166 @@
 # Systems Overview
 
-This document describes the core systems that govern character behavior, progression, and player interaction.
-It explains how different systems interact, their responsibilities, and the architecture decisions behind them.
-
----
-## Needs System
-
-### Purpose
-Manages continuous character needs using numeric values that decay over time and react to player actions.
-
-### Core Needs
-- **Hunger**
-- **Sleep**
-- **Play**
-
-### Update Logic
-- Each need is represented as a continuous numeric value (0–100).
-- Values are updated every frame using a configurable decay rate.
-- Player actions modify the stats immediately.
-- Critical thresholds trigger effects (e.g., crying, refusal to play).
-
-### Design Rationale
-- Using continuous values allows multiple needs to evolve simultaneously.
-- Provides smoother gameplay and flexible balancing.
-- Decoupled from UI; visual feedback is handled separately by `StatView`.
-
-
+This document describes the **technical architecture** of the project and how systems interact.
 
 ---
 
-## Player Interaction System
+## 🧠 Design Philosophy
 
-### Purpose
-Handles player input and translates it into gameplay actions.
+The project is built with:
 
-### Core Responsibilities
-- Capture player input (touch-based)
-- Validate player actions
-- Trigger interactions with gameplay systems
+- Modularity
+- Scalability
+- Mobile-first constraints
 
-<!--### Main Components
-- `PlayerInputHandler`
-- `InteractionController`-->
-
-### Data Flow
-1. Input is received through touch.
-2. Input is validated based on current game state.
-3. Corresponding interaction is triggered.
-4. Gameplay systems (Needs, Character State) are updated accordingly.
+Systems are designed to be lightweight and decoupled, suitable for **WebGL performance on mobile devices**.
 
 ---
-<!--## Character State System
+
+## 📊 Needs System
 
 ### Purpose
-Maintains the current state of the character and ensures consistency between systems.
 
-### Core Responsibilities
-- Store character state (idle, sleeping, interacting, etc.)
-- React to needs changes
-- Coordinate animations and visual feedback
+Manages character needs that evolve over time.
 
-### Main Components
-- `CharacterStateController`
-- `CharacterStateData`
+### Implementation
 
-### Data Flow
-1. Needs System triggers state-related events.
-2. Character State System updates the current state.
-3. Visual and animation systems are notified.
-4. State changes may restrict or enable interactions.
+- Float values (0–100)
+- Frame-based updates using decay rates
+- Immediate response to player actions
+
+### Design Notes
+
+- Decoupled from UI
+- Optimized for continuous updates without heavy computation
 
 ---
-### Threshold Effects
 
-The Needs Manager evaluates each stat against defined thresholds.
-When a stat falls below a critical value, a corresponding effect is triggered:
-- Hunger < 20 → Cry animation + sound
-- Sleep < 15 → Refuse to play
-- Play < 10 → Mood penalty
-
-These effects are managed separately from UI updates, keeping gameplay logic clean.
-
--->
-
-## Growth System
+## 🔄 Growth System (FSM)
 
 ### Purpose
-Growth stages are defined through a shared enum used across systems (FSM, UI, gameplay logic and save system).  
-This avoids tight coupling and allows the growth logic to scale cleanly.
 
-### Core Responsibilities
-- Define and manage character growth stages (e.g., Baby, Toddler, Child)
-- Control transitions between stages
-- React to long-term needs and milestones
-- Persist current growth state
+Controls progression through character life stages.
 
-### Architecture
-- Each growth stage represents a distinct state with its own rules and behavior.
-- Implemented as a FSM with `GrowthStateMachine` and individual `GrowthState` classes.
-- Future iterations may explore hierarchical states if complexity increases.
+### Implementation
+
+- Custom FSM
+- States implemented via `IState`
+
+```csharp
+public interface IState
+{
+    void Enter();
+    void Execute();
+    void Exit();
+}
+```
+
+- Transitions triggered by quest completion
 
 ### Benefits
-- Clear separation between growth stages
-- Easy to add or modify stages without affecting existing logic
-- Predictable and controlled transitions
+
+- Predictable behavior
+- Easy to extend with new stages
+- Clean separation of logic
 
 ---
 
-## Activity System
+## 🎯 Quest System
 
 ### Purpose
-Handles short-term character actions that the player triggers.
 
-### Examples of Activities
-- Feeding
-- Resting
-- Playing
+Drives progression through player actions.
 
-### Mechanics
-- Only one activity is active at a time.
-- Activities modify the Needs System stats according to defined rules.
-- Activity outcomes may trigger visual/audio feedback but do not directly change the stats logic.
+### Structure
 
----
-## UI Separation
+- ScriptableObject-based `Quest`
+- Modular `QuestStep` logic
 
-- All visual representations of stats are handled by `StatView`.
-- Sliders update in real time based on stat values.
-- Slider color changes indicate critical thresholds:
-  - Green: Normal
-  - Red: Critical
+### Behavior
 
-- Gameplay logic and visual feedback are clearly separated.
+- Action-based completion
+- UI-driven feedback
+- Stage progression trigger
+
+### Benefits
+
+- Data-driven design
+- Easy content expansion
+- Minimal code changes for new quests
 
 ---
 
-## Threshold Effects
+## 🔔 Notification System
 
-- The Needs Manager evaluates each stat against critical thresholds:
-  - **Hunger < 20** → Cry animation + sound
-  - **Sleep < 15** → Refuse to play
-  - **Play < 10** → Mood penalty
-- Effects are managed by the system, not the UI.
-- Threshold effects are modular and can be extended for additional stats or activities.
+### Purpose
+
+Provides structured feedback to the player.
+
+### Implementation
+
+- FIFO queue system
+- Sequential message handling
+
+### Behavior
+
+- Prevents UI spam
+- Ensures readability on small screens
+- Supports mobile UX constraints
+
+---
+
+## 🎮 Player Interaction System
+
+### Purpose
+
+Handles touch input and translates it into gameplay.
+
+### Flow
+
+1. Capture touch input
+2. Validate interaction
+3. Trigger activity
+4. Notify systems
+
+### Mobile Considerations
+
+- Designed for **tap-based interaction**
+- Avoids complex gestures
+- Optimized for responsiveness
 
 ---
 
-## Quest System
+## 🧩 System Communication
 
-The Quest System controls character progression by defining structured objectives that the player must complete in order to trigger growth transitions.
+- Activity → modifies Needs
+- Quest → triggers FSM transitions
+- Needs → sends notifications
+- Notification → updates UI
 
-Instead of automatic time-based evolution, character growth is now progression-driven. Each growth stage is unlocked by completing specific missions.
-
-### Responsibilities
-
-- Define mission objectives (e.g., feed X times, play Y times)
-- Track mission progress
-- Notify the GrowthController when conditions are met
-- Trigger stage transitions in the Growth State Machine
-
-### System Flow
-
-```mermaid
-flowchart TD
-    PlayerAction[Player Action]
-    QuestManager[Quest Manager]
-    QuestCheck[Check Objectives]
-    GrowthController[Growth Controller]
-    GrowthFSM[Growth State Machine]
-
-    PlayerAction --> QuestManager
-    QuestManager --> QuestCheck
-    QuestCheck -->|Completed| GrowthController
-    GrowthController --> GrowthFSM
-
-
-```
-
-
-
-## System Relationships Summary
-
-- **Needs System** is the central driver of gameplay.
-- **Player Interaction System** modifies needs and states.
-<!--- **Character State System** ensures consistency and control flow.-->
-- **Growth System** evaluates long-term progression.
-- **UI System** reflects system state to the player.
+Systems are loosely coupled to maintain flexibility.
 
 ---
-Future iterations may explore hierarchical states if growth complexity increases.
+
+## 📈 Scalability
+
+Supports:
+
+- Adding new stats easily
+- Creating new activities with minimal effort
+- Expanding rooms modularly
+- Extending quest logic through ScriptableObjects
+
 ---
 
-## System Diagram (Conceptual)
+## ⚡ Performance Considerations
 
-```mermaid
-flowchart TD
-    PlayerInput[Player_Input]
-    ActivitySys[Activity_System]
-    NeedsSys[Needs_System_Hunger_Sleep_Play]
-    GrowthSys[Growth_System_FSM_Baby_Toddler_Child]
-    Threshold[Threshold_Effects]
-    UI[UI_Feedback_StatView]
+- Lightweight update loops
+- Minimal dependencies between systems
+- Designed to run smoothly in WebGL on mobile browsers
 
-    PlayerInput --> ActivitySys
-    ActivitySys --> NeedsSys
-    ActivitySys --> GrowthSys
-    NeedsSys --> Threshold
-    Threshold --> UI
+---
 
+## 📝 Notes
 
-
-```
-
-## Notes
-
-This document represents the current design during pre-production.
-System responsibilities and data flow may evolve as gameplay is tested and iterated.
+- Focus is on systems, not final polish
+- Architecture supports future expansion
