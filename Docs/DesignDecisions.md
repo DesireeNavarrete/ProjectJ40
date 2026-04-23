@@ -17,21 +17,16 @@ Simulador de mascota virtualº
 Programadora de gameplay y sistemas
 
 **Objetivo del documento:**  
-[Explica en 2-3 líneas que este documento describe decisiones de diseño y por qué se tomaron]
+Este documento describe las decisiones tomadas sobre el diseño de las mecánicas y sistemas.
 
 ---
 
 ## 🎯 2. Pilares de diseño
 
-*(Define 2–4 ideas clave que guían TODO el diseño del juego)*
-
 - Pilar 1: Simplicidad en las interacciones
 - Pilar 2: Feedback claro del estado del personaje
 - Pilar 3: Relación emocional jugador–personaje
 - Pilar 4: Diversión del jugador
-
-👉 **Cómo rellenarlo:**  
-Piensa: “¿Qué era lo más importante que el jugador sintiera o hiciera?”
 
 ---
 
@@ -50,61 +45,64 @@ Estos son los principales sistemas del proyecto:
 ### 🔹 Decisión: FSM de etapas de crecimiento
 
 **Problema**  
-> Necesitaba diseñar un sistema que permitiera tener diferentes comportamientos para cada etapa de crecimiento, ya que cada etapa desbloquea nuevas interacciones con el jugador.
+> Necesitaba definir cómo gestionar las diferentes etapas de crecimiento del personaje, asegurando que cada una tuviera comportamientos, interacciones y mecánicas propias sin generar dependencias complejas.
 
 ---
 
 **Opciones consideradas**
 
-- Opción 1: máquina de estados
-- Opción 2: clases personalizadas
+- Opción 1: máquina de estados(FSM)
+- Opción 2: clases independientes sin estructura común
+- Opción 3: Uso de condicionales simples para controlar la lógica por etapa
 
 ---
 
 **Decisión tomada**
 
-> Se decidió implementar la máquina de estados.
+> Se decidió implementar la máquina de estados para gestionar las etapas de crecimiento.
 
 ---
 
 **Por qué**
 
-- Porque permite tener diferentes estados e ir cambiando entre ellos.
-- Porque quería aprender a implementarla.
+- Permite encapsular el comportamiento de cada etapa de forma independiente
+- Facilita la transición controlada entre estados (crecimiento del personaje)
+- Mejora la escalabilidad si se añaden nuevas etapas en el futuro
+- Refuerza la sensación de progresión del jugador al diferenciar claramente cada fase
 
 ---
 
 **Trade-offs (consecuencias negativas)**
 
-- Pierdes [algo]
-- Complica [algo]
-- Limita [algo]
+- Mayor complejidad inicial frente a soluciones más simples
+- Overhead estructural para un número limitado de estados
+- Requiere una arquitectura más planificada
 
 ---
 
 **Resultado**
 
-> El sistema permitió tener 3 etapas de crecimiento que se pueden controlar desde donde sea.
+> El sistema permitió implementar tres etapas diferenciadas con comportamientos propios, mejorando la claridad del código y la percepción de progreso en el gameplay.
 
 ---
 
 **Si tuviera más tiempo...*
 
-> Mejoraría este sistema añadiendo [idea].
+> Mejoraría este sistema añadiendo Añadiría variaciones dentro de cada estado (subestados o comportamiento dinámico) para aumentar la profundidad sin necesidad de añadir más etapas.
 
 ---
 
 ### 🔹 Decisión: Sistema de misiones
 
 **Problema**  
-> Necesitaba diseñar un sistema de misiones para que al completarlas cambiara de etapa de crecimiento (creciera el personaje).
+> Necesitaba diseñar un sistema de misiones que permitiera estructurar la progresión del jugador y controlar el avance entre etapas de crecimiento del personaje de forma clara y escalable.
 
 ---
 
 **Opciones consideradas**
 
-- Opción 1: sistema de misiones sencillo
-- Opción 2: sistemas de misiones escalable y modular
+- Opción 1: sistema de misiones sencillo, basado en condiciones directas
+- Opción 2: sistemas de misiones modular y escalable, basado en objetivos reutilizables
 
 ---
 
@@ -116,29 +114,30 @@ Estos son los principales sistemas del proyecto:
 
 **Por qué**
 
-- Porque permite escalarlo mas fácil entre estados, ya que tenemos 3.
-- Porque es fácil implementar más misiones
+- Permite estructurar la progresión del jugador mediante objetivos claros y alcanzables
+- Facilita añadir nuevo contenido sin modificar sistemas existentes
+- Refuerza el bucle de juego al dar al jugador metas constantes
+- Permite reutilizar lógica de misiones entre distintas etapas de crecimiento
 
 
 ---
 
 **Trade-offs (consecuencias negativas)**
 
-- Pierdes [algo]
-- Complica [algo]
-- Limita [algo]
-
+- Mayor complejidad inicial frente a un sistema simple
+- Requiere más planificación para definir la estructura de misiones
+- Puede ser excesivo para proyectos pequeños si no se reutiliza lo suficiente
 ---
 
 **Resultado**
 
-> El sistema permitió que el jugador pudiera completar misiones, haciendo el gameplay mas fluido y con unas metas claras.
+> El sistema permitió guiar al jugador a través de objetivos claros, mejorando la sensación de progresión y facilitando la transición entre etapas de crecimiento del personaje.
 
 ---
 
 **Si tuviera más tiempo...*
 
-> Mejoraría este sistema añadiendo [idea].
+> Añadiría herramientas internas (editor tools) para crear y configurar misiones de forma más rápida, reduciendo el tiempo de iteración y facilitando el diseño de nuevo contenido.
 
 ---
 
@@ -146,46 +145,48 @@ Estos son los principales sistemas del proyecto:
 ### 🔹 Decisión: Sistema de stats de personaje
 
 **Problema**  
-> Necesitaba diseñar un sistema de estados de personaje, 3 niveles, hambre, sueño y diversión que bajara por tiempo.
+> Necesitaba diseñar un sistema de necesidades (hambre, sueño y diversión) que evolucionara en tiempo real y obligara al jugador a gestionar múltiples variables simultáneamente, generando decisiones constantes.
 
 ---
 
 **Opciones consideradas**
 
-- Opción 1: FSM
-- Opción 2: clases personalizadas
+- Opción 1: Uso de una máquina de estados (FSM) para representar estados globales
+- Opción 2: Sistema basado en variables independientes gestionadas mediante clases
 
 ---
 
 **Decisión tomada**
 
-> Se decidió implementar el sistema por clases personalizadas con creación de instancias.
+> Se decidió implementar un sistema basado en stats independientes gestionadas mediante clases, permitiendo que todas las necesidades evolucionen en paralelo.
 
 ---
 
 **Por qué**
 
-- Porque la maquina de estados no funcionaba con 3 estados a la vez que se actualiza en tiempo real.
+- Permite que múltiples necesidades se degraden simultáneamente, generando presión constante sobre el jugador
+- Refuerza la toma de decisiones al obligar a priorizar qué necesidad atender primero
+- Se adapta mejor a sistemas en tiempo real frente a una FSM, que limita el comportamiento a un único estado activo
+- Facilita ajustar individualmente el comportamiento de cada stat (ritmo de degradación, efectos, etc.)
 
 ---
 
 **Trade-offs (consecuencias negativas)**
 
-- Pierdes [algo]
-- Complica [algo]
-- Limita [algo]
-
+- Mayor complejidad en el balanceo de los valores de cada stat
+- Riesgo de sobrecargar al jugador si varias necesidades caen al mismo tiempo
+- Requiere una buena comunicación visual para evitar confusión
 ---
 
 **Resultado**
 
-> El sistema permitió tener 3 stats a la vez en ejecución, haciendo más claras las necesidades el personaje.
+> El sistema permitió generar un bucle de gameplay basado en la gestión de necesidades, donde el jugador debe priorizar acciones constantemente, aumentando la interacción y la sensación de responsabilidad sobre el personaje.
 
 ---
 
 **Si tuviera más tiempo...*
 
-> Mejoraría este sistema añadiendo [idea].
+> Añadiría interacciones entre stats (por ejemplo, que el sueño afecte a la diversión) para generar mayor profundidad sistémica y decisiones más complejas.
 
 ---
 
@@ -193,41 +194,43 @@ Estos son los principales sistemas del proyecto:
 ### 🔹 Decisión: Sistema de notificaciones de UI
 
 **Problema**  
-> Necesitaba diseñar un sistema de notificaciones para comunicar ciertas cosas al jugador, como un feed.
-
+> Necesitaba diseñar un sistema que comunicara al jugador los cambios importantes del estado del personaje (necesidades, eventos, acciones) sin saturarlo de información ni interrumpir el flujo de juego.
 ---
 
 **Opciones consideradas**
 
-- Opción 1: Queue
-- Opción 2: sistema propio
+- Opción 1: sistema simple sin control de orden (mostrar notificaciones según ocurren)
+- Opción 2: sistema personalizado con gestión manual de prioridades
+- Opción 3: sistema basado en cola FIFO (Queue)
 
 ---
 
 **Decisión tomada**
 
-> Se decidió implementar el sistema FIFO con Queue.
+> Se decidió implementar un sistema de notificaciones basado en una cola FIFO (Queue), donde las notificaciones se muestran en el orden en el que ocurren.
 
 ---
 
 **Por qué**
 
-- Porque la primera notificación que entra es la primera que sale.
-- Porque así aprendo un sistema nuevo.
+- Permite mantener un orden claro y predecible en la comunicación al jugador
+- Ayuda a controlar el ritmo de aparición de las notificaciones, evitando sobrecarga de información
+- Reduce la complejidad del sistema frente a soluciones con prioridades dinámicas
+- Se adapta bien a un juego con eventos frecuentes pero de baja complejidad
 
 ---
 
 **Trade-offs (consecuencias negativas)**
 
-- Pierdes [algo]
-- Complica [algo]
-- Limita [algo]
+- No permite priorizar eventos críticos sobre otros menos importantes
+- Puede generar retraso en la comunicación de eventos urgentes
+- Menor flexibilidad frente a sistemas más avanzados basados en prioridades
 
 ---
 
 **Resultado**
 
-> El sistema permitió un feed de notificaciones de comunicación con el jugador, ayudando a la Flow del gameplay.
+> El sistema permitió comunicar los eventos del juego de forma ordenada y constante, mejorando la legibilidad de la información y evitando saturar al jugador, lo que contribuye a un flujo de juego más estable.
 
 ---
 
@@ -239,46 +242,49 @@ Estos son los principales sistemas del proyecto:
 ### 🔹 Decisión: notificaciones de necesidades
 
 **Problema**  
-> Necesitaba diseñar un sistema de necesidades del personaje.
+> Necesitaba diseñar un sistema que alertara al jugador cuando las necesidades del personaje (hambre, sueño, limpieza, etc.) alcanzaran niveles críticos, asegurando una respuesta rápida sin saturar la interfaz.
 
 ---
 
 **Opciones consideradas**
 
-- Opción 1: FIFO
-- Opción 2: clase personalizada
+- Opción 1: uso del sistema general de notificaciones FIFO
+- Opción 2: sistema específico mediante clases personalizadas para cada necesidad
 
 ---
 
 **Decisión tomada**
 
-> Se decidió implementar el sistema por clase personalizada.
+> Se decidió implementar un sistema específico basado en clases personalizadas para gestionar las notificaciones de necesidades de forma independiente.
 
 ---
 
 **Por qué**
 
-- Porque permite personalizar la notificación, ya que no se comporta como un sistema FIFO.
+- Permite adaptar el comportamiento de cada necesidad (frecuencia, urgencia, tipo de aviso)
+- Facilita comunicar eventos críticos de forma más directa que un sistema FIFO general
+- Refuerza la sensación de urgencia al priorizar estados importantes del personaje
+- Permite diferenciar visualmente cada tipo de necesidad para mejorar la legibilidad
 
 ---
 
 **Trade-offs (consecuencias negativas)**
 
-- Pierdes [algo]
-- Complica [algo]
-- Limita [algo]
+- Mayor complejidad al mantener un sistema paralelo al de notificaciones general
+- Riesgo de redundancia si no se coordinan bien ambos sistemas
+- Necesidad de equilibrar la frecuencia de avisos para evitar saturación
 
 ---
 
 **Resultado**
 
-> El sistema permitió mejorar el gameplay implementando un sistema de limpieza e ir al baño del jugador, avisándolo por UI.
+> El sistema permitió comunicar de forma más efectiva las necesidades críticas del personaje, aumentando la capacidad de reacción del jugador y reforzando el bucle de cuidado.
 
 ---
 
 **Si tuviera más tiempo...*
 
-> Mejoraría este sistema añadiendo más necesidades y mas complejidad.
+> Integraría este sistema con el de notificaciones general mediante un modelo híbrido con prioridades, unificando la gestión del feedback sin perder control sobre los eventos críticos.
 
 ---
 
@@ -288,24 +294,29 @@ Estos son los principales sistemas del proyecto:
 
 *(Reflexión honesta del proyecto)*
 
-- Aprendí que a usar ciertos sistemas en los momentos correctos.
-- Descubrí que [algo no funcionó como esperabas]
-- Me di cuenta de que [comportamiento del jugador o sistema]
-- La próxima vez haría [mejora clara]
+- Aprendí que sistemas simples bien conectados generan más impacto que sistemas complejos aislados
+- Descubrí que el feedback constante es clave para mantener la interacción en juegos tipo tamagotchi
+- Subestimé la importancia del balanceo de los timers en las necesidades
 
 ---
 
 ## 🔮 5. Posibles mejoras futuras
 
-*(Ideas claras, no humo)*
+- Expandir el sistema de necesidades añadiendo nuevas variables y relaciones entre ellas (por ejemplo, que el sueño afecte a la diversión), aumentando la profundidad del sistema.
 
-- Añadir más habitaciones con más acciones
-- Mejorar el gameplay añadiendo minijuegos
+- Añadir nuevas acciones y espacios (habitaciones) que amplíen las opciones del jugador y refuercen el bucle de cuidado.
 
+- Implementar minijuegos ligados a necesidades concretas, integrándolos como parte del core loop en lugar de contenido aislado.
+
+- Mejorar el sistema de notificaciones hacia un modelo híbrido con prioridades, unificando la comunicación sin perder control sobre eventos críticos.
+
+- Desarrollar herramientas internas (editor tools) para facilitar la creación y balanceo de misiones y eventos.
 ---
 
 ## 🧭 6. Resumen de diseño (opcional)
 
-> Este proyecto se centró en aprender nuevos sistemas junto con diseño de mecánicas.
-> Las decisiones principales se enfocaron en tener un proyecto funcional antes de bonito.
-> El resultado fue un gameplay funcional.
+## 🧭 6. Resumen de diseño
+
+> Este proyecto se centró en diseñar un sistema de cuidado basado en la gestión de necesidades en tiempo real y la progresión del personaje.  
+> Las decisiones principales se enfocaron en crear un bucle de juego claro, apoyado en feedback constante y toma de decisiones por parte del jugador.  
+> El resultado es una experiencia donde el jugador debe priorizar acciones de forma continua, respondiendo al estado del personaje y reforzando la sensación de responsabilidad.
