@@ -1,46 +1,69 @@
 # ProjectJ40
 
-**ProjectJ40** is an early-stage life simulation game inspired by tamagotchi-style experiences, designed specifically as a **mobile-first WebGL experience**.
+> **Mobile-first life simulation built in Unity, focused on scalable gameplay architecture and system design.**
 
-The player takes care of a character whose needs evolve over time, interacting through touch-based input within a browser environment.
-
----
-
-## 🎮 Core Concept
-
-The player manages a character’s needs (Hunger, Sleep, Fun) while interacting with different rooms and objects.
-
-- Stats decay over time
-- The player performs activities to restore them
-- Progression unlocks new rooms and interactions
-- Growth stages reflect long-term engagement
+ProjectJ40 is a tamagotchi-inspired experience where the player takes care of a character that grows over time.  
+The project is designed as a **WebGL mobile experience**, prioritizing touch interaction and modular systems.
 
 ---
 
-## 📱 Mobile-First Design (WebGL)
+## 🚀 Why This Project Matters
 
-This project is specifically designed to be played:
+This project focuses on building **clean, extensible gameplay systems**, including:
 
-- On **mobile devices**
-- Through a **WebGL build hosted on itch.io**
-- Using **touch-based interactions only**
-
-### Design Considerations
-
-- Simple and readable UI for small screens
-- Large interaction areas for touch input
-- Short interaction loops suitable for mobile sessions
-- Lightweight systems to ensure WebGL performance
+- Finite State Machines for progression
+- Data-driven quest systems
+- Decoupled gameplay architecture
+- Mobile-first interaction design (WebGL)
 
 ---
 
-## 🧠 Key Features
+## 🎮 Core Gameplay
 
-- **Needs System** with continuous stat decay
-- **Finite State Machine (FSM)** for growth stages
-- **ScriptableObject-driven Quest System**
-- **Queue-based Notification System** to avoid UI spam
-- **Modular Room & Interaction System**
+- Manage **Hunger, Sleep, and Fun**
+- Perform activities through **touch interaction**
+- Balance decaying stats over time
+- Complete **quests** to unlock progression
+- Discover new rooms and interactions as the character grows
+
+---
+
+## 🧠 Technical Highlights
+
+- **Custom FSM (State Pattern)**
+  - Interface-based (`IState`)
+  - Clean state transitions
+  - Easily extendable growth system
+
+- **ScriptableObject Quest System**
+  - `Quest` + `QuestStep` architecture
+  - Action-based progression (not stat thresholds)
+  - Data-driven and scalable
+
+- **Queue-Based Notification System**
+  - FIFO message handling
+  - Prevents UI spam
+  - Centralized feedback pipeline
+
+- **Decoupled Systems**
+  - Gameplay logic separated from UI
+  - Modular communication between systems
+
+---
+
+## 📱 Mobile-First WebGL Design
+
+This project is specifically designed to run on:
+
+- Mobile browsers via **WebGL**
+- Touch-based input only
+
+### Key Design Decisions
+
+- Large interaction targets for touch
+- Minimal UI friction
+- Short gameplay loops
+- Lightweight systems for WebGL performance
 
 ---
 
@@ -48,92 +71,77 @@ This project is specifically designed to be played:
 
 ```mermaid
 flowchart TD
-    PlayerInput[Touch Input]
-    ActivitySystem[Activity System]
-    NeedsSystem[Needs System]
-    QuestSystem[Quest System]
-    GrowthFSM[Growth FSM]
-    NotificationSystem[Notification Queue]
-    UI[Mobile UI Feedback]
+    Input[Touch Input]
+    Activity[Activity System]
+    Needs[Needs System]
+    Quest[Quest System]
+    FSM[Growth FSM]
+    Notify[Notification Queue]
+    UI[UI]
 
-    PlayerInput --> ActivitySystem
-    ActivitySystem --> NeedsSystem
-    ActivitySystem --> QuestSystem
-    QuestSystem --> GrowthFSM
-    NeedsSystem --> NotificationSystem
-    NotificationSystem --> UI
+    Input --> Activity
+    Activity --> Needs
+    Activity --> Quest
+    Quest --> FSM
+    Needs --> Notify
+    Notify --> UI
 ```
 
 ---
 
-## ⚙️ Technical Highlights
+## 🎯 Systems at a Glance
 
-- Custom **State Machine** using `IState`
-- **Data-driven quest system** with ScriptableObjects
-- Clear separation between **gameplay and UI**
-- Systems designed for:
-  - Easy stat expansion
-  - Modular content scaling
-  - Mobile-friendly interaction
-
----
-
-## 🎥 Media
-
-Shows early system for hunger, energy, and happiness with quest progression  
-![Gameplay](https://github.com/user-attachments/assets/ac27f399-52fb-4086-9d82-9bb6b3730f41)
+| System                | Responsibility                          |
+|----------------------|----------------------------------------|
+| Needs System         | Continuous stat simulation             |
+| Activity System      | Player-driven stat changes             |
+| Quest System         | Progression through actions            |
+| Growth FSM           | Stage-based character evolution        |
+| Notification System  | Controlled UI feedback (queue-based)   |
 
 ---
 
 ## ▶️ Playable Build
 
-Play the WebGL version (recommended on mobile):
-
 👉 https://desireenavarrete.itch.io/projectj40
+*(Recommended on mobile devices)*
 
 ---
 
-## 📱 Platform & Controls
+## 🎥 Media
 
-- Platform: WebGL (itch.io)
-- Target Device: Mobile browsers
-- Input: Touch-based only
-
----
-
-## 🚧 Project Status
-
-**Early Prototype / Work in Progress**
-
-Focused on building scalable gameplay systems.
-
-> ⚠️ This build may contain bugs or incomplete features.
+![Gameplay](https://github.com/user-attachments/assets/ac27f399-52fb-4086-9d82-9bb6b3730f41)
 
 ---
 
 ## 🧪 What I Learned
 
-- Designing systems for **mobile-first interaction**
-- Implementing **FSM-based progression**
-- Building **scalable gameplay architecture**
-- Creating **data-driven quest systems**
+- Designing **scalable gameplay systems**
+- Implementing **FSM for progression**
+- Building **data-driven architectures**
+- Adapting gameplay to **mobile WebGL constraints**
 
 ---
 
 ## 🔗 Portfolio
 
-More details and screenshots:  
 👉 https://desireenavarrete.carrd.co/#WIP
 
 ---
 
-## 🛠 Technology
+## 🛠 Tech Stack
 
-- Engine: Unity 2022.3.20f1
-- Language: C#
-- Input System: Unity Input System
-- Platform: WebGL (itch.io)
-- Target: Mobile browsers
+- Unity 2022.3.20f1
+- C#
+- Unity Input System
+- WebGL (itch.io)
+- Mobile-first design
+
+---
+
+## 🚧 Status
+
+Early prototype focused on systems and architecture.
 
 ---
 
