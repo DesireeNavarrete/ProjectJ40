@@ -53,14 +53,13 @@ public class StatsManager : MonoBehaviour
         //Boton vater----------
         canvasComp.toiletBut.onClick.AddListener(() =>
         {
-            //jugarStat.SetValue(100);
-            //jugarStat.Cooldown();
+            canvasComp.toiletBut.GetComponent<ButtonControl>().Cooldown();
+
         });
         //Boton ducha--------------------
         canvasComp.showerBut.onClick.AddListener(() =>
         {
-            //jugarStat.SetValue(100);
-            //jugarStat.Cooldown();
+            canvasComp.showerBut.GetComponent<ButtonControl>().Cooldown();
         });
         //Boton dormir
         canvasComp.dormirBut.onClick.AddListener(() =>
