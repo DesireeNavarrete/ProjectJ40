@@ -1,108 +1,135 @@
 # Mechanics Overview
 
-This document describes the core gameplay mechanics of the ongoing project.
-Mechanics define how the player interacts with the game, how the character reacts,
-and how needs evolve over time.
+This document describes the **gameplay mechanics**, focusing on player interaction and game behavior.
 
 ---
 
-## Core Gameplay Loop
+## 🎮 Core Gameplay Loop
 
-1. The player interacts with the character through touch-based input.
-2. Activities (e.g., feeding, playing, resting) modify the character's stats.
-3. Stats (Hunger, Sleep, Play) decay over time, requiring the player to manage them.
-4. Thresholds in the stats trigger specific effects or feedback to the player.
-5. Character growth or progression may occur over long-term milestones.
+1. The player interacts using **touch input**
+2. Selects an activity (feed, play, rest)
+3. The activity modifies character stats
+4. Stats decay continuously over time
+5. The player maintains balance between needs
+6. Completing quests unlocks new content
 
 ---
 
-## Character Needs
+## 📊 Character Needs
 
 ### Stats
-- **Hunger**: Decreases over time, increased by feeding actions.
-- **Sleep**: Decreases over time, replenished by resting.
-- **Play**: Decreases over time, replenished by playing activities.
-<!--
-Aqui hay que añadir mas cambios de stats
--->
-### Update Logic
-- Each stat is represented as a continuous numeric value (0–100).
-- Values are updated every frame using a decay rate multiplied by a configurable factor.
-- Player actions modify the stats immediately according to their effect.
-- Effects from crossing thresholds (e.g., crying, refusing actions) are evaluated after each update.
+
+- **Hunger**
+- **Sleep**
+- **Fun**
+
+### Behavior
+
+- Range: 0–100
+- Continuous decay over time
+- Immediate response to player actions
 
 ---
 
-## Activities
+## 👆 Touch-Based Interaction
 
-### Purpose
-Activities represent short-term actions the player can perform with the character.
+- All gameplay is designed around **mobile touch input**
+- Interactions are:
+  - Direct (tap on objects)
+  - Immediate (no complex UI navigation)
+
+### Design Goals
+
+- Minimize friction on mobile
+- Keep interactions intuitive
+- Support short play sessions
+
+---
+
+## 🎯 Activities
+
+Activities are triggered through interaction with objects in rooms.
 
 ### Examples
-- **Feeding**: Increases Hunger, may reduce Play slightly.
-- **Resting**: Increases Sleep, temporarily limits Play actions.
-- **Playing**: Increases Play, may reduce Sleep or Hunger slightly.
 
-### Mechanics Notes
-- Activities are only performed one at a time and are executed based on player input.
-- Activity outcomes affect stats and trigger visual/audio feedback.
+- Feeding → restores Hunger
+- Resting → restores Sleep
+- Playing → restores Fun
 
----
+### Notes
 
-## Stat Threshold Effects
-<!--
-- Critical thresholds for each stat trigger feedback or constraints:
-  - Hunger < 20 → Crying animation + sound
-  - Sleep < 15 → Character refuses to play
-  - Play < 10 → Mood penalty applied
-  -->
-
-- Threshold effects are managed separately from the UI.
+- Only one activity at a time
+- Activities provide instant feedback
+- Designed for quick interaction loops
 
 ---
 
-## UI Feedback
+## 🏠 Rooms & Interaction
 
-- Stat values are reflected in sliders via the `StatView` component.
-- Slider color changes when critical thresholds are reached:
-  - Green: Normal
-  - Red: Critical
+- Game world is divided into **rooms**
+- Each room contains interactive objects
+- Objects define available activities
 
-- UI reacts to stat changes in real time, but does not affect the underlying gameplay logic.
+Example:
+- Laboratory → tools that increase Fun
+
+---
+
+## 📈 Progression Mechanics
+
+### Growth Stages
+
+- Character evolves across stages
+- Each stage unlocks new content
+
+### Unlocks
+
+- New rooms
+- New interactions
+- New activities
 
 ---
 
-## Player Interaction Summary
+## 🎯 Quest-Driven Progression
 
-- Touch input is the primary control method.
-- Interactions trigger activities which modify stats.
-- Stats continuously decay and are evaluated for threshold effects.
-- Player engagement is maintained by balancing the needs of the character.
+- Quests are displayed in the UI
+- Require **specific player actions**
+- Completing quests advances progression
 
 ---
+
+## 🎯 Player Experience Goals
+
+- Encourage constant interaction
+- Provide quick, satisfying feedback
+- Support mobile-friendly gameplay loops
+- Combine short-term and long-term goals
+
+---
+
+## 🔄 Gameplay Flow
 
 ```mermaid
 flowchart TD
-    Player[Player_Interaction]
-    ChooseActivity[Select_Activity_Feed_Play_Rest]
-    ApplyEffects[Apply_Effects_on_Stats]
-    Stats[Stats_Hunger_Sleep_Play]
-    CheckThresholds[Check_Thresholds]
-    Effects[Trigger_Effects_Cry_Refuse_MoodPenalty]
-    UI[UI_Feedback_Sliders]
+    Player[Touch Input]
+    Activity[Select Activity]
+    Effects[Apply Effects]
+    Stats[Update Stats]
+    Decay[Time Decay]
+    Quest[Quest Progress]
+    Unlocks[New Content]
 
-    Player --> ChooseActivity
-    ChooseActivity --> ApplyEffects
-    ApplyEffects --> Stats
-    Stats --> CheckThresholds
-    CheckThresholds --> Effects
-    Stats --> UI
+    Player --> Activity
+    Activity --> Effects
+    Effects --> Stats
+    Stats --> Decay
+    Effects --> Quest
+    Quest --> Unlocks
 ```
 
-## Notes
+---
 
-- Mechanics are currently in pre-production and may evolve as the project develops.
-- The system is designed to be modular and extensible:
-  - Additional activities or stats can be added easily.
-  - Threshold effects can be expanded without modifying core logic.
+## 📝 Notes
 
+- Mechanics are optimized for **mobile WebGL gameplay**
+- Systems support quick iteration and expansion
