@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
                 break;
             case TeenPhase:
                 cuerpoP.GetComponent<SpriteRenderer>().color = Color.blue;
+
                 canvasComp.weldBut.gameObject.SetActive(true);//activamos el boton de soldar
                 //entrada: amigos, bio y baloncesto
                 canvasComp.baloncestoBut.gameObject.SetActive(true);//activamos el boton de bloncesto
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
                 break;
             case AdultPhase:
                 cuerpoP.GetComponent<SpriteRenderer>().color = Color.red;
+
                 //cocina: protes y cafe
                 canvasComp.proteinBut.gameObject.SetActive(true);//activamos el boton de protes
                 canvasComp.coffeBut.gameObject.SetActive(true);//activamos el boton de cafe
@@ -42,6 +44,11 @@ public class Player : MonoBehaviour
                 //dormit: movil + cama
                 //entrada: crossfit(mochila) 
                 canvasComp.crossfitBut.gameObject.SetActive(true);//activamos el boton de crossfit
+                //ocultar
+                canvasComp.baloncestoBut.gameObject.SetActive(false);//desactivamos el boton de baloncesto
+                canvasComp.bioBut.gameObject.SetActive(false);//desactivamos el boton de bio
+                canvasComp.weldBut.gameObject.SetActive(false);//desactivamos el boton de soldar
+
                 break;
         }
     }

@@ -35,21 +35,14 @@ public class UIManager : MonoBehaviour
         canvasComp.quedarBut.gameObject.SetActive(false);
         canvasComp.baloncestoBut.gameObject.SetActive(false);
         canvasComp.bioBut.gameObject.SetActive(false);
-
         canvasComp.proteinBut.gameObject.SetActive(false);
         canvasComp.coffeBut.gameObject.SetActive(false);
-
         canvasComp.crossfitBut.gameObject.SetActive(false);
-
         canvasComp.cumpleBut.gameObject.SetActive(false);
-
         canvasComp.cumpleBut.onClick.AddListener(() => ChangePhase());
         canvasComp.seguimientoQuests.onClick.AddListener(() => AbrilCerralQuests());
         canvasComp.seguimientoQuests.onClick.AddListener(() => Pausa());
-
         canvasComp.toiletBut.onClick.AddListener(() => QuitarColaBath());
-
-
         canvasComp.showerBut.onClick.AddListener(() => QuitarColaDucha());
     }
 

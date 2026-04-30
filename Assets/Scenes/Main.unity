@@ -789,6 +789,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115702247}
   m_CullTransparentMesh: 1
+--- !u!1 &133880522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 133880523}
+  - component: {fileID: 133880524}
+  m_Layer: 0
+  m_Name: QuestPoint2-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &133880523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133880522}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 400.82446, y: -77.93733, z: -2.0737445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1124019155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &133880524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133880522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questInfoForPoint: {fileID: 11400000, guid: 25c33c3b097e68f498fac7e3c3d4c5a0, type: 2}
+  startPoint: 1
+  finishPoint: 1
+  canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
+  colorGreen: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
 --- !u!1 &151088090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,6 +1189,7 @@ MonoBehaviour:
   pj: {fileID: 630559705}
   uiManager: {fileID: 1159007710}
   canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
 --- !u!4 &196443544
 Transform:
   m_ObjectHideFlags: 0
@@ -1753,7 +1804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &342818194
 Transform:
   m_ObjectHideFlags: 0
@@ -1768,6 +1819,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 692972853}
+  - {fileID: 1314587068}
+  - {fileID: 1044160887}
+  - {fileID: 992534160}
+  - {fileID: 865337960}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &351404927
@@ -3440,7 +3495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &692972853
 Transform:
   m_ObjectHideFlags: 0
@@ -3468,7 +3523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questInfoForPoint: {fileID: 0}
+  questInfoForPoint: {fileID: 11400000, guid: 5e7b38d3ac0c3f1448b9a559fc657ecd, type: 2}
   startPoint: 1
   finishPoint: 1
   canvasComp: {fileID: 98228674}
@@ -3643,6 +3698,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 56.174, y: -0.066, z: 36.925}
+--- !u!1 &709017149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 709017150}
+  - component: {fileID: 709017151}
+  m_Layer: 0
+  m_Name: QuestPoint2-3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &709017150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709017149}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 400.82446, y: -77.93733, z: -2.0737445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1124019155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &709017151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709017149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questInfoForPoint: {fileID: 11400000, guid: 1f29fd00510c05b479ab2b5697cad4f0, type: 2}
+  startPoint: 1
+  finishPoint: 1
+  canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
+  colorGreen: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
 --- !u!1 &729336684
 GameObject:
   m_ObjectHideFlags: 0
@@ -4033,11 +4138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptables:
-  - {fileID: 11400000, guid: 784a5b25a9e9e524d8b30c7e2c19bc0d, type: 2}
-  - {fileID: 11400000, guid: 1673e76bb36081148986b02d5b9d9e90, type: 2}
   - {fileID: 11400000, guid: 0ef13e2c3592a2d42acd0ba9dd0baa21, type: 2}
   - {fileID: 11400000, guid: f8b3c1c893068184e8c69f87ee69e226, type: 2}
-  - {fileID: 11400000, guid: 6a68f16d393c6b241b1a8ba5906e7732, type: 2}
   statsManager: {fileID: 2100208892}
   uiManager: {fileID: 1159007710}
   canvasComp: {fileID: 98228674}
@@ -4671,6 +4773,56 @@ MonoBehaviour:
   normalColor: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
   warningColor: {r: 1, g: 0, b: 0, a: 1}
   warningThreshold: 25
+--- !u!1 &865337959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 865337960}
+  - component: {fileID: 865337961}
+  m_Layer: 0
+  m_Name: QuestPoint3-5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &865337960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865337959}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 400.82446, y: -77.93733, z: -2.0737445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 342818194}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &865337961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865337959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questInfoForPoint: {fileID: 11400000, guid: 392f813047edcbf40ad7fe4ba45169b2, type: 2}
+  startPoint: 1
+  finishPoint: 1
+  canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
+  colorGreen: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
 --- !u!1 &878227962
 GameObject:
   m_ObjectHideFlags: 0
@@ -5005,6 +5157,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &992534159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 992534160}
+  - component: {fileID: 992534161}
+  m_Layer: 0
+  m_Name: QuestPoint3-4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992534160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992534159}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 400.82446, y: -77.93733, z: -2.0737445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 342818194}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &992534161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992534159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questInfoForPoint: {fileID: 11400000, guid: 2032a1cea4390db45ad216889f313364, type: 2}
+  startPoint: 1
+  finishPoint: 1
+  canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
+  colorGreen: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
 --- !u!1 &1002027638
 GameObject:
   m_ObjectHideFlags: 0
@@ -5197,6 +5399,56 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1044160886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1044160887}
+  - component: {fileID: 1044160888}
+  m_Layer: 0
+  m_Name: QuestPoint3-3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1044160887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044160886}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 400.82446, y: -77.93733, z: -2.0737445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 342818194}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044160888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044160886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questInfoForPoint: {fileID: 11400000, guid: eb761a0857b038243b9d88dfa997c68e, type: 2}
+  startPoint: 1
+  finishPoint: 1
+  canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
+  colorGreen: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
 --- !u!1 &1055097878
 GameObject:
   m_ObjectHideFlags: 0
@@ -5778,6 +6030,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonpressed: 0
+--- !u!1 &1101441801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1101441802}
+  - component: {fileID: 1101441803}
+  m_Layer: 0
+  m_Name: QuestPoint2-4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1101441802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101441801}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 400.82446, y: -77.93733, z: -2.0737445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1124019155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101441803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101441801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questInfoForPoint: {fileID: 11400000, guid: d72ce2594dbe3e648818e82f090aadb2, type: 2}
+  startPoint: 1
+  finishPoint: 1
+  canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
+  colorGreen: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
 --- !u!1 &1106160699
 GameObject:
   m_ObjectHideFlags: 0
@@ -5931,6 +6233,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1145115182}
+  - {fileID: 133880523}
+  - {fileID: 709017150}
+  - {fileID: 1101441802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1143096256
@@ -6919,6 +7224,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278306229}
   m_CullTransparentMesh: 1
+--- !u!1 &1314587067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1314587068}
+  - component: {fileID: 1314587069}
+  m_Layer: 0
+  m_Name: QuestPoint3-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1314587068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314587067}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 400.82446, y: -77.93733, z: -2.0737445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 342818194}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1314587069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314587067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b54fe3e9ccfa4ea38d074c2808fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questInfoForPoint: {fileID: 11400000, guid: 70adef0cb8f45564a984aab47651cb80, type: 2}
+  startPoint: 1
+  finishPoint: 1
+  canvasComp: {fileID: 98228674}
+  notis: {fileID: 151088091}
+  colorGreen: {r: 0.105882354, g: 0.54901963, b: 0, a: 1}
 --- !u!1 &1314971386
 GameObject:
   m_ObjectHideFlags: 0

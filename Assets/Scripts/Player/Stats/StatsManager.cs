@@ -54,7 +54,6 @@ public class StatsManager : MonoBehaviour
         canvasComp.toiletBut.onClick.AddListener(() =>
         {
             canvasComp.toiletBut.GetComponent<ButtonControl>().Cooldown();
-
         });
         //Boton ducha--------------------
         canvasComp.showerBut.onClick.AddListener(() =>
@@ -99,8 +98,9 @@ public class StatsManager : MonoBehaviour
         //Boton crossfit
         canvasComp.crossfitBut.onClick.AddListener(() =>
         {
-            //jugarStat.SetValue(100);
-            //jugarStat.Cooldown();
+            jugarStat.SetValue(100);
+            canvasComp.crossfitBut.GetComponent<ButtonControl>().Cooldown();
+
         });
         //Boton baloncesto
         canvasComp.baloncestoBut.onClick.AddListener(() =>
@@ -112,17 +112,14 @@ public class StatsManager : MonoBehaviour
         //Boton bio
         canvasComp.bioBut.onClick.AddListener(() =>
         {
-            //jugarStat.SetValue(100);
-            //jugarStat.Cooldown();
+            jugarStat.SetValue(100);
+            canvasComp.bioBut.GetComponent<ButtonControl>().Cooldown();
         });
 
         //CUMPLE
         canvasComp.cumpleBut.onClick.AddListener(() =>
         {
             canvasComp.cumpleBut.GetComponent<ButtonControl>().Cooldown();
-          
-            //jugarStat.SetValue(100);
-            //jugarStat.Cooldown();
         });
     }
 

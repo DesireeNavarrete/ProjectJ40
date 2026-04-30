@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dcd7545bef65e54fbbe3e79acc07c47, type: 3}
-  m_Name: Q2_1
+  m_Name: Q2_4
   m_EditorClassIdentifier: 
-  <id>k__BackingField: Q2_1
-  displayName: Observa como suelda Javi
+  <id>k__BackingField: Q2_4
+  displayName: Ves a limpiar playas
   levelRequirement: 1
   questPrerequisites:
   - {fileID: 11400000, guid: 341d3fee203ed84468a8cff068199909, type: 2}
@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f6843a4e2b28cbd4cbd5f446346ccc36, type: 2}
   - {fileID: 11400000, guid: 06ca6835d6fcf7d4aaa7426adf8b5032, type: 2}
   questStepPrefabs:
-  - {fileID: 7631363774085716279, guid: 0aee2e06aec299a4e9053f6c9f018793, type: 3}
+  - {fileID: 6521730649991840000, guid: e8aaf267eea1c2f4396b772ea2f8a036, type: 3}

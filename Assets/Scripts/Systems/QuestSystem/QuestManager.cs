@@ -1,6 +1,7 @@
 using ProjectJ40.Growth;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public class QuestManager : MonoBehaviour
     public UIManager uiManager;
 
     public CanvasComponent canvasComp;
+    public Notifications notis;
     private void Awake()
     {
         questMap = CreateQuestMap();
@@ -70,7 +72,20 @@ public class QuestManager : MonoBehaviour
         if (canvasComp.sliExp.value == canvasComp.sliExp.maxValue)
         {
             print("ETAPA COMPLETE");
-            uiManager.Cumple();
+            switch (GrowthController.GrowthFSM.CurrentState)
+            {
+                case BabyPhase:
+                    uiManager.Cumple();
+                    break;
+                case TeenPhase:
+                    uiManager.Cumple();
+                    break;
+                case AdultPhase:
+                    //TODO: texto diferente Y CINEMATICA?¿?¿?¡ O TEXTO O COMO SE ACABA EL JUEGO?¿?¿
+                    notis.AddNotificationUI("-¡Enhorabuena!\r\nJavi ya se vale por si solo... ya no te necesita..");
+                    break;
+
+            }
         }
     }
 
