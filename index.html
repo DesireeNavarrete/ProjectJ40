@@ -61,7 +61,7 @@
       margin: 0 0 10px;
       color: var(--accent-light);
       font-size: 0.8rem;
-      font-weight: 800;
+      font-weight: 400;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -100,7 +100,8 @@
       background: var(--accent);
       color: #ffffff;
       font: inherit;
-      font-weight: 800;
+      font-weight: 400;
+      font-weight: normal;
       text-decoration: none;
       cursor: pointer;
     }
@@ -108,6 +109,17 @@
     .docs-button.secondary {
       background: transparent;
       color: var(--accent-light);
+    }
+
+    .docs-button:hover,
+    .docs-button:focus-visible {
+      border-color: var(--warm);
+      background: var(--warm);
+      color: #1f2328;
+    }
+
+    .docs-button:active {
+      transform: translateY(1px);
     }
 
     .docs-button.is-active {
@@ -188,6 +200,7 @@
     }
 
     .docs-viewer {
+      margin-top: 18px;
       padding: 28px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -311,8 +324,7 @@
         <h1>ProjectJ40</h1>
         <p class="docs-lead">Mobile-first virtual pet simulator made in Unity, focused on modular architecture, mission progression, real-time needs, and a touch-based WebGL experience.</p>
         <div class="docs-actions">
-          <a class="docs-button" href="./README.md">View README</a>
-          <a class="docs-button secondary" href="https://desireenavarrete.itch.io/projectj40">Playable build</a>
+          <a class="docs-button" href="https://desireenavarrete.itch.io/projectj40" target="_blank" rel="noopener">Playable build</a>
         </div>
       </div>
       <aside class="docs-meta" aria-label="Project summary">
@@ -336,44 +348,24 @@
     </section>
 
     <section class="docs-section">
-      <h2>Documentation index</h2>
-      <div class="docs-grid">
-        <article class="docs-card">
-          <h3>Design decisions</h3>
-          <p>Project pillars, FSM decisions, missions, stats, notifications, and trade-offs.</p>
-          <button class="docs-button secondary" type="button" data-doc="./Docs/DesignDecisions.md">Open DesignDecisions.md</button>
-        </article>
-        <article class="docs-card">
-          <h3>Mechanics</h3>
-          <p>Gameplay loop, character needs, touch interaction, activities, rooms, unlocks, and progression.</p>
-          <button class="docs-button secondary" type="button" data-doc="./Docs/mechanics.md">Open mechanics.md</button>
-        </article>
-        <article class="docs-card">
-          <h3>Systems</h3>
-          <p>Technical architecture, Needs System, Growth FSM, Quest System, Notification System, and module interaction.</p>
-          <button class="docs-button secondary" type="button" data-doc="./Docs/systems.md">Open systems.md</button>
-        </article>
-      </div>
-    </section>
-
-    <section class="docs-section">
       <h2>Game Design Document</h2>
       <article class="docs-card docs-wide-card">
         <h3>Full GDD</h3>
         <p>The full Game Design Document contains the complete design vision, gameplay details, references, and planning notes. It is linked externally to keep this technical documentation focused and easy to read.</p>
-        <a class="docs-button secondary" href="https://docs.google.com/document/d/1kRWkryWp1hpHICF91umZwplXScFGonBcSXOZWQdaaqM/edit?tab=t.0" target="_blank" rel="noopener">Open GDD</a>
+        <a class="docs-button" href="https://docs.google.com/document/d/1kRWkryWp1hpHICF91umZwplXScFGonBcSXOZWQdaaqM/edit?tab=t.0" target="_blank" rel="noopener">Open GDD</a>
       </article>
     </section>
 
     <section class="docs-section">
       <h2>Read documentation</h2>
       <div class="docs-nav" aria-label="Documentation files">
-        <button class="docs-button is-active" type="button" data-doc="./Docs/DesignDecisions.md">Design Decisions</button>
-        <button class="docs-button secondary" type="button" data-doc="./Docs/mechanics.md">Mechanics</button>
-        <button class="docs-button secondary" type="button" data-doc="./Docs/systems.md">Systems</button>
+        <button class="docs-button" type="button" data-doc="./README.md">README</button>
+        <button class="docs-button" type="button" data-doc="./Docs/DesignDecisions.md">Design Decisions</button>
+        <button class="docs-button" type="button" data-doc="./Docs/mechanics.md">Mechanics</button>
+        <button class="docs-button" type="button" data-doc="./Docs/systems.md">Systems</button>
       </div>
       <article id="content" class="docs-viewer markdown-content" aria-live="polite">
-        <p class="docs-status">Loading documentation...</p>
+        <p class="docs-status">Select a document to view it here.</p>
       </article>
     </section>
   </main>
@@ -420,7 +412,6 @@
       docButtons.forEach((button) => {
         const isActive = button.dataset.doc === path;
         button.classList.toggle("is-active", isActive);
-        button.classList.toggle("secondary", !isActive);
       });
     }
 
@@ -439,7 +430,6 @@
       });
     });
 
-    loadDocument("./Docs/DesignDecisions.md");
   </script>
 </body>
 </html>
