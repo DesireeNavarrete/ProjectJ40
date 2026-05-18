@@ -1,6 +1,5 @@
 # 🧠 Design Decisions – Tamagotchi Project
 
----
 
 ## 📌 1. Project Context
 
