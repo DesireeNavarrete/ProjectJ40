@@ -47,6 +47,7 @@ public class StatsManager : MonoBehaviour
         canvasComp.weldBut.onClick.AddListener(() =>
         {
             jugarStat.SetValue(100);
+            canvasComp.weldBut.GetComponent<ButtonControl>().Cooldown();
         });
 
 

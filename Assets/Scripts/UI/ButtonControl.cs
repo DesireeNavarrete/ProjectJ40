@@ -2,20 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ButtonControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool buttonpressed = false;
+    Button but;
 
+    private void Start()
+    {
+        but = gameObject.GetComponent<Button>();
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
-        buttonpressed = true;
+        if (but.interactable == true)
+        {
+            buttonpressed = true;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //Cooldown();
-        buttonpressed = false;
+        if (but.interactable == true)
+        {
+            buttonpressed = false;
+        }
     }
 
     public static float currentCooldown = 0f;

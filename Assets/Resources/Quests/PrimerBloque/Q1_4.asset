@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q1_4
   m_EditorClassIdentifier: 
   <id>k__BackingField: Q1_4
-  displayName: "LLeva  a Javi al ba\xF1o cuando lo necesite"
+  displayName: "Lleva  a Javi al ba\xF1o cuando lo necesite"
   levelRequirement: 0
   questPrerequisites: []
   questStepPrefabs:

@@ -27,8 +27,8 @@ public class NeedsNotificatonBath : MonoBehaviour
         statsManager.sleepStat.Multiplier = .5f;
         statsManager.jugarStat.Multiplier = 1;
 
-        needsSystem.contadorCaca = 0;
-        needsSystem.contadorDucha = 0;
+        //needsSystem.contadorCaca = 0;
+        //needsSystem.contadorDucha = 0;
     }
 
     //10s en verde + 10s en naranja + 10s en rojo

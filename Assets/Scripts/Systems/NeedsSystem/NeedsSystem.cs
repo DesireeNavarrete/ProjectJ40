@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NeedsSystem : MonoBehaviour
@@ -24,6 +25,7 @@ public class NeedsSystem : MonoBehaviour
             if (!notis.notificationsNeeds.Contains("caca"))
             {
                 notis.AddNotificationNeeds("caca");
+                contadorCaca = 0;
             }
         }
         else
@@ -37,6 +39,7 @@ public class NeedsSystem : MonoBehaviour
             if (!notis.notificationsNeeds.Contains("ducha"))
             {
                 notis.AddNotificationNeeds("ducha");
+                contadorDucha = 0;
             }
         }
         else
@@ -47,29 +50,5 @@ public class NeedsSystem : MonoBehaviour
     {
         canvasComp.foodBut.onClick.AddListener(() => CacaContador());
         canvasComp.computerBut.onClick.AddListener(() => DuchaContador());
-    }
-
-    private void Update()
-    {
-        //acceder a stats
-        //Debug.LogError(statsManager.sleepStat.Value);
-
-        //sueño
-        //if (Mathf.RoundToInt(statsManager.sleepStat.Value) == 98)
-        //{
-        //    notis.AddNotificationNeeds("sleep");
-        //}
-
-        //enfado, 3 stats por debajo del 25
-        //if (Mathf.RoundToInt(statsManager.sleepStat.Value) < 95
-        //    && Mathf.RoundToInt(statsManager.hambreStat.Value) < 95
-        //    && Mathf.RoundToInt(statsManager.jugarStat.Value) < 95)
-        //{
-        //    notis.AddNotificationNeeds("enfado");//fuck lohace en bucle
-        //    print("AAAAAA");
-        //}
-
-        //TODO: necesidad de ir al baño o ducharse, barra de tiempo? y cuando este a 50 o menos, mensaje por texto "Cuidado, javi necesita ir al baño"
-        //Controlar el boton de baño/ducha para quitar la notificacion
     }
 }

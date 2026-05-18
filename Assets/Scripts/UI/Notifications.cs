@@ -39,6 +39,16 @@ public class Notifications : MonoBehaviour
     //Notificaciones de necesidades
     public void AddNotificationNeeds(string react)//añade elemento a la cola
     {
+        if (react == "caca")
+        {
+            print(react);
+            canvasComp.toiletBut.interactable = true;
+        }
+        if (react == "ducha")
+        {
+            print(react);
+            canvasComp.showerBut.interactable = true;
+        }
         foreach (var item in reacts.scriptables)
         {
             if (item.reaccion == react)
@@ -49,6 +59,7 @@ public class Notifications : MonoBehaviour
                 notificationsNeeds.Add(react);
                 //notificationsNeeds.Enqueue(react);
                 //UpdateQueue();
+                
             }
         }
     }

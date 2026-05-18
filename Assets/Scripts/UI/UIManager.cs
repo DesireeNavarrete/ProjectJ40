@@ -44,6 +44,22 @@ public class UIManager : MonoBehaviour
         canvasComp.seguimientoQuests.onClick.AddListener(() => Pausa());
         canvasComp.toiletBut.onClick.AddListener(() => QuitarColaBath());
         canvasComp.showerBut.onClick.AddListener(() => QuitarColaDucha());
+
+
+        canvasComp.toiletBut.interactable = false;
+        canvasComp.toiletBut.onClick.AddListener(() => ToiletButtonReset());
+        canvasComp.showerBut.interactable = false;
+        canvasComp.showerBut.onClick.AddListener(() => ShowerButtonReset());
+    }
+
+    void ToiletButtonReset()
+    {
+        canvasComp.toiletBut.interactable=false;
+    }
+
+    void ShowerButtonReset()
+    {
+        canvasComp.showerBut.interactable=false;
     }
 
     void QuitarColaBath()
@@ -148,6 +164,7 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
+
         //Gestion de UI para el cooldown
         //TODO: poner interacts en el onclick de los bootnes? optimizacion
         #region UIStats
@@ -155,8 +172,8 @@ public class UIManager : MonoBehaviour
         if (ButtonControl.currentCooldown > 0)
         {
             canvasComp.foodBut.interactable = false;
-            canvasComp.computerBut.interactable = false;
-            canvasComp.toiletBut.interactable = false;
+            //canvasComp.computerBut.interactable = false;
+            //canvasComp.toiletBut.interactable = false;
             canvasComp.showerBut.interactable = false;
             canvasComp.weldBut.interactable = false;
 
@@ -174,8 +191,8 @@ public class UIManager : MonoBehaviour
         if (ButtonControl.currentCooldown <= 0)
         {
             canvasComp.foodBut.interactable = true;
-            canvasComp.computerBut.interactable = true;
-            canvasComp.toiletBut.interactable = true;
+            //canvasComp.computerBut.interactable = true;
+            //canvasComp.toiletBut.interactable = true;
             canvasComp.showerBut.interactable = true;
             canvasComp.weldBut.interactable = true;
 
