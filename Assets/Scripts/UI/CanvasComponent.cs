@@ -66,5 +66,11 @@ public class CanvasComponent : MonoBehaviour
     public GameObject emocionPanel;
     public Image emocion;
 
+    [Header("Canvas")]
+    public GameObject canvasGame;
+    public GameObject canvasDead;
+    public GameObject canvasDeadPanel;
+    public GameObject canvasDeadPanelInicio;
+
 
 }

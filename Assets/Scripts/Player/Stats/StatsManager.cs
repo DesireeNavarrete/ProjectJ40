@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class StatsManager : MonoBehaviour
     public StatsView sleepView;
     public StatsView playView;
 
-
+    public static bool nivelesCriticos;
     public void Start()
     {
         //Creamos los stats default, con sus multiplicadores correspondientes
@@ -133,10 +134,24 @@ public class StatsManager : MonoBehaviour
 
         //Cooldown
         StatsView.SliderCooldownStats(canvasComp.sliCooldown);
+
+        if (hambreStat.Value <= 10 && sleepStat.Value <= 10 && jugarStat.Value <= 10)
+        {
+            print("Niveles críticos");
+            //nivelesCriticos = true;
+            NivelesCriticos();
+        }
     }
 
     void UpdateDecay(Stat stat)
     {
         stat.Modify(-Time.deltaTime);
+    }
+
+    void NivelesCriticos()
+    {
+        canvasComp.canvasDeadPanelInicio.SetActive(true);
+        canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f);
+        canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(1, .5f);
     }
 }

@@ -54,12 +54,12 @@ public class UIManager : MonoBehaviour
 
     void ToiletButtonReset()
     {
-        canvasComp.toiletBut.interactable=false;
+        canvasComp.toiletBut.interactable = false;
     }
 
     void ShowerButtonReset()
     {
-        canvasComp.showerBut.interactable=false;
+        canvasComp.showerBut.interactable = false;
     }
 
     void QuitarColaBath()

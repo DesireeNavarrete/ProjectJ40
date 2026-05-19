@@ -45,7 +45,7 @@ public class QuestPoint : MonoBehaviour
         {
             currentQuestState = quest.state;
             Debug.Log("Quest con id: " + questId + " actualizado estado " + currentQuestState);
-            DebugConsole.instance.Log("Quest con id: " + questId + " actualizado estado " + currentQuestState);
+            //DebugConsole.instance.Log("Quest con id: " + questId + " actualizado estado " + currentQuestState);
         }
     }
 

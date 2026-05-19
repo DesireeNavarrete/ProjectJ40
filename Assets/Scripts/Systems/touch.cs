@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-
     void Start()
     {
 
