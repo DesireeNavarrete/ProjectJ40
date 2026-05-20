@@ -8,31 +8,23 @@ ProjectJ40 is a mobile-first virtual pet prototype. The player takes care of Jav
 
 ## Core Gameplay Loop
 
-```mermaid
-%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#e8f3ff", "primaryTextColor": "#1b1f24", "primaryBorderColor": "#356b9a", "lineColor": "#356b9a", "secondaryColor": "#fff4d6", "tertiaryColor": "#f4ecff", "fontFamily": "Arial"}}}%%
-flowchart TD
-    Player[Player taps an action]
-    Stats[Stats are restored or changed]
-    Needs[Needs counters may advance]
-    Quest[Quest step may complete]
-    Progress[Experience increases]
-    Growth[Growth phase unlocks]
-    NewActions[New actions become available]
-
-    Player --> Stats
-    Player --> Needs
-    Player --> Quest
-    Quest --> Progress
-    Progress --> Growth
-    Growth --> NewActions
-
-    classDef input fill:#e8f3ff,stroke:#356b9a,color:#1b1f24;
-    classDef system fill:#fff4d6,stroke:#9a6b00,color:#1b1f24;
-    classDef result fill:#f4ecff,stroke:#6f4aa8,color:#1b1f24;
-
-    class Player input;
-    class Stats,Needs,Quest system;
-    class Progress,Growth,NewActions result;
+```text
+Player taps an action
+    |
+    +--> Stats are restored or changed
+    |
+    +--> Needs counters may advance
+    |
+    +--> Quest step may complete
+             |
+             v
+       Experience increases
+             |
+             v
+       Growth phase unlocks
+             |
+             v
+       New actions become available
 ```
 
 The player is encouraged to make quick decisions and keep Javi stable while also completing objectives.

@@ -54,6 +54,14 @@ public class MinijuegoDead : MonoBehaviour
 
     private bool PressedThisFrame(out Vector2 screenPos)
     {
+
+
+        if (sli.value == 1)
+        {
+            canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);
+            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f);
+            canvasComp.canvasDead.SetActive(false);
+        }
         // Primero comprobamos entrada táctil.
         // TouchPhase.Began significa que el dedo acaba de tocar la pantalla.
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -89,9 +97,7 @@ public class MinijuegoDead : MonoBehaviour
         if (sli.value >= sli.maxValue)//completado
         {
             sli.value = 1;
-            canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);
-            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f);
-            canvasComp.canvasDead.SetActive(false);
+            
 
             print("minijuego completado");
             StatsManager.nivelesCriticos = false;

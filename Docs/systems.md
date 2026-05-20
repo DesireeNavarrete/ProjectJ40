@@ -8,35 +8,27 @@ ProjectJ40 is a Unity WebGL prototype. The architecture is built around small ga
 
 ## Main Runtime Flow
 
-```mermaid
-%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#e8f3ff", "primaryTextColor": "#1b1f24", "primaryBorderColor": "#356b9a", "lineColor": "#356b9a", "secondaryColor": "#fff4d6", "tertiaryColor": "#f4ecff", "fontFamily": "Arial"}}}%%
-flowchart TD
-    Buttons[UI Buttons]
-    Stats[StatsManager]
-    Needs[NeedsSystem]
-    Rooms[RoomsManager]
-    QuestPoint[QuestPoint]
-    Events[GameEventsManager / QuestEvents]
-    QuestManager[QuestManager]
-    Growth[GrowthController FSM]
-    Notifications[Notifications]
+```text
+UI Buttons
+    |
+    +--> StatsManager
+    |
+    +--> NeedsSystem ----------------+
+    |                                |
+    +--> RoomsManager                v
+                                  Notifications
 
-    Buttons --> Stats
-    Buttons --> Needs
-    Buttons --> Rooms
-    QuestPoint --> Events
-    Events --> QuestManager
-    QuestManager --> Growth
-    QuestManager --> Notifications
-    Needs --> Notifications
-
-    classDef input fill:#e8f3ff,stroke:#356b9a,color:#1b1f24;
-    classDef system fill:#fff4d6,stroke:#9a6b00,color:#1b1f24;
-    classDef feedback fill:#f4ecff,stroke:#6f4aa8,color:#1b1f24;
-
-    class Buttons input;
-    class Stats,Needs,Rooms,QuestPoint,Events,QuestManager,Growth system;
-    class Notifications feedback;
+QuestPoint
+    |
+    v
+GameEventsManager / QuestEvents
+    |
+    v
+QuestManager
+    |
+    +--> GrowthController FSM
+    |
+    +--> Notifications
 ```
 
 The project uses a simple scene setup where managers reference shared UI elements through `CanvasComponent`.

@@ -76,35 +76,26 @@ The project includes two feedback channels:
 
 ## Architecture Overview
 
-```mermaid
-%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#e8f3ff", "primaryTextColor": "#1b1f24", "primaryBorderColor": "#356b9a", "lineColor": "#356b9a", "secondaryColor": "#fff4d6", "tertiaryColor": "#f4ecff", "fontFamily": "Arial"}}}%%
-flowchart TD
-    UI[Touch-Friendly UI Buttons]
-    Stats[Stats Manager]
-    Needs[Needs System]
-    Rooms[Rooms Manager]
-    QuestPoint[Quest Points]
-    Events[Game Events Manager]
-    Quests[Quest Manager]
-    Growth[Growth FSM]
-    Notifications[Notifications]
+```text
+Touch-Friendly UI Buttons
+        |
+        +--> Stats Manager
+        |
+        +--> Needs System --------+
+        |                         |
+        +--> Rooms Manager        v
+                              Notifications
 
-    UI --> Stats
-    UI --> Needs
-    UI --> Rooms
-    QuestPoint --> Events
-    Events --> Quests
-    Quests --> Growth
-    Needs --> Notifications
-    Quests --> Notifications
-
-    classDef input fill:#e8f3ff,stroke:#356b9a,color:#1b1f24;
-    classDef system fill:#fff4d6,stroke:#9a6b00,color:#1b1f24;
-    classDef feedback fill:#f4ecff,stroke:#6f4aa8,color:#1b1f24;
-
-    class UI input;
-    class Stats,Needs,Rooms,QuestPoint,Events,Quests,Growth system;
-    class Notifications feedback;
+Quest Points
+        |
+        v
+Game Events Manager
+        |
+        v
+Quest Manager ---------> Growth FSM
+        |
+        v
+Notifications
 ```
 
 ---
