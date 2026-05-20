@@ -76,27 +76,16 @@ The project includes two feedback channels:
 
 ## Architecture Overview
 
-```text
-Touch-Friendly UI Buttons
-        |
-        +--> Stats Manager
-        |
-        +--> Needs System --------+
-        |                         |
-        +--> Rooms Manager        v
-                              Notifications
-
-Quest Points
-        |
-        v
-Game Events Manager
-        |
-        v
-Quest Manager ---------> Growth FSM
-        |
-        v
-Notifications
-```
+| Source | Sends to | Purpose |
+| --- | --- | --- |
+| Touch-friendly UI buttons | Stats Manager | Restore or update Hunger, Sleep, and Play/Fun |
+| Touch-friendly UI buttons | Needs System | Increase hidden care counters, such as bathroom or shower |
+| Touch-friendly UI buttons | Rooms Manager | Move between room panels and available actions |
+| Needs System | Notifications | Show care alerts when Javi needs attention |
+| Quest Points | Game Events Manager | Start, advance, or finish quests through events |
+| Game Events Manager | Quest Manager | Keep quest flow decoupled from UI interaction |
+| Quest Manager | Growth FSM | Unlock phase progression after quest completion |
+| Quest Manager | Notifications | Show quest and progression feedback |
 
 ---
 

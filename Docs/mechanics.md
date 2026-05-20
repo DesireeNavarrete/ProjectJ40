@@ -8,24 +8,15 @@ ProjectJ40 is a mobile-first virtual pet prototype. The player takes care of Jav
 
 ## Core Gameplay Loop
 
-```text
-Player taps an action
-    |
-    +--> Stats are restored or changed
-    |
-    +--> Needs counters may advance
-    |
-    +--> Quest step may complete
-             |
-             v
-       Experience increases
-             |
-             v
-       Growth phase unlocks
-             |
-             v
-       New actions become available
-```
+| Step | Result |
+| --- | --- |
+| Player taps an action | A room action is executed |
+| Stats update | Hunger, Sleep, or Play/Fun is restored or changed |
+| Needs counters update | Bathroom or shower alerts may appear |
+| Quest step checks the action | A matching quest step can complete |
+| Experience increases | The current growth phase moves closer to completion |
+| Growth phase unlocks | Javi can advance to the next phase |
+| New actions appear | More room actions become available |
 
 The player is encouraged to make quick decisions and keep Javi stable while also completing objectives.
 

@@ -56,11 +56,17 @@ public class MinijuegoDead : MonoBehaviour
     {
 
 
-        if (sli.value == 1)
+        if (sli.value == 1 && !StatsManager.nivelesCriticos)
         {
-            canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);
-            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f);
-            canvasComp.canvasDead.SetActive(false);
+            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f);//canvas del minijuego
+            canvasComp.canvasDead.SetActive(false);//canvas del minijuego
+
+            canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
+            canvasComp.canvasGame.SetActive(true);//canvas del minijuego
+
+            canvasComp.canvasDeadPanelInicioInfo.SetActive(false);//canvas de oh no
+            canvasComp.canvasDeadPanelInicio.SetActive(false);//canvas de cliar en javi
+            //sli.value = 0;
         }
         // Primero comprobamos entrada táctil.
         // TouchPhase.Began significa que el dedo acaba de tocar la pantalla.
@@ -83,10 +89,6 @@ public class MinijuegoDead : MonoBehaviour
         return false;
     }
 
-    void DisableDeadMode()
-    {
-        
-    }
     private void OnSpritePressed()
     {
         // Aquí pones la acción que quieres ejecutar al tocar/clicar el sprite.
@@ -97,8 +99,6 @@ public class MinijuegoDead : MonoBehaviour
         if (sli.value >= sli.maxValue)//completado
         {
             sli.value = 1;
-            
-
             print("minijuego completado");
             StatsManager.nivelesCriticos = false;
         }

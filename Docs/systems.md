@@ -8,28 +8,16 @@ ProjectJ40 is a Unity WebGL prototype. The architecture is built around small ga
 
 ## Main Runtime Flow
 
-```text
-UI Buttons
-    |
-    +--> StatsManager
-    |
-    +--> NeedsSystem ----------------+
-    |                                |
-    +--> RoomsManager                v
-                                  Notifications
-
-QuestPoint
-    |
-    v
-GameEventsManager / QuestEvents
-    |
-    v
-QuestManager
-    |
-    +--> GrowthController FSM
-    |
-    +--> Notifications
-```
+| Source | Sends to | Purpose |
+| --- | --- | --- |
+| UI Buttons | `StatsManager` | Restore or update the main care stats |
+| UI Buttons | `NeedsSystem` | Advance hidden need counters |
+| UI Buttons | `RoomsManager` | Change the active room UI |
+| `NeedsSystem` | `Notifications` | Show bathroom and shower alerts |
+| `QuestPoint` | `GameEventsManager / QuestEvents` | Request quest start or finish events |
+| `GameEventsManager / QuestEvents` | `QuestManager` | Route quest events without direct UI coupling |
+| `QuestManager` | `GrowthController` FSM | Trigger growth progression after quest completion |
+| `QuestManager` | `Notifications` | Show quest completion and progression messages |
 
 The project uses a simple scene setup where managers reference shared UI elements through `CanvasComponent`.
 
