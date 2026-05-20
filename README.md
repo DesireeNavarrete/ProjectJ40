@@ -1,150 +1,160 @@
-# ProjectJ40
+# ProjectJ40 / J4vi
 
-> **Mobile-first life simulation built in Unity, focused on scalable gameplay architecture and system design.**
+> Mobile-first virtual pet prototype made in Unity, focused on gameplay systems, progression, and WebGL constraints.
 
-ProjectJ40 is a tamagotchi-inspired experience where the player takes care of a character that grows over time.  
-The project is designed as a **WebGL mobile experience**, prioritizing touch interaction and modular systems.
+ProjectJ40 is a Tamagotchi-inspired experience where the player takes care of Javi, a character that grows through different life phases. The project was built as a WebGL prototype for mobile browsers, using simple touch-friendly interactions and modular gameplay systems.
 
----
-
-## 🚀 Why This Project Matters
-
-This project focuses on building **clean, extensible gameplay systems**, including:
-
-- Finite State Machines for progression
-- Data-driven quest systems
-- Decoupled gameplay architecture
-- Mobile-first interaction design (WebGL)
+The main goal of the project is to show clean gameplay architecture in a small but complete prototype: stats, quests, growth phases, rooms, UI feedback, and player actions all work together to create a care loop.
 
 ---
 
-## 🎮 Core Gameplay
+## Playable Build
 
-- Manage **Hunger, Sleep, and Fun**
-- Perform activities through **touch interaction**
-- Balance decaying stats over time
-- Complete **quests** to unlock progression
-- Discover new rooms and interactions as the character grows
+[Play ProjectJ40 on itch.io](https://desireenavarrete.itch.io/projectj40)
+
+Recommended on mobile devices.
 
 ---
 
-## 🧠 Technical Highlights
+## Core Gameplay
 
-- **Custom FSM (State Pattern)**
-  - Interface-based (`IState`)
-  - Clean state transitions
-  - Easily extendable growth system
+- Take care of Javi by managing **Hunger**, **Sleep**, and **Play/Fun**.
+- Use room actions such as eating, sleeping, playing, showering, or going to the bathroom.
+- Complete quests to unlock growth progression.
+- Move through different rooms: Kitchen, Lab, Bath, Dorm, and Entrance.
+- Help Javi grow from Baby to Teen and Adult.
 
-- **ScriptableObject Quest System**
-  - `Quest` + `QuestStep` architecture
-  - Action-based progression (not stat thresholds)
-  - Data-driven and scalable
-
-- **Queue-Based Notification System**
-  - FIFO message handling
-  - Prevents UI spam
-  - Centralized feedback pipeline
-
-- **Decoupled Systems**
-  - Gameplay logic separated from UI
-  - Modular communication between systems
+The gameplay is designed around short sessions, fast feedback, and large UI buttons that work well on mobile screens.
 
 ---
 
-## 📱 Mobile-First WebGL Design
+## Technical Highlights
 
-This project is specifically designed to run on:
+### Custom Growth FSM
 
-- Mobile browsers via **WebGL**
-- Touch-based input only
+The growth system uses a small custom finite state machine. Each phase is represented by a state class:
 
-### Key Design Decisions
+- `BabyPhase`
+- `TeenPhase`
+- `AdultPhase`
 
-- Large interaction targets for touch
-- Minimal UI friction
-- Short gameplay loops
-- Lightweight systems for WebGL performance
+This keeps phase-specific behavior separate and makes progression easier to extend.
+
+### ScriptableObject Quest System
+
+Quests are defined with `QuestInfoSO` assets stored under `Resources/Quests`. Each quest has:
+
+- A display name.
+- A level requirement.
+- Optional prerequisite quests.
+- One or more quest step prefabs.
+
+Quest steps listen for player actions and advance the quest through a central event system.
+
+### Stat and Needs Systems
+
+The player manages three main stats:
+
+- Hunger
+- Sleep
+- Play/Fun
+
+Stats decay over time and are restored by room actions. Extra needs, such as bathroom and shower alerts, are handled through a dedicated notification flow.
+
+### Room-Based UI
+
+Rooms are controlled by `RoomsManager`. Each room activates its own set of actions and background color. New actions and rooms become available as Javi grows.
+
+### Notification Feedback
+
+The project includes two feedback channels:
+
+- Text notifications for general UI messages.
+- Need icons for urgent care alerts, such as bathroom or shower needs.
 
 ---
 
-## 🏗 Architecture Overview
+## Architecture Overview
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#e8f3ff", "primaryTextColor": "#1b1f24", "primaryBorderColor": "#356b9a", "lineColor": "#356b9a", "secondaryColor": "#fff4d6", "tertiaryColor": "#f4ecff", "fontFamily": "Arial"}}}%%
 flowchart TD
-    Input[Touch Input]
-    Activity[Activity System]
+    UI[Touch-Friendly UI Buttons]
+    Stats[Stats Manager]
     Needs[Needs System]
-    Quest[Quest System]
-    FSM[Growth FSM]
-    Notify[Notification Queue]
-    UI[UI]
+    Rooms[Rooms Manager]
+    QuestPoint[Quest Points]
+    Events[Game Events Manager]
+    Quests[Quest Manager]
+    Growth[Growth FSM]
+    Notifications[Notifications]
 
-    Input --> Activity
-    Activity --> Needs
-    Activity --> Quest
-    Quest --> FSM
-    Needs --> Notify
-    Notify --> UI
+    UI --> Stats
+    UI --> Needs
+    UI --> Rooms
+    QuestPoint --> Events
+    Events --> Quests
+    Quests --> Growth
+    Needs --> Notifications
+    Quests --> Notifications
+
+    classDef input fill:#e8f3ff,stroke:#356b9a,color:#1b1f24;
+    classDef system fill:#fff4d6,stroke:#9a6b00,color:#1b1f24;
+    classDef feedback fill:#f4ecff,stroke:#6f4aa8,color:#1b1f24;
+
+    class UI input;
+    class Stats,Needs,Rooms,QuestPoint,Events,Quests,Growth system;
+    class Notifications feedback;
 ```
 
 ---
 
-## 🎯 Systems at a Glance
+## Tech Stack
 
-| System                | Responsibility                          |
-|----------------------|----------------------------------------|
-| Needs System         | Continuous stat simulation             |
-| Activity System      | Player-driven stat changes             |
-| Quest System         | Progression through actions            |
-| Growth FSM           | Stage-based character evolution        |
-| Notification System  | Controlled UI feedback (queue-based)   |
-
----
-
-## ▶️ Playable Build
-
-👉 https://desireenavarrete.itch.io/projectj40
-*(Recommended on mobile devices)*
-
----
-
-## 🎥 Media
-
-![Gameplay](https://github.com/user-attachments/assets/ac27f399-52fb-4086-9d82-9bb6b3730f41)
-
----
-
-## 🧪 What I Learned
-
-- Designing **scalable gameplay systems**
-- Implementing **FSM for progression**
-- Building **data-driven architectures**
-- Adapting gameplay to **mobile WebGL constraints**
-
----
-
-## 🔗 Portfolio
-
-👉 https://desireenavarrete.carrd.co/#WIP
-
----
-
-## 🛠 Tech Stack
-
-- Unity 2022.3.20f1
+- Unity `2022.3.20f1`
 - C#
-- Unity Input System
-- WebGL (itch.io)
-- Mobile-first design
+- Unity UI / UGUI
+- ScriptableObjects
+- DOTween
+- LeanTween
+- Shader Graph
+- WebGL build target
 
 ---
 
-## 🚧 Status
+## Project Structure
 
-Early prototype focused on systems and architecture.
+| Path | Purpose |
+| --- | --- |
+| `Assets/Scripts/Player` | Player, growth phases, and stat classes |
+| `Assets/Scripts/FSM` | Custom state machine and `IState` interface |
+| `Assets/Scripts/Systems` | Quest, rooms, needs, and global event systems |
+| `Assets/Scripts/UI` | UI manager, notifications, buttons, and stat views |
+| `Assets/Resources/Quests` | Quest assets and quest step prefabs |
+| `Docs` | Technical and design documentation |
 
 ---
 
-## 📄 License
+## Documentation
+
+- [Systems Overview](Docs/systems.md)
+- [Mechanics Overview](Docs/mechanics.md)
+- [Design Decisions](Docs/DesignDecisions.md)
+
+---
+
+## Project Status
+
+This is an early prototype focused on gameplay systems and architecture. It is not a final polished game, but it already shows the main care loop, quest progression, growth phases, and mobile-first UI structure.
+
+---
+
+## Portfolio
+
+[Portfolio Website](https://desireenavarrete.carrd.co/#WIP)
+
+---
+
+## License
 
 All rights reserved.

@@ -1,315 +1,249 @@
-# 🧠 Design Decisions – Tamagotchi Project
+# Design Decisions - ProjectJ40 / J4vi
 
+This document explains the main design and technical decisions behind ProjectJ40.
 
-## 📌 1. Project Context
-
-**Project Name:**  
-J4vi - Put a Javi in your life
-
-**Game Type:**  
-Virtual pet simulator
-
-**Development Time:**  
-9 months
-
-**Role in the project:**  
-Gameplay and Systems Programmer
-
-**Document Goal:**  
-This document describes the design decisions made for gameplay mechanics and systems.
+ProjectJ40 is a virtual pet prototype made in Unity. The player takes care of Javi, completes quests, and unlocks new growth phases.
 
 ---
 
-## 🎯 2. Design Pillars
+## Project Context
 
-- Pillar 1: simple interactions  
-- Pillar 2: clear feedback of the character state  
-- Pillar 3: emotional connection between player and character  
-- Pillar 4: player enjoyment  
-
----
-
-## 🧩 3. Design Decisions
-
-Main systems in the project:
-
-- Growth stages FSM  
-- Mission system  
-- Character stats system  
-- UI notification system  
-- Needs notification system  
+| Item | Description |
+| --- | --- |
+| Project name | ProjectJ40 / J4vi |
+| Game type | Virtual pet simulator |
+| Platform target | Mobile WebGL |
+| Engine | Unity `2022.3.20f1` |
+| Main role | Gameplay and systems programming |
+| Main focus | Systems architecture, progression, and mobile-friendly interaction |
 
 ---
 
-### 🔹 Decision: Growth Stages FSM
+## Design Pillars
 
-**Problem**  
-> I needed to define how to manage different growth stages of the character, making sure each stage had its own behaviors, interactions, and mechanics without creating complex dependencies.
-
----
-
-**Options considered**
-
-- Finite State Machine (FSM)  
-- Iindependent classes without shared structure  
-- Simple condition-based logic  
+- **Simple interaction:** the player should understand each action quickly.
+- **Clear feedback:** Javi's state should be visible through stats, icons, and messages.
+- **Care loop:** the player should feel responsible for Javi.
+- **Progression:** quests and growth phases should give long-term goals.
+- **Mobile-first UI:** actions should work well on small screens with touch input.
 
 ---
 
-**Decision made**
+## Decision: Custom Growth FSM
 
-> I decided to use a Finite State Machine (FSM) to manage growth stages.
+### Problem
 
----
+Javi needed different life phases with different available actions and progression rules.
 
-**Why**
+### Options Considered
 
-- It allows each stage to have independent behavior  
-- Makes transitions between stages easier to control  
-- Improves scalability if more stages are added  
-- Reinforces the feeling of progression for the player  
+- Simple condition checks.
+- Independent scripts for each phase.
+- A small finite state machine.
 
----
+### Decision
 
-**Trade-offs**
+Use a custom finite state machine with separate state classes:
 
-- Higher initial complexity  
-- Extra structure for a small number of states  
-- Requires more planning  
+- `BabyPhase`
+- `TeenPhase`
+- `AdultPhase`
 
----
+### Why
 
-**Result**
+The FSM keeps phase transitions explicit and easy to understand. Each phase can own its behavior without mixing all progression logic into one script.
 
-> The system allowed three different growth stages with unique behaviors, improving code clarity and the player’s sense of progression.
+### Trade-Offs
 
----
+- More structure than a simple prototype usually needs.
+- Requires clear transition points.
+- Some phase behavior still lives in `Player`, so there is room to move more logic into phase classes later.
 
-**If I had more time…**
+### Result
 
-> I would add variations inside each state (substates or dynamic behavior) to increase depth without adding more stages.
+The system supports a clear growth path:
 
----
+```text
+Baby -> Teen -> Adult
+```
 
-### 🔹 Decision: Mission System
-
-**Problem**  
-> I needed a mission system to structure player progression and control the transition between growth stages in a clear and scalable way.
-
----
-
-**Options considered**
-
-- Simple mission system based on direct conditions  
-- Modular and scalable mission system based on reusable objectives  
+It also makes the project easier to explain as a technical portfolio piece.
 
 ---
 
-**Decision made**
+## Decision: ScriptableObject Quest System
 
-> I decided to implement a modular and scalable mission system.
+### Problem
 
----
+The game needed a way to guide the player, unlock progression, and define different objectives without hardcoding every quest directly into the manager.
 
-**Why**
+### Options Considered
 
-- Provides clear goals for the player  
-- Makes it easier to add new content  
-- Reinforces the core gameplay loop  
-- Allows reuse of mission logic across different stages  
+- Hardcoded quest list.
+- One script per quest only.
+- ScriptableObject quest data with reusable quest logic.
 
----
+### Decision
 
-**Trade-offs**
+Use `QuestInfoSO` assets for quest data, combined with `QuestStep` prefabs for quest behavior.
 
-- More complex than a simple system  
-- Requires more planning  
-- May be too much for small projects if not reused  
+### Why
 
----
+ScriptableObjects make the quest list easier to edit in Unity. The manager can load all quests from `Resources/Quests`, check requirements, and update quest states through events.
 
-**Result**
+### Trade-Offs
 
-> The system guided the player through clear objectives, improving progression and helping transitions between growth stages.
+- Quest steps are still action-specific scripts.
+- Content setup depends on correct Unity asset references.
+- There is no custom editor tool yet for creating quests faster.
 
----
+### Result
 
-**If I had more time…**
+The project has three blocks of quests linked to growth levels:
 
-> I would create editor tools to make mission creation faster and easier to iterate.
+- Baby quests at level 0.
+- Teen quests at level 1.
+- Adult quests at level 2.
 
----
-
-### 🔹 Decision: Character Stats System
-
-**Problem**  
-> I needed a system for character needs (hunger, sleep, fun) that changes over time and forces the player to manage multiple variables at once.
+This creates a clear progression path for the player.
 
 ---
 
-**Options considered**
+## Decision: Decaying Stats Instead of Global Pet State
 
-- FSM with global states  
-- Independent variables managed with classes  
+### Problem
 
----
+Javi needed several needs that could change at the same time.
 
-**Decision made**
+### Options Considered
 
-> I implemented independent stats using classes, allowing all needs to update at the same time.
+- One global mood state.
+- A state machine for all needs.
+- Independent stat values.
 
----
+### Decision
 
-**Why**
+Use independent `Stat` values managed by `StatsManager`.
 
-- Allows multiple needs to decrease at the same time  
-- Creates constant pressure on the player  
-- Encourages decision-making and prioritization  
-- Works better for real-time systems than an FSM  
-- Makes it easier to adjust each stat individually  
+Current main stats:
 
----
+- Hunger
+- Sleep
+- Play/Fun
 
-**Trade-offs**
+### Why
 
-- Harder to balance  
-- Risk of overwhelming the player  
-- Needs clear UI feedback  
+Independent stats are simple and flexible. They let the player prioritize different needs and create constant light pressure.
 
----
+### Trade-Offs
 
-**Result**
+- Balance can become harder as more actions are added.
+- Stats need clear UI feedback.
+- Some action effects are currently simple resets to `100`, which is good for prototype clarity but can be expanded later.
 
-> The system created a gameplay loop based on managing needs, where the player constantly prioritizes actions and feels responsible for the character.
+### Result
 
----
-
-**If I had more time…**
-
-> I would add interactions between stats (e.g., sleep affecting fun) to create more depth.
+The care loop is easy to understand: stats decay over time, and player actions restore them.
 
 ---
 
-### 🔹 Decision: UI Notification System
+## Decision: Room-Based Action UI
 
-**Problem**  
-> I needed a system to inform the player about important events without overwhelming them or interrupting gameplay.
+### Problem
 
----
+The game needed several actions without overcrowding the screen.
 
-**Options considered**
+### Options Considered
 
-- No order control (show notifications as they happen)  
-- Custom system with priorities  
-- FIFO queue system  
+- Show all actions at once.
+- Use menus and submenus.
+- Split actions by rooms.
 
----
+### Decision
 
-**Decision made**
+Use rooms to group actions:
 
-> I used a FIFO queue system where notifications are shown in order.
+- Kitchen
+- Lab
+- Bath
+- Dorm
+- Entrance
 
----
+### Why
 
-**Why**
+Rooms make the UI easier to scan. They also give a simple world structure without needing a large map or complex navigation.
 
-- Keeps communication clear and predictable  
-- Controls the flow of information  
-- Avoids overwhelming the player  
-- Simpler than priority-based systems  
-- Works well for frequent but simple events  
+### Trade-Offs
 
----
+- Room logic needs to manage many object references.
+- Adding a new room requires UI setup.
+- Current room changes are mostly UI-based, not a full scene/world system.
 
-**Trade-offs**
+### Result
 
-- No priority for urgent events  
-- Possible delay for important notifications  
-- Less flexible than advanced systems  
-
----
-
-**Result**
-
-> The system communicates events in a clear and steady way, improving readability and maintaining a smooth gameplay flow.
+The player can move between clear spaces, and new phase actions can appear in the correct room.
 
 ---
 
-**If I had more time…**
+## Decision: Two Notification Channels
 
-> I would upgrade it to a hybrid system with priorities for critical events.
+### Problem
 
----
+The player needed feedback for both general events and urgent care needs.
 
-### 🔹 Decision: Needs Notification System
+### Options Considered
 
-**Problem**  
-> I needed a system to alert the player when character needs reach critical levels, ensuring quick response without UI overload.
+- Only text messages.
+- Only icon alerts.
+- Separate channels for text and needs.
 
----
+### Decision
 
-**Options considered**
+Use two notification flows:
 
-- Using the general FIFO notification system  
-- Custom system with dedicated classes per need  
+- Text UI notifications for events like quest completion or growth messages.
+- Need icons for bathroom and shower alerts.
 
----
+### Why
 
-**Decision made**
+Text messages are useful for explaining progress. Icons are better for quick care alerts on a small mobile screen.
 
-> I implemented a custom system using classes for each need.
+### Trade-Offs
 
----
+- There is some overlap between notification systems.
+- Need notifications use a list instead of the same queue model as text notifications.
+- A future version could merge both into a priority-based notification system.
 
-**Why**
+### Result
 
-- Allows different behavior per need (frequency, urgency, type)  
-- Communicates critical events more directly  
-- Reinforces urgency  
-- Improves visual clarity  
-
----
-
-**Trade-offs**
-
-- More complex than a single system  
-- Possible redundancy with the main notification system  
-- Needs careful balance to avoid spam  
+The prototype communicates both progression and immediate needs without relying on only one feedback style.
 
 ---
 
-**Result**
+## What Worked Well
 
-> The system improved how critical needs are communicated, increasing player reaction and reinforcing the care loop.
-
----
-
-**If I had more time…**
-
-> I would merge both notification systems into a hybrid priority-based system.
+- The quest system gives structure to the prototype.
+- The FSM makes growth progression easy to understand.
+- ScriptableObjects make quest content visible in the Unity editor.
+- Rooms help organize actions for a mobile UI.
+- The project has a strong base for a portfolio explanation.
 
 ---
 
-## 📊 4. Learnings
+## Future Improvements
 
-- Simple systems connected together create more impact than complex isolated ones  
-- Constant feedback is key in tamagotchi-style games  
-- I underestimated the importance of balancing timers  
-
----
-
-## 🔮 5. Future Improvements
-
-- Expand the needs system with more variables and relationships  
-- Add new actions and rooms to increase player options  
-- Add minigames connected to specific needs  
-- Improve notifications with a hybrid priority system  
-- Create editor tools for missions and events  
+- Add save/load for player progress.
+- Move more phase-specific logic out of `Player` and into phase classes.
+- Create editor tools for faster quest creation.
+- Add more varied stat effects instead of only resetting values.
+- Improve notification priority and timing.
+- Add stronger final-game feedback for the Adult phase.
+- Reduce direct `GameObject.Find` and scene reference coupling.
 
 ---
 
-## 🧭 6. Design Summary
+## Design Summary
 
-> This project focused on designing a care system based on real-time needs and character progression.  
-> The main decisions were focused on creating a clear gameplay loop with constant feedback and player decision-making.  
-> The result is an experience where the player must constantly prioritize actions and respond to the character’s state.
+ProjectJ40 focuses on a clear virtual pet care loop supported by modular systems. The main design goal was not to build a large game, but to create a playable prototype where stats, quests, rooms, growth phases, and feedback work together.
+
+The result is a small mobile-first WebGL project that demonstrates gameplay architecture, Unity UI flow, ScriptableObject content, and state-based progression.

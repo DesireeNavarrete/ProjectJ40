@@ -1,166 +1,235 @@
 # Systems Overview
 
-This document describes the **technical architecture** of the project and how systems interact.
+This document explains the main technical systems in ProjectJ40 and how they work together.
+
+ProjectJ40 is a Unity WebGL prototype. The architecture is built around small gameplay systems connected through UI actions, events, and ScriptableObject data.
 
 ---
 
-## 🧠 Design Philosophy
+## Main Runtime Flow
 
-The project is built with:
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#e8f3ff", "primaryTextColor": "#1b1f24", "primaryBorderColor": "#356b9a", "lineColor": "#356b9a", "secondaryColor": "#fff4d6", "tertiaryColor": "#f4ecff", "fontFamily": "Arial"}}}%%
+flowchart TD
+    Buttons[UI Buttons]
+    Stats[StatsManager]
+    Needs[NeedsSystem]
+    Rooms[RoomsManager]
+    QuestPoint[QuestPoint]
+    Events[GameEventsManager / QuestEvents]
+    QuestManager[QuestManager]
+    Growth[GrowthController FSM]
+    Notifications[Notifications]
 
-- Modularity
-- Scalability
-- Mobile-first constraints
+    Buttons --> Stats
+    Buttons --> Needs
+    Buttons --> Rooms
+    QuestPoint --> Events
+    Events --> QuestManager
+    QuestManager --> Growth
+    QuestManager --> Notifications
+    Needs --> Notifications
 
-Systems are designed to be lightweight and decoupled, suitable for **WebGL performance on mobile devices**.
+    classDef input fill:#e8f3ff,stroke:#356b9a,color:#1b1f24;
+    classDef system fill:#fff4d6,stroke:#9a6b00,color:#1b1f24;
+    classDef feedback fill:#f4ecff,stroke:#6f4aa8,color:#1b1f24;
 
----
-
-## 📊 Needs System
-
-### Purpose
-
-Manages character needs that evolve over time.
-
-### Implementation
-
-- Float values (0–100)
-- Frame-based updates using decay rates
-- Immediate response to player actions
-
-### Design Notes
-
-- Decoupled from UI
-- Optimized for continuous updates without heavy computation
-
----
-
-## 🔄 Growth System (FSM)
-
-### Purpose
-
-Controls progression through character life stages.
-
-### Implementation
-
-- Custom FSM
-- States implemented via `IState`
-
-```csharp
-public interface IState
-{
-    void Enter();
-    void Execute();
-    void Exit();
-}
+    class Buttons input;
+    class Stats,Needs,Rooms,QuestPoint,Events,QuestManager,Growth system;
+    class Notifications feedback;
 ```
 
-- Transitions triggered by quest completion
-
-### Benefits
-
-- Predictable behavior
-- Easy to extend with new stages
-- Clean separation of logic
+The project uses a simple scene setup where managers reference shared UI elements through `CanvasComponent`.
 
 ---
 
-## 🎯 Quest System
+## Growth System
 
-### Purpose
+The growth system controls Javi's life phase.
 
-Drives progression through player actions.
+Main classes:
 
-### Structure
+- `GrowthController`
+- `StateMachine`
+- `IState`
+- `BabyPhase`
+- `TeenPhase`
+- `AdultPhase`
+- `GrowthStage`
 
-- ScriptableObject-based `Quest`
-- Modular `QuestStep` logic
+The game starts in `BabyPhase`. When enough quests are completed, the player can trigger a birthday/growth action. This advances the FSM to the next phase:
 
-### Behavior
+```text
+Baby -> Teen -> Adult
+```
 
-- Action-based completion
-- UI-driven feedback
-- Stage progression trigger
+Each phase can unlock different actions. For example, Teen unlocks actions like welding, basketball, going out with friends, and biology. Adult unlocks actions like protein, coffee, DIY, and crossfit.
 
-### Benefits
-
-- Data-driven design
-- Easy content expansion
-- Minimal code changes for new quests
-
----
-
-## 🔔 Notification System
-
-### Purpose
-
-Provides structured feedback to the player.
-
-### Implementation
-
-- FIFO queue system
-- Sequential message handling
-
-### Behavior
-
-- Prevents UI spam
-- Ensures readability on small screens
-- Supports mobile UX constraints
+The FSM keeps the progression logic clear and makes new phases easier to add later.
 
 ---
 
-## 🎮 Player Interaction System
+## Stats System
 
-### Purpose
+The stats system manages the three main care values:
 
-Handles touch input and translates it into gameplay.
+- Hunger
+- Sleep
+- Play/Fun
 
-### Flow
+Main classes:
 
-1. Capture touch input
-2. Validate interaction
-3. Trigger activity
-4. Notify systems
+- `StatsManager`
+- `Stat`
+- `StatsView`
 
-### Mobile Considerations
+`StatsManager` creates the stats at runtime and updates them every frame. Each stat starts at `100` and decays over time. Room actions reset related stats back to `100`.
 
-- Designed for **tap-based interaction**
-- Avoids complex gestures
-- Optimized for responsiveness
+Examples:
 
----
+- Food restores Hunger.
+- Sleeping restores Sleep.
+- Computer, basketball, DIY, crossfit, and similar activities restore Play/Fun.
 
-## 🧩 System Communication
-
-- Activity → modifies Needs
-- Quest → triggers FSM transitions
-- Needs → sends notifications
-- Notification → updates UI
-
-Systems are loosely coupled to maintain flexibility.
+`StatsView` connects each stat to its UI slider and warning color.
 
 ---
 
-## 📈 Scalability
+## Needs System
 
-Supports:
+The needs system handles extra care alerts that are not part of the three main bars.
 
-- Adding new stats easily
-- Creating new activities with minimal effort
-- Expanding rooms modularly
-- Extending quest logic through ScriptableObjects
+Main classes and assets:
+
+- `NeedsSystem`
+- `NeedsSO`
+- `NeedsNotificatonBath`
+- `caca.asset`
+- `ducha.asset`
+
+Current needs include:
+
+- Bathroom need (`caca`)
+- Shower need (`ducha`)
+
+These alerts are triggered after repeated actions and are shown as icons in the UI. They are removed when the player uses the correct room action.
 
 ---
 
-## ⚡ Performance Considerations
+## Quest System
 
-- Lightweight update loops
-- Minimal dependencies between systems
-- Designed to run smoothly in WebGL on mobile browsers
+The quest system drives progression.
+
+Main classes:
+
+- `QuestManager`
+- `Quest`
+- `QuestInfoSO`
+- `QuestStep`
+- `QuestPoint`
+- `QuestState`
+- `QuestEvents`
+- `GameEventsManager`
+
+Quest data is stored as `QuestInfoSO` assets inside:
+
+```text
+Assets/Resources/Quests
+```
+
+Each quest can define:
+
+- `id`
+- `displayName`
+- `levelRequirement`
+- `questPrerequisites`
+- `questStepPrefabs`
+
+At runtime, `QuestManager` loads all quests with:
+
+```csharp
+Resources.LoadAll<QuestInfoSO>("Quests")
+```
+
+Quest flow:
+
+1. `QuestManager` loads quest assets into a dictionary.
+2. `QuestPoint` listens for quest state changes.
+3. When requirements are met, a quest becomes available.
+4. The player starts the quest through the UI.
+5. A quest step prefab is instantiated.
+6. The quest step waits for the required action.
+7. When the action is done, the quest advances.
+8. Completed quests add experience toward the current growth phase.
+
+This makes quest content mostly data-driven while keeping each objective simple.
 
 ---
 
-## 📝 Notes
+## Room System
 
-- Focus is on systems, not final polish
-- Architecture supports future expansion
+Rooms define where actions are available.
+
+Main classes:
+
+- `RoomsManager`
+- `Rooms`
+
+Current rooms:
+
+- Kitchen
+- Lab
+- Bath
+- Dorm
+- Entrance
+
+`RoomsManager` changes the active room panel, background color, and room label. It also supports adding room names at runtime when a phase unlocks more content.
+
+---
+
+## UI System
+
+The UI is managed mainly through:
+
+- `UIManager`
+- `CanvasComponent`
+- `ButtonControl`
+- `StatsView`
+
+`CanvasComponent` works as a central reference holder for buttons, panels, sliders, room objects, and quest UI elements.
+
+`UIManager` handles:
+
+- Initial UI visibility.
+- Quest panel open/close.
+- Global pause toggle.
+- Birthday/growth button.
+- Removing need alerts after the player responds.
+- Global action cooldown interaction state.
+
+`ButtonControl` handles pointer down/up state and a shared action cooldown.
+
+---
+
+## Notification System
+
+Main class:
+
+- `Notifications`
+
+There are two notification types:
+
+- UI text notifications, stored in a `Queue<string>`.
+- Need notifications, stored in a list and shown as icons.
+
+Text notifications are used for general events, such as quest completion or growth messages. Need notifications are used for care alerts like bathroom and shower.
+
+---
+
+## Current Limitations
+
+- There is no documented save/load system yet.
+- Some systems rely on direct scene references and `GameObject.Find`.
+- The global cooldown is shared by all action buttons.
+- Quest steps are simple and action-specific.
+- The project is focused on prototype architecture, not final production polish.
