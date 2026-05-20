@@ -27,11 +27,6 @@ public class MinijuegoDead : MonoBehaviour
 
     private void Update()
     {
-        if (StatsManager.nivelesCriticos)
-        {
-            
-        }
-
         if (sli.value < sli.maxValue)
         {
             sli.value = sli.value - Time.deltaTime * .25f;
@@ -55,8 +50,6 @@ public class MinijuegoDead : MonoBehaviour
         {
             OnSpritePressed();
         }
-
-
     }
 
     private bool PressedThisFrame(out Vector2 screenPos)
@@ -82,6 +75,10 @@ public class MinijuegoDead : MonoBehaviour
         return false;
     }
 
+    void DisableDeadMode()
+    {
+        
+    }
     private void OnSpritePressed()
     {
         // Aquí pones la acción que quieres ejecutar al tocar/clicar el sprite.
@@ -89,18 +86,15 @@ public class MinijuegoDead : MonoBehaviour
         DebugConsole.instance.Log("Sprite tocado/clicado");
         txt.text = "Sprite tocado/clicado";
         sli.value = sli.value + .1f;
-        if (sli.value >= sli.maxValue)
+        if (sli.value >= sli.maxValue)//completado
         {
             sli.value = 1;
-            //sliImg.color = Color.green;
-
-            //TODO contador de tiempo y desactivar dead canvas
-            //canvasComp.canvasDeadPanel.SetActive(false);
-            canvasComp.canvasDeadPanel.GetComponent<CanvasGroup>().DOFade(0, .5f);
-
-            //canvasComp.canvasGame.SetActive(false);
             canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);
+            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f);
+            canvasComp.canvasDead.SetActive(false);
 
+            print("minijuego completado");
+            StatsManager.nivelesCriticos = false;
         }
     }
 }

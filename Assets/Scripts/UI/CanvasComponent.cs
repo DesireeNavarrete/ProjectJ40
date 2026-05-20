@@ -71,6 +71,7 @@ public class CanvasComponent : MonoBehaviour
     public GameObject canvasDead;
     public GameObject canvasDeadPanel;
     public GameObject canvasDeadPanelInicio;
+    public GameObject canvasDeadPanelInicioInfo;
 
 
 }

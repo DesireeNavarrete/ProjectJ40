@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -138,9 +139,16 @@ public class StatsManager : MonoBehaviour
         if (hambreStat.Value <= 10 && sleepStat.Value <= 10 && jugarStat.Value <= 10)
         {
             print("Niveles críticos");
-            //nivelesCriticos = true;
-            NivelesCriticos();
-        }
+            nivelesCriticos = true;
+            StartCoroutine(NivelesCriticos());
+        }else
+            nivelesCriticos = false;
+
+        //if (!nivelesCriticos)
+        //{
+        //    canvasComp.canvasDeadPanel.GetComponent<CanvasGroup>().DOFade(0, .5f);
+        //    canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);
+        //}
     }
 
     void UpdateDecay(Stat stat)
@@ -148,10 +156,15 @@ public class StatsManager : MonoBehaviour
         stat.Modify(-Time.deltaTime);
     }
 
-    void NivelesCriticos()
+    IEnumerator NivelesCriticos()
     {
+        canvasComp.canvasDeadPanelInicioInfo.SetActive(true);
+        yield return new WaitForSeconds(5.5f);
         canvasComp.canvasDeadPanelInicio.SetActive(true);
         canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f);
         canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(1, .5f);
+        hambreStat.SetValue(50);
+        sleepStat.SetValue(50);
+        jugarStat.SetValue(50);
     }
 }
