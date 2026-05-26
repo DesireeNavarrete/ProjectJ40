@@ -40,7 +40,11 @@ public class UIManager : MonoBehaviour
         canvasComp.crossfitBut.gameObject.SetActive(false);
         canvasComp.cumpleBut.gameObject.SetActive(false);
         canvasComp.cumpleBut.onClick.AddListener(() => ChangePhase());
-        canvasComp.seguimientoQuests.onClick.AddListener(() => AbrilCerralQuests());
+
+        canvasComp.seguimientoQuests.onClick.AddListener(() => AbrilCerralQuests(canvasComp.questPanel));
+        canvasComp.configPanelButton.onClick.AddListener(() => AbrilCerralQuests(canvasComp.configPanel));
+
+        canvasComp.configPanelButton.onClick.AddListener(() => Pausa());
         canvasComp.seguimientoQuests.onClick.AddListener(() => Pausa());
         canvasComp.toiletBut.onClick.AddListener(() => QuitarColaBath());
         canvasComp.showerBut.onClick.AddListener(() => QuitarColaDucha());
@@ -152,14 +156,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void AbrilCerralQuests()
+    public void AbrilCerralQuests(GameObject panel)
     {
-        if (canvasComp.questPanel.activeSelf)
+        if (panel.activeSelf)
         {
-            canvasComp.questPanel.SetActive(false);
+            panel.SetActive(false);
         }
         else
-            canvasComp.questPanel.SetActive(true);
+            panel.SetActive(true);
 
     }
     void Update()

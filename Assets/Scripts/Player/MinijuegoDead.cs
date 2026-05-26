@@ -56,17 +56,29 @@ public class MinijuegoDead : MonoBehaviour
     {
 
 
-        if (sli.value == 1 && !StatsManager.nivelesCriticos)
+        if (sli.value == 1 && !StatsManager.nivelesCriticos)//volver a estado normal
         {
-            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f);//canvas del minijuego
+            //canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
+            //{
+            //    // Código que quieres ejecutar cuando termine
+            //    Debug.Log("¡El tween ha terminado!");
+            //    canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
+            //});
             canvasComp.canvasDead.SetActive(false);//canvas del minijuego
+            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
+            {
+                // Código que quieres ejecutar cuando termine
+                Debug.Log("¡El tween ha terminado!");
+                canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
+                canvasComp.canvasGame.SetActive(true);//canvas principal
+                canvasComp.canvasDeadPanelDeadFinal.SetActive(true);
+            });
 
-            canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
-            canvasComp.canvasGame.SetActive(true);//canvas del minijuego
 
             canvasComp.canvasDeadPanelInicioInfo.SetActive(false);//canvas de oh no
             canvasComp.canvasDeadPanelInicio.SetActive(false);//canvas de cliar en javi
-            //sli.value = 0;
+
+            sli.value = 0;
         }
         // Primero comprobamos entrada táctil.
         // TouchPhase.Began significa que el dedo acaba de tocar la pantalla.

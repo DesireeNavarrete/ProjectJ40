@@ -141,7 +141,8 @@ public class StatsManager : MonoBehaviour
             print("Niveles críticos");
             nivelesCriticos = true;
             StartCoroutine(NivelesCriticos());
-        }else
+        }
+        else
             nivelesCriticos = false;
 
         //if (!nivelesCriticos)
@@ -158,11 +159,17 @@ public class StatsManager : MonoBehaviour
 
     IEnumerator NivelesCriticos()
     {
-        canvasComp.canvasDeadPanelInicioInfo.SetActive(true);
-        yield return new WaitForSeconds(5.5f);
-        canvasComp.canvasDeadPanelInicio.SetActive(true);
-        canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f);
-        canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(1, .5f);
+        canvasComp.canvasDeadPanelInicioInfo.SetActive(true);//panel de oh no
+        yield return new WaitForSeconds(4.5f);
+        canvasComp.canvasDeadPanelInicio.SetActive(true);//panel de clica en javi
+        canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
+        {
+
+            canvasComp.canvasGame.SetActive(false);
+            canvasComp.canvasDead.SetActive(true);
+            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas entero
+
+        });
         hambreStat.SetValue(50);
         sleepStat.SetValue(50);
         jugarStat.SetValue(50);
