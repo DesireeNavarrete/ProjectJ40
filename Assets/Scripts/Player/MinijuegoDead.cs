@@ -64,13 +64,13 @@ public class MinijuegoDead : MonoBehaviour
             //    Debug.Log("¡El tween ha terminado!");
             //    canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
             //});
-            canvasComp.canvasDead.SetActive(false);//canvas del minijuego
             canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
             {
                 // Código que quieres ejecutar cuando termine
-                Debug.Log("¡El tween ha terminado!");
-                canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
+                //Debug.Log("¡El tween ha terminado!");
+                canvasComp.canvasDead.SetActive(false);//canvas del minijuego
                 canvasComp.canvasGame.SetActive(true);//canvas principal
+                canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
                 canvasComp.canvasDeadPanelDeadFinal.SetActive(true);
             });
 
@@ -78,7 +78,7 @@ public class MinijuegoDead : MonoBehaviour
             canvasComp.canvasDeadPanelInicioInfo.SetActive(false);//canvas de oh no
             canvasComp.canvasDeadPanelInicio.SetActive(false);//canvas de cliar en javi
 
-            sli.value = 0;
+            //sli.value = 0;
         }
         // Primero comprobamos entrada táctil.
         // TouchPhase.Began significa que el dedo acaba de tocar la pantalla.
@@ -104,11 +104,10 @@ public class MinijuegoDead : MonoBehaviour
     private void OnSpritePressed()
     {
         // Aquí pones la acción que quieres ejecutar al tocar/clicar el sprite.
-        Debug.Log("Sprite tocado/clicado");
-        DebugConsole.instance.Log("Sprite tocado/clicado");
-        txt.text = "Sprite tocado/clicado";
+        //Debug.Log("Sprite tocado/clicado");
+        //DebugConsole.instance.Log("Sprite tocado/clicado");
         sli.value = sli.value + .1f;
-        if (sli.value >= sli.maxValue)//completado
+        if (sli.value > sli.maxValue)//completado
         {
             sli.value = 1;
             print("minijuego completado");
