@@ -77,5 +77,7 @@ public class CanvasComponent : MonoBehaviour
 
     [Header("Config")]
     public GameObject configPanel;
+    public GameObject panelConfig;
+    public GameObject opciones;
     public Button configPanelButton;
 }

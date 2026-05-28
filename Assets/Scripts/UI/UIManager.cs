@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
@@ -42,7 +44,7 @@ public class UIManager : MonoBehaviour
         canvasComp.cumpleBut.onClick.AddListener(() => ChangePhase());
 
         canvasComp.seguimientoQuests.onClick.AddListener(() => AbrilCerralQuests(canvasComp.questPanel));
-        canvasComp.configPanelButton.onClick.AddListener(() => AbrilCerralQuests(canvasComp.configPanel));
+        canvasComp.configPanelButton.onClick.AddListener(() => ConfigPanel(canvasComp.configPanel));
 
         canvasComp.configPanelButton.onClick.AddListener(() => Pausa());
         canvasComp.seguimientoQuests.onClick.AddListener(() => Pausa());
@@ -166,6 +168,19 @@ public class UIManager : MonoBehaviour
             panel.SetActive(true);
 
     }
+
+    public void ConfigPanel(GameObject panel)
+    {
+        if (panel.activeSelf)
+        {
+            panel.SetActive(false);
+            //volver a activar panelcofig y desactivar opciones
+            canvasComp.panelConfig.SetActive(true);
+            canvasComp.opciones.SetActive(false);
+        }
+        else
+            panel.SetActive(true);
+    }
     void Update()
     {
 
@@ -230,4 +245,15 @@ public class UIManager : MonoBehaviour
             canvasPanel.SetActive(false);
         }
     }
+
+    public AudioMixer audioMixer;
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+;    }
 }
