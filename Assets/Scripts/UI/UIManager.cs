@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     public static bool cumpleAvaible = false;
 
     public NeedsSystem reactManager;
+    public GameObject player;
+
     private void Start()
     {
         //desactivamos los elementos de la ui que no se necesiten al iniciar
@@ -56,6 +58,12 @@ public class UIManager : MonoBehaviour
         canvasComp.toiletBut.onClick.AddListener(() => ToiletButtonReset());
         canvasComp.showerBut.interactable = false;
         canvasComp.showerBut.onClick.AddListener(() => ShowerButtonReset());
+
+        //Activar canvas fade
+        canvasComp.canvasPrincipal.GetComponent<CanvasGroup>().DOFade(1, .5f);
+        player.SetActive(true);
+
+
     }
 
     void ToiletButtonReset()
@@ -191,9 +199,9 @@ public class UIManager : MonoBehaviour
         if (ButtonControl.currentCooldown > 0)
         {
             canvasComp.foodBut.interactable = false;
-            //canvasComp.computerBut.interactable = false;
+            canvasComp.computerBut.interactable = false;
             //canvasComp.toiletBut.interactable = false;
-            canvasComp.showerBut.interactable = false;
+            //canvasComp.showerBut.interactable = false;
             canvasComp.weldBut.interactable = false;
 
             canvasComp.coffeBut.interactable = false;
@@ -210,9 +218,9 @@ public class UIManager : MonoBehaviour
         if (ButtonControl.currentCooldown <= 0)
         {
             canvasComp.foodBut.interactable = true;
-            //canvasComp.computerBut.interactable = true;
+            canvasComp.computerBut.interactable = true;
             //canvasComp.toiletBut.interactable = true;
-            canvasComp.showerBut.interactable = true;
+            //canvasComp.showerBut.interactable = true;
             canvasComp.weldBut.interactable = true;
 
             canvasComp.coffeBut.interactable = true;
@@ -255,5 +263,6 @@ public class UIManager : MonoBehaviour
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
-;    }
+        ;
+    }
 }

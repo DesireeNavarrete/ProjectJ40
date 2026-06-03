@@ -1,9 +1,11 @@
+using DG.Tweening;
 using ProjectJ40.Growth;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour
 {
@@ -81,14 +83,23 @@ public class QuestManager : MonoBehaviour
                     uiManager.Cumple();
                     break;
                 case AdultPhase:
-                    //TODO: texto diferente Y CINEMATICA?¿?¿?¡ O TEXTO O COMO SE ACABA EL JUEGO?¿?¿
-                    notis.AddNotificationUI("-¡Enhorabuena!\r\nJavi ya se vale por si solo... ya no te necesita..");
+                    //notis.AddNotificationUI("-¡Enhorabuena!\r\nJavi ya se vale por si solo... ya no te necesita..");
+                    StartCoroutine(FinalScene());
                     break;
 
             }
         }
     }
 
+    IEnumerator FinalScene()
+    {
+        yield return new WaitForSeconds(2);
+        //TODO: añadir alfa anim
+        canvasComp.finalPanel.SetActive(true);
+        yield return new WaitForSeconds(5);
+        canvasComp.finalPanel.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
+        SceneManager.LoadScene(0);
+    }
 
     //nos desuscribimos de los eventos
     private void OnDisable()

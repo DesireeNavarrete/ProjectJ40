@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class CanvasComponent : MonoBehaviour
 {
+
+    [Header("Sliders stats")]
+    public Canvas canvasPrincipal;
+
     [Header("Sliders stats")]
     public Image nivelSliderHambre;
     public Image nivelSliderSueño;
@@ -34,9 +38,6 @@ public class CanvasComponent : MonoBehaviour
     public Button cumpleBut;
 
     public Button seguimientoQuests;
-
-
-
 
     [Header("Texts")]
     public Text currentRoomText;
@@ -80,4 +81,9 @@ public class CanvasComponent : MonoBehaviour
     public GameObject panelConfig;
     public GameObject opciones;
     public Button configPanelButton;
+
+    [Header("Final")]
+    public GameObject finalPanel;
+
+
 }

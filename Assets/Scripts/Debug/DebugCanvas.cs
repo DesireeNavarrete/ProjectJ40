@@ -1,3 +1,4 @@
+using ProjectJ40.Growth;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +42,16 @@ public class DebugCanvas : MonoBehaviour
     public InputField sleepInputMukt;
     public InputField jugarInputMult;
 
+    [Header("FasesCrecimiento")]
+    public Text actualfase;
+    public Button crecerBtn;
+
+    [Header("TimeScale")]
+    public Text actualTime;
+    public Button timeLento;
+    public Button timeNormal;
+    public Button timeRapido;
+
     void Start()
     {
         debugButton.onClick.AddListener(() => EnableDisableDebug(debugCanvas));
@@ -54,6 +65,22 @@ public class DebugCanvas : MonoBehaviour
         hambreBtnMult.onClick.AddListener(() => ApplyMultiplier(hambreInputMult, statsManager.hambreStat));
         sleepBtnMult.onClick.AddListener(() => ApplyMultiplier(sleepInputMukt, statsManager.sleepStat));
         playBtnMult.onClick.AddListener(() => ApplyMultiplier(jugarInputMult, statsManager.jugarStat));
+
+        //crecer
+        crecerBtn.onClick.AddListener(() => Crecer());
+        actualfase.text = "BabyPhase";
+
+        //time.scale
+        timeLento.onClick.AddListener(() => CambiarTiempo(.5f));
+        timeNormal.onClick.AddListener(() => CambiarTiempo(1));
+        timeRapido.onClick.AddListener(() => CambiarTiempo(2));
+        actualTime.text = Time.timeScale.ToString();
+    }
+
+    public void CambiarTiempo(float f)
+    {
+        Time.timeScale = f;
+        actualTime.text = Time.timeScale.ToString();
     }
 
     // Update is called once per frame
@@ -66,6 +93,26 @@ public class DebugCanvas : MonoBehaviour
         statHambreMult.text = statsManager.hambreStat.Multiplier.ToString();
         statJugarMult.text = statsManager.jugarStat.Multiplier.ToString();
         statSleepMult.text = statsManager.sleepStat.Multiplier.ToString();
+
+    }
+
+    public void Crecer()
+    {
+        switch (GrowthController.GrowthFSM.CurrentState)
+        {
+            case BabyPhase:
+                GrowthController.AdvanceToStage(GrowthStage.Teen);
+                actualfase.text = "TeenPhase";
+                break;
+
+            case TeenPhase:
+                GrowthController.AdvanceToStage(GrowthStage.Adult);
+                actualfase.text = "adultPhase";
+                break;
+            case AdultPhase:
+                actualfase.text = "Indendizarse";
+                break;
+        }
     }
 
     //cambio de valor para testeo
