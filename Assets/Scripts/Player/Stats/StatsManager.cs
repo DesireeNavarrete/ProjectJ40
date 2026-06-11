@@ -1,6 +1,8 @@
 using DG.Tweening;
+using ProjectJ40.Growth;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +23,7 @@ public class StatsManager : MonoBehaviour
     public static bool nivelesCriticos;
     public void Start()
     {
+
         //Creamos los stats default, con sus multiplicadores correspondientes
         hambreStat = new Stat(100, 2);
         sleepStat = new Stat(100, .5f);
@@ -126,6 +129,7 @@ public class StatsManager : MonoBehaviour
         });
     }
 
+    public static GrowthStage stateBeforeDie;
     public void Update()
     {
         // Actualizar decay
@@ -140,18 +144,27 @@ public class StatsManager : MonoBehaviour
         {
             print("Niveles críticos");
             nivelesCriticos = true;
-            StartCoroutine(NivelesCriticos());
+            isDeadTriggered = true;
+
+            //StartCoroutine(NivelesCriticos());
         }
         else
             nivelesCriticos = false;
 
-        //if (!nivelesCriticos)
-        //{
-        //    canvasComp.canvasDeadPanel.GetComponent<CanvasGroup>().DOFade(0, .5f);
-        //    canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);
-        //}
-    }
+        if (GrowthController.GrowthFSM.PreviousState != null)
+        {
+        }
 
+        if (isDeadTriggered)
+        {
+            print(isDeadTriggered);
+            isDeadTriggered = false;
+            GrowthController.AdvanceToStage(GrowthStage.Dead);
+            stateBeforeDie = GrowthController.GrowthFSM.PreviousState.Stage;
+            //print(stateBeforeDie.ToString());
+        }
+    }
+    public bool isDeadTriggered;
     void UpdateDecay(Stat stat)
     {
         stat.Modify(-Time.deltaTime);
@@ -160,18 +173,17 @@ public class StatsManager : MonoBehaviour
     IEnumerator NivelesCriticos()
     {
         canvasComp.canvasDeadPanelInicioInfo.SetActive(true);//panel de oh no
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(3f);
         canvasComp.canvasDeadPanelInicio.SetActive(true);//panel de clica en javi
-        canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
-        {
+        //canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
+        //{
+        canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f);
+        canvasComp.canvasGame.SetActive(false);
+        canvasComp.canvasDead.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas entero
 
-            canvasComp.canvasGame.SetActive(false);
-            canvasComp.canvasDead.SetActive(true);
-            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas entero
+        //});
 
-        });
-        hambreStat.SetValue(50);
-        sleepStat.SetValue(50);
-        jugarStat.SetValue(50);
     }
 }

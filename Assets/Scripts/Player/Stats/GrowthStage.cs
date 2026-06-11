@@ -4,6 +4,7 @@ namespace ProjectJ40.Growth
     {
         Baby,
         Teen,
-        Adult
+        Adult,
+        Dead
     }
 }

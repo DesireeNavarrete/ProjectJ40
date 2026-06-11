@@ -48,7 +48,14 @@ public class NeedsSystem : MonoBehaviour
 
     private void Start()
     {
+        //baño
         canvasComp.foodBut.onClick.AddListener(() => CacaContador());
+        canvasComp.coffeBut.onClick.AddListener(() => CacaContador());
+        canvasComp.proteinBut.onClick.AddListener(() => CacaContador());
+
+        //ducha
         canvasComp.computerBut.onClick.AddListener(() => DuchaContador());
+        canvasComp.bricolajeBut.onClick.AddListener(() => DuchaContador());
+        canvasComp.weldBut.onClick.AddListener(() => DuchaContador());
     }
 }

@@ -51,6 +51,7 @@ public class DebugCanvas : MonoBehaviour
     public Button timeLento;
     public Button timeNormal;
     public Button timeRapido;
+    public Button timeRapido4;
 
     void Start()
     {
@@ -67,13 +68,14 @@ public class DebugCanvas : MonoBehaviour
         playBtnMult.onClick.AddListener(() => ApplyMultiplier(jugarInputMult, statsManager.jugarStat));
 
         //crecer
-        crecerBtn.onClick.AddListener(() => Crecer());
+        crecerBtn.onClick.AddListener(() => CrecerDebug());
         actualfase.text = "BabyPhase";
 
         //time.scale
         timeLento.onClick.AddListener(() => CambiarTiempo(.5f));
         timeNormal.onClick.AddListener(() => CambiarTiempo(1));
         timeRapido.onClick.AddListener(() => CambiarTiempo(2));
+        timeRapido4.onClick.AddListener(() => CambiarTiempo(4));
         actualTime.text = Time.timeScale.ToString();
     }
 
@@ -96,10 +98,11 @@ public class DebugCanvas : MonoBehaviour
 
     }
 
-    public void Crecer()
+    public void CrecerDebug()
     {
         switch (GrowthController.GrowthFSM.CurrentState)
         {
+
             case BabyPhase:
                 GrowthController.AdvanceToStage(GrowthStage.Teen);
                 actualfase.text = "TeenPhase";

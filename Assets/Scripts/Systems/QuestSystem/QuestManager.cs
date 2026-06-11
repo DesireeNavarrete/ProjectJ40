@@ -94,10 +94,11 @@ public class QuestManager : MonoBehaviour
     IEnumerator FinalScene()
     {
         yield return new WaitForSeconds(2);
-        //TODO: añadir alfa anim
         canvasComp.finalPanel.SetActive(true);
-        yield return new WaitForSeconds(5);
         canvasComp.finalPanel.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
+        yield return new WaitForSeconds(15);
+        canvasComp.GetComponent<CanvasGroup>().DOFade(0, .5f);
+        yield return new WaitForSeconds(.5f);
         SceneManager.LoadScene(0);
     }
 

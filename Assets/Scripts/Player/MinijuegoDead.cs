@@ -12,9 +12,9 @@ public class MinijuegoDead : MonoBehaviour
     public Slider sli;
     public Image sliImg;
     public CanvasComponent canvasComp;
+    public StatsManager statsManager;
+    public bool minijuegoComplete = false;
 
-    // Cámara usada para convertir la posición de pantalla a posición del mundo.
-    // Si no se asigna desde el Inspector, se usará Camera.main.
     [SerializeField] private Camera cam;
 
     private void Awake()
@@ -30,6 +30,15 @@ public class MinijuegoDead : MonoBehaviour
         if (sli.value < sli.maxValue)
         {
             sli.value = sli.value - Time.deltaTime * .25f;
+        }
+
+        if (sli.value >= sli.maxValue && StatsManager.nivelesCriticos)//completado
+        {
+            minijuegoComplete = true;
+            StatsManager.nivelesCriticos = false;
+            sli.value = 1;
+            print("minijuego completado");
+            GrowthController.AdvanceToStage(StatsManager.stateBeforeDie);
         }
 
         // Comprobamos si hubo un toque o clic en este frame.
@@ -50,46 +59,20 @@ public class MinijuegoDead : MonoBehaviour
         {
             OnSpritePressed();
         }
+
+        
     }
+
 
     private bool PressedThisFrame(out Vector2 screenPos)
     {
 
-
-        if (sli.value == 1 && !StatsManager.nivelesCriticos)//volver a estado normal
-        {
-            //canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
-            //{
-            //    // Código que quieres ejecutar cuando termine
-            //    Debug.Log("¡El tween ha terminado!");
-            //    canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
-            //});
-            canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
-            {
-                // Código que quieres ejecutar cuando termine
-                //Debug.Log("¡El tween ha terminado!");
-                canvasComp.canvasDead.SetActive(false);//canvas del minijuego
-                canvasComp.canvasGame.SetActive(true);//canvas principal
-                canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);//canvas del juego
-                canvasComp.canvasDeadPanelDeadFinal.SetActive(true);
-            });
-
-
-            canvasComp.canvasDeadPanelInicioInfo.SetActive(false);//canvas de oh no
-            canvasComp.canvasDeadPanelInicio.SetActive(false);//canvas de cliar en javi
-
-            //sli.value = 0;
-        }
-        // Primero comprobamos entrada táctil.
-        // TouchPhase.Began significa que el dedo acaba de tocar la pantalla.
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             screenPos = Input.GetTouch(0).position;
             return true;
         }
 
-        // También comprobamos clic de ratón.
-        // En WebGL móvil, algunos navegadores pueden traducir el toque a clic.
         if (Input.GetMouseButtonDown(0))
         {
             screenPos = Input.mousePosition;
@@ -103,15 +86,9 @@ public class MinijuegoDead : MonoBehaviour
 
     private void OnSpritePressed()
     {
-        // Aquí pones la acción que quieres ejecutar al tocar/clicar el sprite.
-        //Debug.Log("Sprite tocado/clicado");
-        //DebugConsole.instance.Log("Sprite tocado/clicado");
-        sli.value = sli.value + .1f;
-        if (sli.value > sli.maxValue)//completado
+        if (StatsManager.nivelesCriticos)
         {
-            sli.value = 1;
-            print("minijuego completado");
-            StatsManager.nivelesCriticos = false;
+            sli.value = sli.value + .1f;
         }
     }
 }
