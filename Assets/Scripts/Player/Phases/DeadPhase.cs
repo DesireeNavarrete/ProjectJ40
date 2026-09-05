@@ -14,6 +14,7 @@ public class DeadPhase : IState
 
     CanvasComponent canvasComp;
     StatsManager statsManager;
+    MinijuegoDead miniDead;
 
     public DeadPhase(Player p, StateMachine fsm)
     {
@@ -25,11 +26,10 @@ public class DeadPhase : IState
         Debug.Log("Enter Dead");
         canvasComp = GameObject.Find("CanvasPrincipal").GetComponent<CanvasComponent>();
         statsManager = GameObject.Find("--StatsManager--").GetComponent<StatsManager>();
+        miniDead = GameObject.Find("--P1--").GetComponent<MinijuegoDead>();
 
         canvasComp.canvasDeadPanelInicioInfo.SetActive(true);//panel de oh no
         canvasComp.canvasDeadPanelInicio.SetActive(true);//panel de clica en javi
-        //canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
-        //{
         canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(0, .5f);
         canvasComp.canvasGame.SetActive(false);
         canvasComp.canvasDead.SetActive(true);
@@ -49,12 +49,17 @@ public class DeadPhase : IState
         statsManager.hambreStat.SetValue(50);
         statsManager.sleepStat.SetValue(50);
         statsManager.jugarStat.SetValue(50);
+        miniDead.sli.value = 0;
+        //TODO: alfa anim
+        canvasComp.canvasDead.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() =>
+        {
+            canvasComp.canvasGame.SetActive(true);//canvas principal
+            canvasComp.canvasGame.GetComponent<CanvasGroup>().DOFade(1, .5f);
+            canvasComp.canvasDead.SetActive(false);//canvas del minijuego
+            canvasComp.canvasDeadPanelInicioInfo.SetActive(false);
 
-        canvasComp.canvasDead.SetActive(false);//canvas del minijuego
-        canvasComp.canvasGame.SetActive(true);//canvas principal
-        //todo: cambiar de fase a stateBeforeDie
+        });
 
-        canvasComp.canvasDeadPanelInicioInfo.SetActive(false);
     }
 
 }

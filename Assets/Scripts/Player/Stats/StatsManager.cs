@@ -2,7 +2,6 @@ using DG.Tweening;
 using ProjectJ40.Growth;
 using System.Collections;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 

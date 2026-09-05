@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 328.37, y: 0}
+  m_AnchoredPosition: {x: -4.825989, y: -96.52075}
+  m_SizeDelta: {x: 318.7179, y: 293.0414}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8249567198046013995
 CanvasRenderer:
@@ -79,7 +79,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "-\xA1Enhorabuena!\\\nJavi est\xE1 ahora preparado para crecer\n\xA1Corre
+    ves a la cocina!\""
 --- !u!114 &3447480933222383997
 MonoBehaviour:
   m_ObjectHideFlags: 0

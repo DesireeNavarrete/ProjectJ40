@@ -1,0 +1,43 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="40" fill="#1F2328"/>
+
+  <g opacity="0.3">
+    <path d="M180 185C330 105 508 121 642 215C784 315 955 312 1100 220C1216 146 1375 146 1485 240" stroke="#A7DCD7" stroke-width="14" stroke-linecap="round"/>
+    <path d="M125 724C291 628 472 643 611 747C761 860 949 854 1097 742C1221 649 1386 653 1508 755" stroke="#A7DCD7" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(198 168)">
+    <rect x="10" y="10" width="500" height="500" rx="126" fill="#A7DCD7"/>
+    <rect x="10" y="10" width="500" height="500" rx="126" stroke="#F3F4F6" stroke-width="20"/>
+    <rect x="72" y="78" width="376" height="310" rx="84" fill="#2B3036"/>
+    <rect x="72" y="78" width="376" height="310" rx="84" stroke="#F3F4F6" stroke-width="16"/>
+
+    <circle cx="190" cy="221" r="31" fill="#F3F4F6"/>
+    <circle cx="318" cy="221" r="31" fill="#F3F4F6"/>
+    <path d="M223 297C246 322 282 322 305 297" stroke="#F3B562" stroke-width="18" stroke-linecap="round"/>
+
+    <path d="M165 126C202 98 319 98 356 126" stroke="#A7DCD7" stroke-width="12" stroke-linecap="round"/>
+    <path d="M146 415H374" stroke="#F3F4F6" stroke-width="18" stroke-linecap="round"/>
+    <path d="M146 415L190 459" stroke="#F3F4F6" stroke-width="18" stroke-linecap="round"/>
+    <path d="M260 415L304 459" stroke="#F3F4F6" stroke-width="18" stroke-linecap="round"/>
+    <path d="M374 415L418 459" stroke="#F3F4F6" stroke-width="18" stroke-linecap="round"/>
+
+    <rect x="166" y="548" width="188" height="22" rx="11" fill="#F3B562"/>
+    <circle cx="260" cy="559" r="44" stroke="#F3F4F6" stroke-width="14"/>
+  </g>
+
+  <g transform="translate(772 244)">
+    <text x="0" y="150" fill="#F3F4F6" font-family="AvocadoTaco, Century Gothic, Arial Black, sans-serif" font-size="178" font-weight="900" letter-spacing="8">J4VI</text>
+    <rect x="12" y="194" width="488" height="18" rx="9" fill="#A7DCD7"/>
+    <rect x="12" y="230" width="305" height="18" rx="9" fill="#F3B562"/>
+    <text x="12" y="310" fill="#C3C7CE" font-family="Questrial, Century Gothic, Arial, sans-serif" font-size="38" letter-spacing="0">Pon un Javi en tu vida</text>
+    <text x="12" y="368" fill="#62C5BB" font-family="Consolas, monospace" font-size="28" letter-spacing="2">PROJECTJ40 / UNITY WEBGL PET</text>
+  </g>
+
+  <g transform="translate(1040 620)">
+    <rect x="0" y="0" width="92" height="26" rx="13" fill="#A7DCD7"/>
+    <rect x="118" y="0" width="92" height="26" rx="13" fill="#F3B562"/>
+    <rect x="236" y="0" width="92" height="26" rx="13" fill="#E76F6F"/>
+    <text x="0" y="72" fill="#C3C7CE" font-family="Questrial, Century Gothic, Arial, sans-serif" font-size="24">hambre · sueño · juego</text>
+  </g>
+</svg>

@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour
     {
         cumpleAvaible = true;
         canvasComp.cumpleBut.gameObject.SetActive(true);
-        notis.AddNotificationUI("-¡Enhorabuena!\r\nJavi está ahora preparado para crecer\r\n¡Corre ves a la cocina!");
+        notis.AddNotificationUI("<b><size=50>-¡Enhorabuena!\r\nJavi está ahora preparado para crecer\r\n¡Corre ves a la cocina!</size></b>");
     }
 
     public void ChangePhase()
@@ -200,8 +200,8 @@ public class UIManager : MonoBehaviour
         {
             canvasComp.foodBut.interactable = false;
             canvasComp.computerBut.interactable = false;
-            //canvasComp.toiletBut.interactable = false;
-            //canvasComp.showerBut.interactable = false;
+            canvasComp.toiletBut.interactable = false;
+            canvasComp.showerBut.interactable = false;
             canvasComp.weldBut.interactable = false;
 
             canvasComp.coffeBut.interactable = false;
@@ -219,8 +219,16 @@ public class UIManager : MonoBehaviour
         {
             canvasComp.foodBut.interactable = true;
             canvasComp.computerBut.interactable = true;
-            //canvasComp.toiletBut.interactable = true;
-            //canvasComp.showerBut.interactable = true;
+
+            if (notis.notificationsNeeds.Contains("caca"))
+            {
+                canvasComp.toiletBut.interactable = true;
+            }
+            if (notis.notificationsNeeds.Contains("ducha"))
+            {
+                canvasComp.showerBut.interactable = true;
+            }
+
             canvasComp.weldBut.interactable = true;
 
             canvasComp.coffeBut.interactable = true;
